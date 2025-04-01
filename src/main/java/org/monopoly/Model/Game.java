@@ -9,12 +9,12 @@ import java.util.ArrayList;
 /**
  * Represents the game logic and state for a game of Monopoly
  * @author walshj05
+ * Modified by: crevelings (4/1/25)
  */
 public class Game {
     private Banker banker;
     private GameBoard gameBoard;
     private TurnManager turnManager;
-    private Dice dice;
 
     /**
      * Constructor for the Game class
@@ -34,14 +34,15 @@ public class Game {
         this.banker = new Banker();
         this.gameBoard = new GameBoard();
         this.turnManager = new TurnManager(numHumanPlayers, players);
-        this.dice = new Dice();
     }
 
     /**
      * Allows the current player to take their turn
      * @author walshj05
+     * Modified by: crevelings (4/1/25)
      */
     public void playerTakeTurn(){
+        Dice dice = Dice.getInstance();
         int doublesNeeded = 0;
         Player currentPlayer = turnManager.getCurrentPlayer();
 
@@ -51,12 +52,12 @@ public class Game {
             if (currentPlayer.isInJail()){
                 doublesNeeded = 1; // passes the base turn logic
             } else {
-                Dice.resetNumDoubles(); // allows base turn logic
+                dice.resetNumDoubles(); // allows base turn logic
             }
         }
 
         // Player takes standard turn
-        while (Dice.getNumDoubles() == doublesNeeded && Dice.getNumDoubles() < 3) {
+        while (dice.getNumDoubles() == doublesNeeded && dice.getNumDoubles() < 3) {
             currentPlayer.takeTurn(dice);
             int currentPosition = currentPlayer.getPosition();
             gameBoard.executeStrategyType(currentPlayer, "tile");
@@ -71,16 +72,17 @@ public class Game {
             }
 
             if (dice.isDouble()) {
-                Dice.incrementNumDoubles();
+                dice.incrementNumDoubles();
             }
             doublesNeeded++;
         }
-        Dice.resetNumDoubles();
+        dice.resetNumDoubles();
     }
 
     /**
      * Continues to the next players turn (ends the current players turn)
      * @author walshj05
+     * Modified by: crevelings (4/1/25)
      */
     public void nextPlayersTurn(){
         turnManager.nextPlayer();
@@ -92,6 +94,7 @@ public class Game {
      * @author walshj05
      */
     public void jailTurnLogic(Player player){
+        Dice dice = Dice.getInstance();
         if (player.getJailTurns() == 3){
             player.releaseFromJail();
         } else if (player.hasCard("community:Get Out of Jail Free")){

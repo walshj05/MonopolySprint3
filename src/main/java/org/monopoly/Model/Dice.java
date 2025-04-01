@@ -6,6 +6,7 @@ import java.util.Random;
 /**
  * @author crevelings
  * This class represents a pair of six-sided dice for the game
+ * Implemented as a Singleton
  */
 public class Dice {
     private static final int SIDES = 6;
@@ -13,10 +14,23 @@ public class Dice {
     protected boolean isDouble;
     private static int numDoubles; // Tracks consecutive doubles in the current turn
 
+    private static Dice instance;
     public Dice() {
         random = new Random(System.nanoTime());
         isDouble = false;
         numDoubles = 0;
+    }
+
+    /**
+     * Get the singleton instance of the Dice class
+     * @return the singleton instance of Dice
+     * @author crevelings
+     */
+    public static Dice getInstance() {
+        if (instance == null) {
+            instance = new Dice();
+        }
+        return instance;
     }
 
     /**
@@ -37,15 +51,15 @@ public class Dice {
         return isDouble;
     }
 
-    public static int getNumDoubles() {
+    public int getNumDoubles() {
         return numDoubles;
     }
 
-    public static void incrementNumDoubles() {
+    public void incrementNumDoubles() {
         numDoubles++;
     }
 
-    public static void resetNumDoubles() {
+    public void resetNumDoubles() {
         numDoubles = 0;
     }
 }
