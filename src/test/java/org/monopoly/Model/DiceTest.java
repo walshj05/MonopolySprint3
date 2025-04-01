@@ -86,9 +86,9 @@ class DiceTest {
         for (int i = 0; i < 100; i++) {
             humanPlayer.takeTurn(dice);
             if (dice.isDouble()) {
-                maxConsecutiveDoubles = Math.max(maxConsecutiveDoubles, Dice.getNumDoubles());
+                maxConsecutiveDoubles = Math.max(maxConsecutiveDoubles, dice.getNumDoubles());
             } else {
-                Dice.resetNumDoubles();
+                dice.resetNumDoubles();
             }
         }
 
@@ -100,11 +100,11 @@ class DiceTest {
     @Test
     void testResetNumDoubles() {
         Dice dice = new Dice();
-        Dice.incrementNumDoubles();
-        Dice.incrementNumDoubles();
-        assertEquals(2, Dice.getNumDoubles());
-        Dice.resetNumDoubles();
-        assertEquals(0, Dice.getNumDoubles());
+        dice.incrementNumDoubles();
+        dice.incrementNumDoubles();
+        assertEquals(2, dice.getNumDoubles());
+        dice.resetNumDoubles();
+        assertEquals(0, dice.getNumDoubles());
     }
 
     @Test
@@ -122,7 +122,7 @@ class DiceTest {
             }
         }
 
-        assertTrue(wentToJail || Dice.getNumDoubles() < 3,
+        assertTrue(wentToJail || dice.getNumDoubles() < 3,
                 "Player should go to jail after rolling three doubles in a row.");
         System.out.println("Player went to jail: " + wentToJail);
     }
