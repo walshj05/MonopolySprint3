@@ -21,6 +21,11 @@ public class Dice {
         numDoubles = 0;
     }
 
+    /**
+     * Get the singleton instance of the Dice class
+     * @return the singleton instance of Dice
+     * @author crevelings
+     */
     public static Dice getInstance() {
         if (instance == null) {
             instance = new Dice();

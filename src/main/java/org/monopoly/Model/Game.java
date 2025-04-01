@@ -9,12 +9,12 @@ import java.util.ArrayList;
 /**
  * Represents the game logic and state for a game of Monopoly
  * @author walshj05
+ * Modified by: crevelings (4/1/25)
  */
 public class Game {
     private Banker banker;
     private GameBoard gameBoard;
     private TurnManager turnManager;
-//    private Dice dice;
 
     /**
      * Constructor for the Game class
@@ -34,12 +34,12 @@ public class Game {
         this.banker = new Banker();
         this.gameBoard = new GameBoard();
         this.turnManager = new TurnManager(numHumanPlayers, players);
-//        this.dice = new Dice();
     }
 
     /**
      * Allows the current player to take their turn
      * @author walshj05
+     * Modified by: crevelings (4/1/25)
      */
     public void playerTakeTurn(){
         Dice dice = Dice.getInstance();
@@ -82,6 +82,7 @@ public class Game {
     /**
      * Continues to the next players turn (ends the current players turn)
      * @author walshj05
+     * Modified by: crevelings (4/1/25)
      */
     public void nextPlayersTurn(){
         turnManager.nextPlayer();
