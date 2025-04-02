@@ -1,8 +1,8 @@
 package org.monopoly.Model;
 
 import org.monopoly.Model.GameTiles.PropertySpace;
-import org.monopoly.Model.Players.HumanPlayer;
 import org.monopoly.Model.Cards.TitleDeedDeck;
+import org.monopoly.Model.Players.Player;
 
 import java.util.*;
 
@@ -20,7 +20,12 @@ public class Banker {
         this.numHotels = 32;
     }
 
-
+    /**
+     * Singleton pattern to ensure only one instance of Banker is created.
+     * @return The instance of Banker.
+     *
+     * @author shifmans
+     */
     public static Banker getInstance() {
         if (instance == null) {
             instance = new Banker();
@@ -28,17 +33,17 @@ public class Banker {
         return instance;
     }
 
-    public void sellProperty(String propertyName, HumanPlayer humanPlayer) {
+    public void sellProperty(String propertyName, Player player) {
         if (deck.getTitleDeeds().getProperty(propertyName).isMortgaged()) {
             throw new IllegalStateException("Property is mortgaged and cannot be sold.");
         }
 
-        deck.getTitleDeeds().getProperty(propertyName).setOwner(humanPlayer.getName());
-        humanPlayer.subtractFromBalance(deck.getTitleDeeds().getProperty(propertyName).getPrice());
+        deck.getTitleDeeds().getProperty(propertyName).setOwner(player.getName());
+        player.subtractFromBalance(deck.getTitleDeeds().getProperty(propertyName).getPrice());
         deck.drawCard(propertyName);
     }
 
-    public void sellHouse(String propertyName, HumanPlayer humanPlayer) {
+    public void sellHouse(String propertyName, Player player) {
         if (deck.getTitleDeeds().getProperty(propertyName) instanceof PropertySpace) {
             if (this.numHouses == 0) {
                 throw new IllegalStateException("There are no houses left.");
@@ -47,7 +52,7 @@ public class Banker {
                 this.numHouses -= 1;
 
                 int numPropertyHouses = ((PropertySpace) deck.getTitleDeeds().getProperty(propertyName)).getNumHouses();
-                humanPlayer.subtractFromBalance(((PropertySpace) deck.getTitleDeeds().getProperty(propertyName)).getHousePrice());
+                player.subtractFromBalance(((PropertySpace) deck.getTitleDeeds().getProperty(propertyName)).getHousePrice());
                 ((PropertySpace) deck.getTitleDeeds().getProperty(propertyName)).setNumHouses(numPropertyHouses+1);
             }
         }
@@ -57,7 +62,7 @@ public class Banker {
         }
     }
 
-    public void receiveHouse(String propertyName, HumanPlayer humanPlayer) {
+    public void receiveHouse(String propertyName, Player player) {
         if (deck.getTitleDeeds().getProperty(propertyName) instanceof PropertySpace) {
             if (this.numHouses == 0) {
                 throw new IllegalStateException("There are no houses left.");
@@ -66,7 +71,7 @@ public class Banker {
                 this.numHouses += 1;
 
                 int numPropertyHouses = ((PropertySpace) deck.getTitleDeeds().getProperty(propertyName)).getNumHouses();
-                humanPlayer.addToBalance(((PropertySpace) deck.getTitleDeeds().getProperty(propertyName)).getHousePrice()/2);
+                player.addToBalance(((PropertySpace) deck.getTitleDeeds().getProperty(propertyName)).getHousePrice()/2);
                 ((PropertySpace) deck.getTitleDeeds().getProperty(propertyName)).setNumHouses(numPropertyHouses-1);
             }
         }
@@ -76,7 +81,7 @@ public class Banker {
         }
     }
 
-    public void sellHotel(String propertyName, HumanPlayer humanPlayer) {
+    public void sellHotel(String propertyName, Player player) {
         if (deck.getTitleDeeds().getProperty(propertyName) instanceof PropertySpace) {
             if (this.numHotels == 0) {
                 throw new IllegalStateException("There are no hotels left.");
@@ -85,7 +90,7 @@ public class Banker {
                 this.numHotels -= 1;
 
                 int numPropertyHotels = ((PropertySpace) deck.getTitleDeeds().getProperty(propertyName)).getNumHotels();
-                humanPlayer.subtractFromBalance(((PropertySpace) deck.getTitleDeeds().getProperty(propertyName)).getHousePrice());
+                player.subtractFromBalance(((PropertySpace) deck.getTitleDeeds().getProperty(propertyName)).getHousePrice());
                 ((PropertySpace) deck.getTitleDeeds().getProperty(propertyName)).setNumHotels(numPropertyHotels+1);
             }
         }
@@ -95,7 +100,7 @@ public class Banker {
         }
     }
 
-    public void receiveHotel(String propertyName, HumanPlayer humanPlayer) {
+    public void receiveHotel(String propertyName, Player player) {
         if (deck.getTitleDeeds().getProperty(propertyName) instanceof PropertySpace) {
             if (this.numHotels == 0) {
                 throw new IllegalStateException("There are no hotels left.");
@@ -104,7 +109,7 @@ public class Banker {
                 this.numHotels += 1;
 
                 int numPropertyHotels = ((PropertySpace) deck.getTitleDeeds().getProperty(propertyName)).getNumHotels();
-                humanPlayer.addToBalance(((PropertySpace) deck.getTitleDeeds().getProperty(propertyName)).getHotelPrice()/2);
+                player.addToBalance(((PropertySpace) deck.getTitleDeeds().getProperty(propertyName)).getHotelPrice()/2);
                 ((PropertySpace) deck.getTitleDeeds().getProperty(propertyName)).setNumHotels(numPropertyHotels-1);
             }
         }
@@ -114,11 +119,11 @@ public class Banker {
         }
     }
 
-    public void auctionProperty(String propertyName, ArrayList<HumanPlayer> players) {
+    public void auctionProperty(String propertyName, ArrayList<Player> players) {
         int currentBidAmount = 1;
-        HashMap<HumanPlayer, Integer> currentBidding = new HashMap<>();
+        HashMap<Player, Integer> currentBidding = new HashMap<>();
         Scanner keyboard = new Scanner(System.in);
-        HumanPlayer currentHighestBidder;
+        Player currentHighestBidder;
         int numRounds = 1;
 
         while (true) {
@@ -128,7 +133,7 @@ public class Banker {
                 System.out.println("Round " + numRounds + ", the bid now starts at $" + currentBidAmount);
             }
 
-            ArrayList<HumanPlayer> bidders = getCurrentBidders(players, currentBidAmount, keyboard);
+            ArrayList<Player> bidders = getCurrentBidders(players, currentBidAmount, keyboard);
             ArrayList<Integer> bidAmounts = getBidAmount(currentBidAmount, bidders, keyboard);
 
             if ((numRounds == 1) && (bidders.isEmpty())) {
@@ -153,7 +158,7 @@ public class Banker {
         }
     }
 
-    private void endAuction(String propertyName, ArrayList<HumanPlayer> bidders, ArrayList<Integer> bidAmounts) {
+    private void endAuction(String propertyName, ArrayList<Player> bidders, ArrayList<Integer> bidAmounts) {
         if (bidders.isEmpty() || bidAmounts.isEmpty()) {
             System.out.println("No valid bids placed for the property.");
             return;
@@ -167,10 +172,10 @@ public class Banker {
         bidders.get(0).subtractFromBalance(bidAmounts.get(0));
     }
 
-    private ArrayList<HumanPlayer> getCurrentBidders(ArrayList<HumanPlayer> players, int currentBidAmount, Scanner keyboard) {
-        ArrayList<HumanPlayer> bidders = new ArrayList<>();
+    private ArrayList<Player> getCurrentBidders(ArrayList<Player> players, int currentBidAmount, Scanner keyboard) {
+        ArrayList<Player> bidders = new ArrayList<>();
 
-        for (HumanPlayer player : players) {
+        for (Player player : players) {
             if (currentBidAmount <= player.getBalance()) {
                 System.out.println(player.getName() + ", do you want to bid on this property (Y/N)? ");
                 char answer = keyboard.next().charAt(0);
@@ -194,10 +199,10 @@ public class Banker {
         return bidders;
     }
 
-    private ArrayList<Integer> getBidAmount(int currentBid, ArrayList<HumanPlayer> bidders, Scanner keyboard) {
+    private ArrayList<Integer> getBidAmount(int currentBid, ArrayList<Player> bidders, Scanner keyboard) {
         ArrayList<Integer> bidAmounts = new ArrayList<>();
 
-        for (HumanPlayer bidder : bidders) {
+        for (Player bidder : bidders) {
             System.out.println(bidder.getName() + ", how much do you want to bid? ");
             int answer = keyboard.nextInt();
 
@@ -212,11 +217,11 @@ public class Banker {
         return bidAmounts;
     }
 
-    private HumanPlayer getHighestBidder(HashMap<HumanPlayer, Integer> currentBidding) {
+    private Player getHighestBidder(HashMap<Player, Integer> currentBidding) {
         int bid = 0;
-        HumanPlayer highestBidder = null;
+        Player highestBidder = null;
 
-        for (HumanPlayer bidder : currentBidding.keySet()) {
+        for (Player bidder : currentBidding.keySet()) {
             if (currentBidding.get(bidder) > bid) {
                 bid = currentBidding.get(bidder);
                 highestBidder = bidder;
@@ -230,13 +235,13 @@ public class Banker {
         deck.getTitleDeeds().getProperties().get(propertyName).setMortgagedStatus(true);
     }
 
-    public void payGoSpace(HumanPlayer humanPlayerName) {
-        humanPlayerName.addToBalance(200);
+    public void payGoSpace(Player playerName) {
+        playerName.addToBalance(200);
         this.bankBalance -= 200;
     }
 
-    public void receiveMoney(HumanPlayer humanPlayerName, int money) {
-        humanPlayerName.subtractFromBalance(money);
+    public void receiveMoney(Player playerName, int money) {
+        playerName.subtractFromBalance(money);
         this.bankBalance += money;
     }
 
