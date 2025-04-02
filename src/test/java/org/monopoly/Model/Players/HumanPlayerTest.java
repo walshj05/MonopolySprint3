@@ -163,4 +163,15 @@ public class HumanPlayerTest {
         humanPlayer.resetJailTurns();
         assertEquals(0, humanPlayer.getJailTurns());
     }
+
+    /*
+    Add a test for hasMonopoly
+     */
+    @Test
+    void testPlayerHasMonopoly() throws InsufficientFundsException {
+        HumanPlayer humanPlayer = new HumanPlayer("John Doe", new Token( "John Doe","BattleShip.png"));
+        humanPlayer.purchaseProperty("Park Place", 350);
+        humanPlayer.purchaseProperty("Boardwalk", 400);
+        assertTrue(humanPlayer.hasMonopoly("darkBlue"));
+    }
 }

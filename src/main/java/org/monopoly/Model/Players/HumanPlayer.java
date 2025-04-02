@@ -110,6 +110,7 @@ public class HumanPlayer extends Player {
      */
     public void releaseFromJail() {
         inJail = false;
+        jailTurns = 0;
         System.out.println(name + " has been released from jail!");
     }
 
