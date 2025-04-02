@@ -79,9 +79,9 @@ class GameTest {
         Player currentPlayer = tm.getCurrentPlayer();
         currentPlayer.goToJail();
         game.jailTurnLogic(currentPlayer);
-        assertEquals(10, currentPlayer.getPosition());
         currentPlayer.releaseFromJail();
         game.playerTakeTurn();
+        assertNotEquals(10, currentPlayer.getPosition());
     }
 
     @Test

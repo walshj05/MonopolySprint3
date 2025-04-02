@@ -9,7 +9,6 @@ import org.monopoly.Model.Players.Player;
  * @author shifmans
  */
 public class ChanceSpace extends GameTile {
-    private ChanceDeck deck;
     /**
      * Constructor to initialize a ChanceSpace.
      *
@@ -17,7 +16,6 @@ public class ChanceSpace extends GameTile {
      */
     public ChanceSpace(ChanceDeck deck) {
         super("Chance Space", "");
-        this.deck = deck;
     }
 
     /**

@@ -6,6 +6,7 @@ import org.monopoly.Model.Cards.TitleDeedDeck;
 import org.monopoly.Model.GameTiles.ElectricCompanySpace;
 import org.monopoly.Model.GameTiles.WaterWorksSpace;
 import org.monopoly.Model.Players.HumanPlayer;
+import org.monopoly.Model.Players.Player;
 import org.monopoly.Model.Players.Token;
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
@@ -104,7 +105,7 @@ public class BankerTests {
     public void testAuctionProperty() {
         Banker banker = new Banker();
 
-        ArrayList<HumanPlayer> players = new ArrayList<>();
+        ArrayList<Player> players = new ArrayList<>();
         players.add(new HumanPlayer("Jim", new Token("Thimble", "Thimble.png")));
         players.add(new HumanPlayer("Pat", new Token("Top Hat", "TopHat.png")));
 

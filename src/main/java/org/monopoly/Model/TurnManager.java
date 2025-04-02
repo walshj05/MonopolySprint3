@@ -3,7 +3,6 @@ package org.monopoly.Model;
 import org.monopoly.Model.Players.Player;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Manages the turns of the players in the game.
@@ -12,7 +11,7 @@ import java.util.HashMap;
  */
 public class TurnManager {
     private int currentPlayerIndex;
-    private final HashMap<Integer, Player> players;
+    private final ArrayList<Player> players;
     private int numPlayers;
 
     /**
@@ -24,10 +23,7 @@ public class TurnManager {
     public TurnManager(int numPlayers, ArrayList<Player> players) {
         this.numPlayers = numPlayers;
         this.currentPlayerIndex = 0;
-        this.players = new HashMap<>();
-        for (int i = 0; i < numPlayers; i++) {
-            this.players.put(i, players.get(i));
-        }
+        this.players = players;
     }
 
     /**
@@ -50,19 +46,10 @@ public class TurnManager {
     /**
      * Removes a player from the game.
      * @param player the player to be removed from the game
-     * @return the player that was removed from the game
      * @author walshj05
      */
     public void removePlayer(Player player) {
-        for (int i = 0; i < numPlayers; i++) {
-            if (players.get(i) == player) {
-                if (currentPlayerIndex == i) {
-                    nextPlayer();
-                }
-                players.remove(i);
-                break;
-            }
-        }
+        players.remove(player);
         numPlayers--;
     }
 }

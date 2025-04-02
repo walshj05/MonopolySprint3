@@ -9,7 +9,6 @@ import org.monopoly.Model.Players.Player;
  * @author shifmans
  */
 public class CommunityChestSpace extends GameTile {
-    private CommunityChestDeck deck;
 
     /**
      * Constructor to initialize a CommunityChestSpace.
@@ -18,7 +17,6 @@ public class CommunityChestSpace extends GameTile {
      */
     public CommunityChestSpace(CommunityChestDeck deck) {
         super("Community Chest Space", "");
-        this.deck = deck;
     }
 
     /**

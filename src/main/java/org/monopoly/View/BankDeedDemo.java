@@ -4,6 +4,7 @@ import org.monopoly.Model.Banker;
 import org.monopoly.Model.GameTiles.GameTile;
 import org.monopoly.Model.GameTiles.PropertySpace;
 import org.monopoly.Model.Players.HumanPlayer;
+import org.monopoly.Model.Players.Player;
 import org.monopoly.Model.Players.Token;
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class BankDeedDemo {
      */
     public static void main(String[] args) {
         Banker banker = new Banker();
-        ArrayList<HumanPlayer> playerList = new ArrayList<>();
+        ArrayList<Player> playerList = new ArrayList<>();
 
         HumanPlayer player1 = new HumanPlayer("Alice", new Token("Thimble", "Thimble.png"));
         HumanPlayer player2 = new HumanPlayer("Bob", new Token("Boot", "Boot.png"));

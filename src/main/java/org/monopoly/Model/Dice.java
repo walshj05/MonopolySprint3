@@ -12,7 +12,7 @@ public class Dice {
     private static final int SIDES = 6;
     private Random random;
     protected boolean isDouble;
-    private static int numDoubles; // Tracks consecutive doubles in the current turn
+    private int numDoubles; // Tracks consecutive doubles in the current turn
 
     private static Dice instance;
     public Dice() {

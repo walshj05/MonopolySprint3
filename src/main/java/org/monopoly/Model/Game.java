@@ -12,7 +12,6 @@ import java.util.ArrayList;
  * Modified by: crevelings (4/1/25)
  */
 public class Game {
-    private Banker banker;
     private GameBoard gameBoard;
     private TurnManager turnManager;
 
@@ -31,9 +30,8 @@ public class Game {
             players.add(new HumanPlayer("Player" + (i + 1), playerTokens[i]));
         }
 
-        this.banker = new Banker();
         this.gameBoard = new GameBoard();
-        this.turnManager = new TurnManager(numHumanPlayers, players);
+        this.turnManager = new TurnManager(numHumanPlayers, players); // todo implement players rolling for order
     }
 
     /**
@@ -57,7 +55,7 @@ public class Game {
         }
 
         // Player takes standard turn
-        while (dice.getNumDoubles() == doublesNeeded && dice.getNumDoubles() < 3) {
+        while (dice.getNumDoubles() == doublesNeeded) {
             currentPlayer.takeTurn(dice);
             int currentPosition = currentPlayer.getPosition();
             gameBoard.executeStrategyType(currentPlayer, "tile");
@@ -75,6 +73,11 @@ public class Game {
                 dice.incrementNumDoubles();
             }
             doublesNeeded++;
+
+            if (dice.getNumDoubles() == 3) {
+                currentPlayer.goToJail();
+                break;
+            }
         }
         dice.resetNumDoubles();
     }
