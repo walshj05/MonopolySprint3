@@ -20,10 +20,6 @@ public abstract class Player {
 
     public abstract int getBalance();
 
-    public abstract int getNumHotels();
-
-    public abstract int getNumHouses();
-
     public abstract void setPosition(int position);
 
     public abstract void move(int spaces);
@@ -43,10 +39,6 @@ public abstract class Player {
     public abstract void sellProperty(String property, int propertyCost) throws NoSuchPropertyException;
 
     public abstract boolean hasMonopoly(String colorGroup);
-
-    public abstract void addHouse(String property, String colorGroup) throws HouseCannotBeBuiltException;
-
-    public abstract void addHotel(String property) throws HotelCannotBeBuiltException;
 
     public abstract void addToBalance(int amount);
 

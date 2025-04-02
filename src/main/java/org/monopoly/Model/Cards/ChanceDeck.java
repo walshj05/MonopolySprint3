@@ -149,8 +149,8 @@ public class ChanceDeck extends CardDeck {
                 player.goToJail();
                 break;
             case "Make general repairs on all your property. For each house pay $25. For each hotel pay $100.":
-                int total = (player.getNumHotels() * 100) + (player.getNumHouses() * 25);
-                player.subtractFromBalance(total);
+//                int total = (player.getNumHotels() * 100) + (player.getNumHouses() * 25);
+                player.subtractFromBalance(0); // todo add logic to charge player for repairs -> gameState
                 break;
             case "Speeding fine $15.":
                 player.subtractFromBalance(15);

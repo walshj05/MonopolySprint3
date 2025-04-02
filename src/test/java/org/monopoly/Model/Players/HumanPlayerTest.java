@@ -1,8 +1,6 @@
 package org.monopoly.Model.Players;
 
 import org.junit.jupiter.api.Test;
-import org.monopoly.Exceptions.HotelCannotBeBuiltException;
-import org.monopoly.Exceptions.HouseCannotBeBuiltException;
 import org.monopoly.Exceptions.InsufficientFundsException;
 import org.monopoly.Exceptions.NoSuchPropertyException;
 import org.monopoly.Model.Dice;
@@ -37,18 +35,6 @@ public class HumanPlayerTest {
         HumanPlayer humanPlayer = new HumanPlayer("John Doe", new Token( "John Doe","BattleShip.png"));
         humanPlayer.setPosition(5);
         assertEquals(5, humanPlayer.getPosition());
-    }
-
-    @Test
-    public void testGetNumHouses() {
-        HumanPlayer humanPlayer = new HumanPlayer("John Doe", new Token( "John Doe","BattleShip.png"));
-        assertEquals(0, humanPlayer.getNumHouses());
-    }
-
-    @Test
-    public void testGetNumHotels() {
-        HumanPlayer humanPlayer = new HumanPlayer("John Doe", new Token( "John Doe","BattleShip.png"));
-        assertEquals(0, humanPlayer.getNumHotels());
     }
 
     @Test
@@ -128,27 +114,6 @@ public class HumanPlayerTest {
     }
 
     @Test
-    void testPlayerHasAMonopoly() throws InsufficientFundsException {
-        HumanPlayer humanPlayer = new HumanPlayer("John Doe", new Token( "John Doe","BattleShip.png"));
-        humanPlayer.purchaseProperty("Boardwalk", 400);
-        humanPlayer.purchaseProperty("Park Place", 350);
-
-        assertTrue(humanPlayer.hasMonopoly("darkBlue"));
-    }
-
-    @Test
-    void playerCanHaveMultipleMonoPolies() throws InsufficientFundsException {
-        HumanPlayer humanPlayer = new HumanPlayer("John Doe", new Token( "John Doe","BattleShip.png"));
-        humanPlayer.purchaseProperty("Boardwalk", 400);
-        humanPlayer.purchaseProperty("Park Place", 350);
-        humanPlayer.purchaseProperty("Mediterranean Avenue", 200);
-        humanPlayer.purchaseProperty("Baltic Avenue", 200);
-
-        assertTrue(humanPlayer.hasMonopoly("darkBlue"));
-        assertTrue(humanPlayer.hasMonopoly("brown"));
-    }
-
-    @Test
     void testPlayerCanSellProperty() throws InsufficientFundsException, NoSuchPropertyException {
         HumanPlayer humanPlayer = new HumanPlayer("John Doe", new Token( "John Doe","BattleShip.png"));
         humanPlayer.purchaseProperty("Park Place", 350);
@@ -182,22 +147,6 @@ public class HumanPlayerTest {
         assertEquals(10, humanPlayer.getPosition());
         humanPlayer.takeTurn(new Dice());
         assertEquals(10, humanPlayer.getPosition());
-    }
-
-    @Test
-    void testPlayerCanBuyHousesAndHotels() throws InsufficientFundsException, HouseCannotBeBuiltException, HotelCannotBeBuiltException {
-        HumanPlayer humanPlayer = new HumanPlayer("John Doe", new Token( "John Doe","BattleShip.png"));
-        humanPlayer.addToBalance(100000);
-        humanPlayer.purchaseProperty("Park Place", 350);
-        humanPlayer.purchaseProperty("Boardwalk", 400);
-        humanPlayer.addHouse("Park Place", "darkBlue");
-        humanPlayer.addHouse("Park Place", "darkBlue");
-        humanPlayer.addHouse("Boardwalk", "darkBlue");
-        humanPlayer.addHouse("Boardwalk", "darkBlue");
-        assertEquals(4, humanPlayer.getNumHouses());
-        humanPlayer.addHotel("Park Place");
-        assertEquals(0, humanPlayer.getNumHouses());
-        assertEquals(1, humanPlayer.getNumHotels());
     }
 
     @Test

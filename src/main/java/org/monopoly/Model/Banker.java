@@ -11,12 +11,21 @@ public class Banker {
     private TitleDeedDeck deck;
     private int numHouses;
     private int numHotels;
+    private static Banker instance;
 
     public Banker() {
         this.bankBalance = Double.POSITIVE_INFINITY;
         this.deck = new TitleDeedDeck();
         this.numHouses = 32;
         this.numHotels = 32;
+    }
+
+
+    public static Banker getInstance() {
+        if (instance == null) {
+            instance = new Banker();
+        }
+        return instance;
     }
 
     public void sellProperty(String propertyName, HumanPlayer humanPlayer) {
@@ -229,6 +238,39 @@ public class Banker {
     public void receiveMoney(HumanPlayer humanPlayerName, int money) {
         humanPlayerName.subtractFromBalance(money);
         this.bankBalance += money;
+    }
+
+    /**
+     * Checks if the player has a monopoly.
+     * @author walshj05
+     */
+    public ArrayList<String> checkForMonopolies(ArrayList<String> propertiesOwned) {
+        ArrayList<String> currMonopolies = new ArrayList<>();
+        if (propertiesOwned.contains("Mediterranean Avenue") && propertiesOwned.contains("Baltic Avenue")) {
+            currMonopolies.add("brown");
+        }
+        if (propertiesOwned.contains("Oriental Avenue") && propertiesOwned.contains("Vermont Avenue") && propertiesOwned.contains("Connecticut Avenue")) {
+            currMonopolies.add("lightBlue");
+        }
+        if (propertiesOwned.contains("St. Charles Place") && propertiesOwned.contains("States Avenue") && propertiesOwned.contains("Virginia Avenue")) {
+            currMonopolies.add("pink");
+        }
+        if (propertiesOwned.contains("St. James Place") && propertiesOwned.contains("Tennessee Avenue") && propertiesOwned.contains("New York Avenue")) {
+            currMonopolies.add("orange");
+        }
+        if (propertiesOwned.contains("Kentucky Avenue") && propertiesOwned.contains("Indiana Avenue") && propertiesOwned.contains("Illinois Avenue")) {
+            currMonopolies.add("red");
+        }
+        if (propertiesOwned.contains("Atlantic Avenue") && propertiesOwned.contains("Ventnor Avenue") && propertiesOwned.contains("Marvin Gardens")) {
+            currMonopolies.add("yellow");
+        }
+        if (propertiesOwned.contains("Pacific Avenue") && propertiesOwned.contains("North Carolina Avenue") && propertiesOwned.contains("Pennsylvania Avenue")) {
+            currMonopolies.add("green");
+        }
+        if (propertiesOwned.contains("Park Place") && propertiesOwned.contains("Boardwalk")) {
+            currMonopolies.add("darkBlue");
+        }
+        return currMonopolies;
     }
 
     public TitleDeedDeck getDeck() {

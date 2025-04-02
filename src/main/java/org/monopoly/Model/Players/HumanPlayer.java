@@ -1,13 +1,11 @@
 package org.monopoly.Model.Players;
 
-import org.monopoly.Exceptions.HouseCannotBeBuiltException;
-import org.monopoly.Exceptions.HotelCannotBeBuiltException;
 import org.monopoly.Exceptions.InsufficientFundsException;
 import org.monopoly.Exceptions.NoSuchPropertyException;
+import org.monopoly.Model.Banker;
 import org.monopoly.Model.Dice;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * A class representing a player in the Monopoly game.
@@ -20,11 +18,9 @@ public class HumanPlayer extends Player {
     private int balance;
     private boolean inJail;
     private Token token;
-    private int numHouses;
-    private int numHotels;
     private ArrayList<String> propertiesOwned;
     private ArrayList<String> propertiesMortgaged;
-    private HashMap<String, Integer> monopolies;
+    private ArrayList<String> monopolies;
     private ArrayList<String> cards;
     private int jailTurns;
 
@@ -42,11 +38,9 @@ public class HumanPlayer extends Player {
         this.jailTurns = 0;
         token.setOwner(this);
         this.position = 0;
-        this.numHouses = 0;
-        this.numHotels = 0;
         this.propertiesOwned = new ArrayList<>();
         this.propertiesMortgaged = new ArrayList<>();
-        this.monopolies = new HashMap<>();
+        this.monopolies = new ArrayList<>();
         this.cards = new ArrayList<>();
     }
 
@@ -70,13 +64,6 @@ public class HumanPlayer extends Player {
         return balance;
     }
 
-    public int getNumHotels() {
-        return numHotels;
-    }
-
-    public int getNumHouses() {
-        return numHouses;
-    }
 
     public void setPosition(int position) {
         this.position = position;
@@ -156,7 +143,7 @@ public class HumanPlayer extends Player {
         if (balance >= price) {
             propertiesOwned.add(property);
             balance -= price;
-            checkForMonopoly();
+            updateMonopolies();
         } else {
             throw new InsufficientFundsException("Insufficient funds to purchase " + property);
         }
@@ -188,7 +175,7 @@ public class HumanPlayer extends Player {
         if (propertiesOwned.contains(property)) {
             propertiesOwned.remove(property);
             balance += propertyCost;
-            checkForMonopoly();
+            updateMonopolies();
         } else {
             throw new NoSuchPropertyException("You do not own " + property);
         }
@@ -200,36 +187,7 @@ public class HumanPlayer extends Player {
      * @author walshj05
      */
     public boolean hasMonopoly(String colorGroup) {
-        return monopolies.containsKey(colorGroup);
-    }
-
-    /**
-     * Adds a house to a property
-     * @param property String
-     * @throws HouseCannotBeBuiltException exception
-     * @author walshj05
-     */
-    public void addHouse(String property, String colorGroup) throws HouseCannotBeBuiltException {
-        if (hasMonopoly(colorGroup)) {
-            numHouses++;
-        } else {
-            throw new HouseCannotBeBuiltException("You do not have a monopoly on " + colorGroup);
-        }
-    }
-
-    /**
-     * Adds a hotel to a property
-     * @param property String
-     * @throws HotelCannotBeBuiltException exception
-     * @author walshj05
-     */
-    public void addHotel(String property) throws HotelCannotBeBuiltException {
-        if (numHouses == 4) {
-            numHouses = 0;
-            numHotels++;
-        } else {
-            throw new HotelCannotBeBuiltException("You do not have 4 houses on " + property);
-        }
+        return monopolies.contains(colorGroup);
     }
 
     /**
@@ -312,39 +270,6 @@ public class HumanPlayer extends Player {
     }
 
     /**
-     * Checks if the player has a monopoly.
-     * @author walshj05
-     */
-    private void checkForMonopoly() {
-        ArrayList<String> currMonopolies = new ArrayList<>();
-        if (propertiesOwned.contains("Mediterranean Avenue") && propertiesOwned.contains("Baltic Avenue")) {
-            currMonopolies.add("brown");
-        }
-        if (propertiesOwned.contains("Oriental Avenue") && propertiesOwned.contains("Vermont Avenue") && propertiesOwned.contains("Connecticut Avenue")) {
-            currMonopolies.add("lightBlue");
-        }
-        if (propertiesOwned.contains("St. Charles Place") && propertiesOwned.contains("States Avenue") && propertiesOwned.contains("Virginia Avenue")) {
-            currMonopolies.add("pink");
-        }
-        if (propertiesOwned.contains("St. James Place") && propertiesOwned.contains("Tennessee Avenue") && propertiesOwned.contains("New York Avenue")) {
-            currMonopolies.add("orange");
-        }
-        if (propertiesOwned.contains("Kentucky Avenue") && propertiesOwned.contains("Indiana Avenue") && propertiesOwned.contains("Illinois Avenue")) {
-            currMonopolies.add("red");
-        }
-        if (propertiesOwned.contains("Atlantic Avenue") && propertiesOwned.contains("Ventnor Avenue") && propertiesOwned.contains("Marvin Gardens")) {
-            currMonopolies.add("yellow");
-        }
-        if (propertiesOwned.contains("Pacific Avenue") && propertiesOwned.contains("North Carolina Avenue") && propertiesOwned.contains("Pennsylvania Avenue")) {
-            currMonopolies.add("green");
-        }
-        if (propertiesOwned.contains("Park Place") && propertiesOwned.contains("Boardwalk")) {
-            currMonopolies.add("darkBlue");
-        }
-        updateMonopolies(currMonopolies);
-    }
-
-    /**
      * Gets the number of turns the player has been in jail
      * @return int
      * @author walshj05
@@ -375,13 +300,9 @@ public class HumanPlayer extends Player {
     /**
      * Updates the monopolies of the player
      * @author walshj05
-     * @param monopolies ArrayList of monopolies
      */
-    private void updateMonopolies(ArrayList<String> monopolies) {
-        for (String monopoly : monopolies) {
-            if (!this.monopolies.containsKey(monopoly)) {
-                this.monopolies.put(monopoly, 0);
-            }
-        }
+    private void updateMonopolies() {
+        Banker banker = Banker.getInstance();
+        monopolies= banker.checkForMonopolies(propertiesOwned);
     }
 }
