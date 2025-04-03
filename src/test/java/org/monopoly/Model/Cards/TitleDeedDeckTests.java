@@ -1,13 +1,20 @@
 package org.monopoly.Model.Cards;
 
 import org.junit.jupiter.api.Test;
-
 import java.util.*;
-
 import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Tests the TitleDeedDeck class.
+ *
+ * Developed by: shifmans
+ */
 
 public class TitleDeedDeckTests {
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testInitializingDeck() {
         TitleDeedDeck deck = new TitleDeedDeck();
@@ -15,6 +22,9 @@ public class TitleDeedDeckTests {
         assertEquals(28, deck.getSize());
     }
 
+    /**
+     * Developed by: shifmans
+     */
     @Test
     public void testDrawCard() {
         TitleDeedDeck deck = new TitleDeedDeck();
@@ -23,6 +33,9 @@ public class TitleDeedDeckTests {
         assertEquals(27, deck.getSize());
     }
 
+    /**
+     * Developed by: shifmans
+     */
     @Test
     public void testTitleDeedCardAlreadyBought() {
         TitleDeedDeck deck = new TitleDeedDeck();
@@ -33,6 +46,9 @@ public class TitleDeedDeckTests {
         assertEquals(27, deck.getSize());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testNoTitleDeedCardsLeft() {
         TitleDeedDeck deck = new TitleDeedDeck();
@@ -70,6 +86,9 @@ public class TitleDeedDeckTests {
         assertEquals(0, deck.getSize());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testReturnCard() {
         TitleDeedDeck deck = new TitleDeedDeck();
@@ -81,6 +100,9 @@ public class TitleDeedDeckTests {
         assertEquals(28, deck.getSize());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testReturnCardAlreadyInDeck() {
         TitleDeedDeck deck = new TitleDeedDeck();
