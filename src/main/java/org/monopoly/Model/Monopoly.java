@@ -140,7 +140,7 @@ public class Monopoly {
         if (purchase){
             for (int i = 0; i < properties.size(); i++) {
                 if (i != index) {
-                    if ((buildings[index] + 1) - buildings[i] > 1) {
+                    if ((buildings[index]) - buildings[i] > 0) {
                         return true;
                     }
                 }
@@ -148,7 +148,7 @@ public class Monopoly {
         } else {
             for (int i = 0; i < properties.size(); i++) {
                 if (i != index) {
-                    if ((buildings[index] - 1) - buildings[i] < -1) {
+                    if ((buildings[index]) - buildings[i] < 0) {
                         return true;
                     }
                 }

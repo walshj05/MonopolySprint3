@@ -15,15 +15,16 @@ import java.util.ArrayList;
  * @author walshj05, crevelings
  */
 public class HumanPlayer extends Player {
-    private String name;
+    private final String name;
     private int position;
     private int balance;
     private boolean inJail;
-    private Token token;
-    private ArrayList<String> propertiesOwned;
-    private ArrayList<String> propertiesMortgaged;
-    private ArrayList<Monopoly> monopolies;
-    private ArrayList<String> cards;
+    private final Token token;
+    private final ArrayList<String> propertiesOwned;
+    private final ArrayList<String> propertiesMortgaged;
+    private final ArrayList<Monopoly> monopolies;
+    private final ArrayList<ColorGroup> colorGroups;
+    private final ArrayList<String> cards;
     private int jailTurns;
 
     /**
@@ -44,6 +45,7 @@ public class HumanPlayer extends Player {
         this.propertiesMortgaged = new ArrayList<>();
         this.monopolies = new ArrayList<>();
         this.cards = new ArrayList<>();
+        this.colorGroups = new ArrayList<>();
     }
 
     /**
@@ -267,6 +269,64 @@ public class HumanPlayer extends Player {
         return balance == 0;
     }
 
+    public void buyHouse(String propertyName, ColorGroup colorGroup, int price) throws InsufficientFundsException {
+        if (balance - price < 0) {
+            throw new InsufficientFundsException("Insufficient funds to buy a house");
+        }
+        if (!propertiesOwned.contains(propertyName) || !colorGroups.contains(colorGroup)) {
+            throw new RuntimeException("Property not registered to player.");
+        }
+
+        int index = colorGroups.indexOf(colorGroup);
+        try {
+            monopolies.get(index).buildHouse(propertyName);
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    public void sellHouse(String propertyName, ColorGroup colorGroup) throws InsufficientFundsException {
+        if (!propertiesOwned.contains(propertyName) || !colorGroups.contains(colorGroup)) {
+            throw new RuntimeException("Property not registered to player.");
+        }
+
+        int index = colorGroups.indexOf(colorGroup);
+        try {
+            monopolies.get(index).sellHouse(propertyName);
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    public void buyHotel(String propertyName, ColorGroup colorGroup, int price) throws InsufficientFundsException {
+        if (balance - price < 0) {
+            throw new InsufficientFundsException("Insufficient funds to buy a hotel");
+        }
+        if (!propertiesOwned.contains(propertyName) || !colorGroups.contains(colorGroup)) {
+            throw new RuntimeException("Property not registered to player.");
+        }
+
+        int index = colorGroups.indexOf(colorGroup);
+        try {
+            monopolies.get(index).buildHotel(propertyName);
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    public void sellHotel(String propertyName, ColorGroup colorGroup) throws InsufficientFundsException {
+        if (!propertiesOwned.contains(propertyName) || !colorGroups.contains(colorGroup)) {
+            throw new RuntimeException("Property not registered to player.");
+        }
+
+        int index = colorGroups.indexOf(colorGroup);
+        try {
+            monopolies.get(index).sellHotel(propertyName);
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
     /**
      * Returns a string representation of the player
      * @return String
@@ -311,9 +371,10 @@ public class HumanPlayer extends Player {
      */
     private void updateMonopolies() {
         Banker banker = Banker.getInstance();
-        ArrayList<ColorGroup> colorGroups = new ArrayList<>();
         for (Monopoly monopoly : monopolies) {
-            colorGroups.add(monopoly.getColorGroup());
+            if (!colorGroups.contains(monopoly.getColorGroup())) {
+                colorGroups.add(monopoly.getColorGroup());
+            }
         }
         banker.checkForMonopolies(propertiesOwned, monopolies, colorGroups);
     }
