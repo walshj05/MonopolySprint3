@@ -11,8 +11,16 @@ import org.monopoly.Model.Players.Token;
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 
+/**
+ * Tests to check that all methods within the Banker class work properly.
+ *
+ * @author shifmans
+ */
 public class BankerTests {
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testBankerConstructor() {
         Banker banker = new Banker();
@@ -36,6 +44,9 @@ public class BankerTests {
         }
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testSellProperty() {
         Banker banker = new Banker();
@@ -50,6 +61,9 @@ public class BankerTests {
         assertEquals(1100, player.getBalance());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testSellHouse() {
         Banker banker = new Banker();
@@ -63,6 +77,9 @@ public class BankerTests {
 
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testReceiveHouses() {
         Banker banker = new Banker();
@@ -76,6 +93,9 @@ public class BankerTests {
 
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testSellHotel() {
         Banker banker = new Banker();
@@ -89,6 +109,9 @@ public class BankerTests {
 
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testReceiveHotels() {
         Banker banker = new Banker();
@@ -101,6 +124,9 @@ public class BankerTests {
 
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testAuctionProperty() {
         Banker banker = new Banker();
@@ -117,6 +143,9 @@ public class BankerTests {
         assertEquals("Jim", banker.getDeck().getTitleDeeds().getProperty("Boardwalk").getOwner());  // Pat should win
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testMortgageProperty() {
         Banker banker = new Banker();
@@ -127,6 +156,9 @@ public class BankerTests {
         assertTrue(deck.getTitleDeeds().getProperty("Boardwalk").isMortgaged());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testMortgageRailroad() {
         Banker banker = new Banker();
@@ -137,6 +169,9 @@ public class BankerTests {
         assertTrue(deck.getTitleDeeds().getProperty("Short Line Railroad").isMortgaged());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testMortgageElectricCompany() {
         Banker banker = new Banker();
@@ -147,6 +182,9 @@ public class BankerTests {
         assertTrue(deck.getTitleDeeds().getProperty("Electric Company").isMortgaged());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testMortgageWaterWorks() {
         Banker banker = new Banker();
@@ -157,6 +195,9 @@ public class BankerTests {
         assertTrue(deck.getTitleDeeds().getProperty("Water Works").isMortgaged());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testPayGoSpace() {
         Banker banker = new Banker();
@@ -170,6 +211,9 @@ public class BankerTests {
         assertEquals(Double.POSITIVE_INFINITY, banker.getBalance());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testReceiveMoney() {
         Banker banker = new Banker();
@@ -183,6 +227,9 @@ public class BankerTests {
         assertEquals(Double.POSITIVE_INFINITY, banker.getBalance());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testElectricCompanyGetRent() {
         Banker banker = new Banker();
@@ -192,6 +239,9 @@ public class BankerTests {
         assertTrue((electricCompany.getRentPrice(2) >= 20) && (electricCompany.getRentPrice(2) <= 120));
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testWaterWorksGetRent() {
         Banker banker = new Banker();
@@ -201,6 +251,9 @@ public class BankerTests {
         assertTrue((waterWorks.getRentPrice(2) >= 20) && (waterWorks.getRentPrice(2) <= 120));
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testUnmortgagedValue() {
         Banker banker = new Banker();

@@ -14,6 +14,9 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class ElementSpacesNameTests {
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testGoSpaceNameCorrectLabel() {
         GoSpace space = new GoSpace();
@@ -21,6 +24,9 @@ public class ElementSpacesNameTests {
         assertEquals("Go Space", space.getName());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testGoSpaceNameIncorrectLabel() {
         GoSpace space = new GoSpace();
@@ -28,6 +34,9 @@ public class ElementSpacesNameTests {
         assertNotEquals("Property Space", space.getName());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testPropertySpaceNameCorrectLabel() {
         PropertySpace space = new PropertySpace("Property Space", "", 0,new ArrayList<>(), ColorGroup.BROWN, 0, 0, 0);
@@ -35,6 +44,9 @@ public class ElementSpacesNameTests {
         assertEquals("Property Space", space.getName());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testPropertySpaceNameIncorrectLabel() {
         PropertySpace space = new PropertySpace("Property Space", "", 0,new ArrayList<>(), ColorGroup.BROWN, 0, 0, 0);
@@ -42,6 +54,9 @@ public class ElementSpacesNameTests {
         assertNotEquals("Community Chest Space", space.getName());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testCommunityChestSpaceNameCorrectLabel() {
         CommunityChestSpace space = new CommunityChestSpace(new CommunityChestDeck());
@@ -49,6 +64,9 @@ public class ElementSpacesNameTests {
         assertEquals("Community Chest Space", space.getName());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testCommunityChestSpaceNameIncorrectLabel() {
         CommunityChestSpace space = new CommunityChestSpace(new CommunityChestDeck());
@@ -56,6 +74,9 @@ public class ElementSpacesNameTests {
         assertNotEquals("Chance Space", space.getName());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testChanceSpaceNameCorrectLabel() {
         ChanceSpace space = new ChanceSpace(new ChanceDeck());
@@ -63,6 +84,9 @@ public class ElementSpacesNameTests {
         assertEquals("Chance Space", space.getName());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testChanceSpaceNameIncorrectLabel() {
         ChanceSpace space = new ChanceSpace(new ChanceDeck());
@@ -70,6 +94,9 @@ public class ElementSpacesNameTests {
         assertNotEquals("Jail Space", space.getName());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testJailSpaceNameCorrectLabel() {
         JailSpace space = new JailSpace();
@@ -77,6 +104,9 @@ public class ElementSpacesNameTests {
         assertEquals("Jail Space", space.getName());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testJailSpaceNameIncorrectLabel() {
         JailSpace space = new JailSpace();
@@ -84,6 +114,9 @@ public class ElementSpacesNameTests {
         assertNotEquals("Railroad Space", space.getName());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testRailroadSpaceNameCorrectLabel() {
         RailroadSpace space = new RailroadSpace("Railroad Space", "", 0, new ArrayList<>(), ColorGroup.RAILROAD, 0);
@@ -92,6 +125,9 @@ public class ElementSpacesNameTests {
             assertEquals("Railroad Space", space.getName());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testRailroadSpaceNameIncorrectLabel() {
         RailroadSpace space = new RailroadSpace("Railroad Space", "", 0, new ArrayList<>(), ColorGroup.RAILROAD, 0);
@@ -99,6 +135,9 @@ public class ElementSpacesNameTests {
         assertNotEquals("Go To Jail Space", space.getName());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testFreeParkingSpaceNameCorrectLabel() {
         FreeParkingSpace space = new FreeParkingSpace();
@@ -106,6 +145,9 @@ public class ElementSpacesNameTests {
         assertEquals("Free Parking Space", space.getName());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testFreeParkingSpaceNameIncorrectLabel() {
         FreeParkingSpace space = new FreeParkingSpace();
@@ -113,6 +155,9 @@ public class ElementSpacesNameTests {
         assertNotEquals("Electric Company", space.getName());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testElectricCompanySpaceNameCorrectLabel() {
         ElectricCompanySpace space = new ElectricCompanySpace("", 150, new ArrayList<>(), ColorGroup.UTILITY, 75);
@@ -120,6 +165,9 @@ public class ElementSpacesNameTests {
         assertEquals("Electric Company", space.getName());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testElectricCompanySpaceNameIncorrectLabel() {
         ElectricCompanySpace space = new ElectricCompanySpace("", 150, new ArrayList<>(), ColorGroup.UTILITY, 75);
@@ -127,6 +175,9 @@ public class ElementSpacesNameTests {
         assertNotEquals("Water Works Space", space.getName());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testWaterWorksSpaceNameCorrectLabel() {
         WaterWorksSpace space = new WaterWorksSpace("", 0, new ArrayList<>(), ColorGroup.UTILITY, 0);
@@ -134,6 +185,9 @@ public class ElementSpacesNameTests {
             assertEquals("Water Works", space.getName());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testWaterWorksSpaceNameIncorrectLabel() {
         WaterWorksSpace space = new WaterWorksSpace("", 0, new ArrayList<>(), ColorGroup.UTILITY, 0);
@@ -141,6 +195,9 @@ public class ElementSpacesNameTests {
         assertNotEquals("Luxury Tax Space", space.getName());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testLuxuryTaxSpaceNameCorrectLabel() {
         LuxuryTaxSpace space = new LuxuryTaxSpace();
@@ -148,6 +205,9 @@ public class ElementSpacesNameTests {
         assertEquals("Luxury Tax Space", space.getName());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testLuxuryTaxSpaceNameIncorrectLabel() {
         LuxuryTaxSpace space = new LuxuryTaxSpace();
@@ -155,6 +215,9 @@ public class ElementSpacesNameTests {
         assertNotEquals("Income Tax Space", space.getName());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testIncomeTaxSpaceNameCorrectLabel() {
         IncomeTaxSpace space = new IncomeTaxSpace();
@@ -162,6 +225,9 @@ public class ElementSpacesNameTests {
         assertEquals("Income Tax Space", space.getName());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testIncomeTaxSpaceNameIncorrectLabel() {
         IncomeTaxSpace space = new IncomeTaxSpace();
@@ -169,6 +235,9 @@ public class ElementSpacesNameTests {
         assertNotEquals("Go Space", space.getName());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testGoToJailSpaceNameCorrectLabel() {
         GoToJailSpace space = new GoToJailSpace();
@@ -176,6 +245,9 @@ public class ElementSpacesNameTests {
         assertEquals("Go To Jail Space", space.getName());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testGoToJailSpaceNameIncorrectLabel() {
         GoToJailSpace space = new GoToJailSpace();
