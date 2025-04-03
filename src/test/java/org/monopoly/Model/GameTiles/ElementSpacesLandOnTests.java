@@ -13,6 +13,10 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author shifmans
  */
 public class ElementSpacesLandOnTests {
+
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testGoSpaceLandOnCorrectActions() {
         GoSpace space = new GoSpace();
@@ -20,6 +24,9 @@ public class ElementSpacesLandOnTests {
         assertEquals("Collect $200 in salary for Passing Go!", space.landOn());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testGoSpaceLandOnIncorrectActions() {
         GoSpace space = new GoSpace();
@@ -38,7 +45,9 @@ public class ElementSpacesLandOnTests {
                 "Hotel: Can build 1 hotel", space.landOn());
     }
 
-
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testPropertySpaceLandOnCorrectActions() {
         ArrayList<Integer> rentPrices = new ArrayList<>();
@@ -65,6 +74,9 @@ public class ElementSpacesLandOnTests {
                     "Hotel Price: $50", space.landOn());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testPropertySpaceLandOnIncorrectActions() {
         ArrayList<Integer> rentPrices = new ArrayList<>();
@@ -80,6 +92,9 @@ public class ElementSpacesLandOnTests {
             assertNotEquals("Draw a card from the deck", space.landOn());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testCommunityChestSpaceLandOnCorrectActions() {
         CommunityChestSpace space = new CommunityChestSpace(new CommunityChestDeck());
@@ -87,6 +102,9 @@ public class ElementSpacesLandOnTests {
         assertEquals("Draw a card from the deck", space.landOn());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testCommunityChestSpaceLandOnIncorrectActions() {
         CommunityChestSpace space = new CommunityChestSpace(new CommunityChestDeck());
@@ -94,6 +112,9 @@ public class ElementSpacesLandOnTests {
         assertNotEquals("Return a card to the deck", space.landOn());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testChanceSpaceLandOnCorrectActions() {
         ChanceSpace space = new ChanceSpace(new ChanceDeck());
@@ -101,6 +122,9 @@ public class ElementSpacesLandOnTests {
         assertEquals("Draw a card from the deck", space.landOn());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testChanceSpaceLandOnIncorrectActions() {
         ChanceSpace space = new ChanceSpace(new ChanceDeck());
@@ -108,6 +132,9 @@ public class ElementSpacesLandOnTests {
         assertNotEquals("Pay $50 or roll doubles to get out of jail", space.landOn());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testJailSpaceLandOnCorrectActions() {
         JailSpace space = new JailSpace();
@@ -115,6 +142,9 @@ public class ElementSpacesLandOnTests {
         assertEquals("Pay $50 or roll doubles to get out of jail", space.landOn());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testJailSpaceLandOnIncorrectActions() {
         JailSpace space = new JailSpace();
@@ -132,6 +162,9 @@ public class ElementSpacesLandOnTests {
                 "Hotel: Cannot build hotels", space.landOn());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testRailroadSpaceLandOnCorrectActions() {
         ArrayList<Integer> rentPrices = new ArrayList<>();
@@ -152,6 +185,9 @@ public class ElementSpacesLandOnTests {
                 "Mortgage Value: $100", space.landOn());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testRailroadSpaceLandOnIncorrectActions() {
         ArrayList<Integer> rentPrices = new ArrayList<>();
@@ -165,6 +201,9 @@ public class ElementSpacesLandOnTests {
         assertNotEquals("Take a rest, you don't have to do anything", space.landOn());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testFreeParkingSpaceLandOnCorrectActions() {
         FreeParkingSpace space = new FreeParkingSpace();
@@ -172,6 +211,9 @@ public class ElementSpacesLandOnTests {
         assertEquals("Take a rest, you don't have to do anything", space.landOn());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testFreeParkingSpaceLandOnIncorrectActions() {
         FreeParkingSpace space = new FreeParkingSpace();
@@ -187,6 +229,9 @@ public class ElementSpacesLandOnTests {
                 "Hotel: Cannot build hotels", space.landOn());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testElectricCompanySpaceLandOnCorrectActions() {
         ElectricCompanySpace space = new ElectricCompanySpace("", 150, new ArrayList<>(), ColorGroup.UTILITY, 75);
@@ -200,6 +245,9 @@ public class ElementSpacesLandOnTests {
                 "Mortgage Value: $75", space.landOn());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testElectricCompanySpaceLandOnIncorrectActions() {
         ElectricCompanySpace space = new ElectricCompanySpace("", 150, new ArrayList<>(), ColorGroup.UTILITY, 75);
@@ -215,6 +263,9 @@ public class ElementSpacesLandOnTests {
                 "Hotel: Cannot build hotels", space.landOn());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testWaterWorksSpaceLandOnCorrectActions() {
         ArrayList<Integer> rentPriceMultiplier = new ArrayList<>();
@@ -232,6 +283,9 @@ public class ElementSpacesLandOnTests {
                 "Mortgage Value: $75", space.landOn());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testWaterWorksSpaceLandOnIncorrectActions() {
         WaterWorksSpace space = new WaterWorksSpace("", 0, new ArrayList<>(), ColorGroup.UTILITY, 0);
@@ -239,6 +293,9 @@ public class ElementSpacesLandOnTests {
         assertNotEquals("Pay $100", space.landOn());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testLuxuryTaxSpaceLandOnCorrectActions() {
         LuxuryTaxSpace space = new LuxuryTaxSpace();
@@ -246,6 +303,9 @@ public class ElementSpacesLandOnTests {
         assertEquals("Pay $100 in Luxury Tax!", space.landOn());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testLuxuryTaxSpaceLandOnIncorrectActions() {
         LuxuryTaxSpace space = new LuxuryTaxSpace();
@@ -253,6 +313,9 @@ public class ElementSpacesLandOnTests {
         assertNotEquals("Pay $200 in Luxury Tax!", space.landOn());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testIncomeTaxSpaceLandOnCorrectActions() {
         IncomeTaxSpace space = new IncomeTaxSpace();
@@ -260,6 +323,9 @@ public class ElementSpacesLandOnTests {
         assertEquals("Pay $200 in Income Tax!", space.landOn());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testIncomeTaxSpaceLandOnIncorrectActions() {
         IncomeTaxSpace space = new IncomeTaxSpace();
@@ -267,6 +333,9 @@ public class ElementSpacesLandOnTests {
         assertNotEquals("Go directly to Jail", space.landOn());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testGoToJailSpaceLandOnCorrectActions() {
         GoToJailSpace space = new GoToJailSpace();
@@ -274,6 +343,9 @@ public class ElementSpacesLandOnTests {
         assertEquals("Go directly to Jail", space.landOn());
     }
 
+    /**
+     * Developed by: shifmans
+     * */
     @Test
     public void testGoToJailSpaceLandOnIncorrectActions() {
         GoToJailSpace space = new GoToJailSpace();

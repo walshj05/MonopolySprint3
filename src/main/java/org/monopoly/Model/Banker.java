@@ -6,6 +6,11 @@ import org.monopoly.Model.Players.Player;
 
 import java.util.*;
 
+/**
+ * Represents a Banker which manages the bank in the game of Monopoly.
+ *
+ * @author shifmans
+ */
 public class Banker {
     private double bankBalance;
     private TitleDeedDeck deck;
@@ -13,6 +18,11 @@ public class Banker {
     private int numHotels;
     private static Banker instance;
 
+    /**
+     * Constructor to initialize the Banker.
+     *
+     * Developed by: shifmans
+     */
     public Banker() {
         this.bankBalance = Double.POSITIVE_INFINITY;
         this.deck = new TitleDeedDeck();
@@ -24,7 +34,7 @@ public class Banker {
      * Singleton pattern to ensure only one instance of Banker is created.
      * @return The instance of Banker.
      *
-     * @author shifmans
+     * Developed by: shifmans
      */
     public static Banker getInstance() {
         if (instance == null) {
@@ -33,6 +43,13 @@ public class Banker {
         return instance;
     }
 
+    /**
+     * This method is used to buy a property from the banker.
+     * @param propertyName The name of the property to buy.
+     * @param player The player who is buying the property.
+     *
+     * Developed by: shifmans
+     */
     public void sellProperty(String propertyName, Player player) {
         if (deck.getTitleDeeds().getProperty(propertyName).isMortgaged()) {
             throw new IllegalStateException("Property is mortgaged and cannot be sold.");
@@ -43,6 +60,13 @@ public class Banker {
         deck.drawCard(propertyName);
     }
 
+    /**
+     * This method is used to sell a house to a player.
+     * @param propertyName The name of the property to sell a house from.
+     * @param player The player who is selling the house.
+     *
+     * Developed by: shifmans
+     */
     public void sellHouse(String propertyName, Player player) {
         if (deck.getTitleDeeds().getProperty(propertyName) instanceof PropertySpace) {
             if (this.numHouses == 0) {
@@ -62,6 +86,13 @@ public class Banker {
         }
     }
 
+    /**
+     * This method is used to receive a house from a player.
+     * @param propertyName The name of the property to receive a house from.
+     * @param player The player who is receiving the house.
+     *
+     * Developed by: shifmans
+     */
     public void receiveHouse(String propertyName, Player player) {
         if (deck.getTitleDeeds().getProperty(propertyName) instanceof PropertySpace) {
             if (this.numHouses == 0) {
@@ -81,6 +112,13 @@ public class Banker {
         }
     }
 
+    /**
+     * This method is used to sell a hotel to a player.
+     * @param propertyName The name of the property to sell a hotel from.
+     * @param player The player who is selling the hotel.
+     *
+     * Developed by: shifmans
+     */
     public void sellHotel(String propertyName, Player player) {
         if (deck.getTitleDeeds().getProperty(propertyName) instanceof PropertySpace) {
             if (this.numHotels == 0) {
@@ -100,6 +138,13 @@ public class Banker {
         }
     }
 
+    /**
+     * This method is used to receive a hotel from a player.
+     * @param propertyName The name of the property to receive a hotel from.
+     * @param player The player who is receiving the hotel.
+     *
+     * Developed by: shifmans
+     */
     public void receiveHotel(String propertyName, Player player) {
         if (deck.getTitleDeeds().getProperty(propertyName) instanceof PropertySpace) {
             if (this.numHotels == 0) {
@@ -119,6 +164,13 @@ public class Banker {
         }
     }
 
+    /**
+     * This method is used to auction a property.
+     * @param propertyName The name of the property to auction.
+     * @param players The players who are in the game.
+     *
+     * Developed by: shifmans
+     */
     public void auctionProperty(String propertyName, ArrayList<Player> players) {
         int currentBidAmount = 1;
         HashMap<Player, Integer> currentBidding = new HashMap<>();
@@ -158,6 +210,14 @@ public class Banker {
         }
     }
 
+    /**
+     * Ends the auction for a property.
+     * @param propertyName The name of the property.
+     * @param bidders The list of bidders.
+     * @param bidAmounts The list of bid amounts.
+     *
+     * Developed by: shifmans
+     */
     private void endAuction(String propertyName, ArrayList<Player> bidders, ArrayList<Integer> bidAmounts) {
         if (bidders.isEmpty() || bidAmounts.isEmpty()) {
             System.out.println("No valid bids placed for the property.");
@@ -172,6 +232,15 @@ public class Banker {
         bidders.get(0).subtractFromBalance(bidAmounts.get(0));
     }
 
+    /**
+     * Gets the current bidders for the property.
+     * @param players The list of players in game.
+     * @param currentBidAmount The current bid amount.
+     * @param keyboard The scanner for user input.
+     * @return The list of bidders for property.
+     *
+     * Developed by: shifmans
+     */
     private ArrayList<Player> getCurrentBidders(ArrayList<Player> players, int currentBidAmount, Scanner keyboard) {
         ArrayList<Player> bidders = new ArrayList<>();
 
@@ -199,6 +268,15 @@ public class Banker {
         return bidders;
     }
 
+    /**
+     * Gets the bid amount from the bidders.
+     * @param currentBid The current bid amount.
+     * @param bidders The list of bidders.
+     * @param keyboard The scanner for user input.
+     * @return The list of bid amounts.
+     *
+     * Developed by: shifmans
+     */
     private ArrayList<Integer> getBidAmount(int currentBid, ArrayList<Player> bidders, Scanner keyboard) {
         ArrayList<Integer> bidAmounts = new ArrayList<>();
 
@@ -217,6 +295,13 @@ public class Banker {
         return bidAmounts;
     }
 
+    /**
+     * Gets the highest bidder from the current bidding.
+     * @param currentBidding The current bidding map.
+     * @return The player with the highest bid.
+     *
+     * Developed by: shifmans
+     */
     private Player getHighestBidder(HashMap<Player, Integer> currentBidding) {
         int bid = 0;
         Player highestBidder = null;
@@ -231,15 +316,34 @@ public class Banker {
         return highestBidder;
     }
 
+    /**
+     * This method is used to mortgage a property.
+     * @param propertyName The name of the property to mortgage.
+     *
+     * Developed by: shifmans
+     */
     public void mortgageProperty(String propertyName) {
         deck.getTitleDeeds().getProperties().get(propertyName).setMortgagedStatus(true);
     }
 
+    /**
+     * This method is used to pay a player for passing Go Space.
+     * @param playerName The player who is passing Go Space.
+     *
+     * Developed by: shifmans
+     */
     public void payGoSpace(Player playerName) {
         playerName.addToBalance(200);
         this.bankBalance -= 200;
     }
 
+    /**
+     * This method is used when player is paying the bank money.
+     * @param playerName The player who is paying the bank.
+     * @param money The amount of money the player is paying.
+     *
+     * Developed by: shifmans
+     */
     public void receiveMoney(Player playerName, int money) {
         playerName.subtractFromBalance(money);
         this.bankBalance += money;
@@ -278,18 +382,42 @@ public class Banker {
         return currMonopolies;
     }
 
+    /**
+     * This method is used to get the deck of properties.
+     * @return The deck of properties.
+     *
+     * Developed by: shifmans
+     */
     public TitleDeedDeck getDeck() {
         return this.deck;
     }
 
+    /**
+     * This method is used to get the number of houses.
+     * @return The number of houses.
+     *
+     * Developed by: shifmans
+     */
     public int getHouses() {
         return this.numHouses;
     }
 
+    /**
+     * This method is used to get the number of hotels.
+     * @return The number of hotels.
+     *
+     * Developed by: shifmans
+     */
     public int getHotels() {
         return this.numHotels;
     }
 
+    /**
+     * This method is used to get the bank balance.
+     * @return The bank balance.
+     *
+     * Developed by: shifmans
+     */
     public double getBalance() {
         return this.bankBalance;
     }
