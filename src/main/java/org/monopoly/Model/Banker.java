@@ -18,7 +18,7 @@ public class Banker {
         this.bankBalance = Double.POSITIVE_INFINITY;
         this.deck = new TitleDeedDeck();
         this.numHouses = 32;
-        this.numHotels = 32;
+        this.numHotels = 12;
     }
 
     /**

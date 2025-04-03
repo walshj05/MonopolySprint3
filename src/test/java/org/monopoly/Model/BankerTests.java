@@ -20,7 +20,7 @@ public class BankerTests {
 
         assertEquals(28, deck.getSize());
         assertEquals(32, banker.getHouses());
-        assertEquals(32, banker.getHotels());
+        assertEquals(12, banker.getHotels());
         assertEquals(Double.POSITIVE_INFINITY, banker.getBalance());
 
         String[] properties = {"Boardwalk", "Park Place", "Baltic Avenue", "Mediterranean Avenue",
