@@ -16,7 +16,7 @@ public class MonopolyTest {
     @Test
     void testBuildHouseWorksForOneMonopoly() {
         String[] properties = {"A", "B", "C"};
-        Monopoly monopoly = new Monopoly(properties);
+        Monopoly monopoly = new Monopoly(properties, null);
 
         // Build a house on property A
         monopoly.buildHouse("A");
@@ -42,9 +42,9 @@ public class MonopolyTest {
         int[] variation2 = {0, 1, 0};
         int[] variation3 = {1, 0, 0};
         String[] properties = {"A", "B", "C"};
-        Monopoly monopoly = new Monopoly(properties, variation1);
-        Monopoly monopoly2 = new Monopoly(properties, variation2);
-        Monopoly monopoly3 = new Monopoly(properties, variation3);
+        Monopoly monopoly = new Monopoly(properties, variation1, null);
+        Monopoly monopoly2 = new Monopoly(properties, variation2, null);
+        Monopoly monopoly3 = new Monopoly(properties, variation3, null);
 
         // Build a house on property A
         monopoly.buildHouse("A");
@@ -68,7 +68,7 @@ public class MonopolyTest {
     void test002ConfigurationNotAllowed() {
         int[] variation1 = {0, 0, 1};
         String[] properties = {"A", "B", "C"};
-        Monopoly monopoly = new Monopoly(properties, variation1);
+        Monopoly monopoly = new Monopoly(properties, variation1, null);
         System.out.println("Before alterations:\n" + monopoly);
 
         // Build a house on property C
@@ -94,7 +94,7 @@ public class MonopolyTest {
     void test012ConfigurationNotAllowed() {
         int[] variation1 = {0, 1, 1};
         String[] properties = {"A", "B", "C"};
-        Monopoly monopoly = new Monopoly(properties, variation1);
+        Monopoly monopoly = new Monopoly(properties, variation1, null);
         System.out.println("Before alterations:\n" + monopoly);
 
         // Build a house on property C
@@ -125,7 +125,7 @@ public class MonopolyTest {
     void test445ConfigNotAllowed() {
         int[] variation1 = {4, 4, 4};
         String[] properties = {"A", "B", "C"};
-        Monopoly monopoly = new Monopoly(properties, variation1);
+        Monopoly monopoly = new Monopoly(properties, variation1, null);
 
         System.out.println("Before alterations:\n" + monopoly);
         // Build a house on property C
@@ -138,7 +138,7 @@ public class MonopolyTest {
     void testPlayerCanBuyHotelWith444Configuration() {
         int[] variation1 = {4, 4, 4};
         String[] properties = {"A", "B", "C"};
-        Monopoly monopoly = new Monopoly(properties, variation1);
+        Monopoly monopoly = new Monopoly(properties, variation1, null);
         System.out.println("Before alterations:\n" + monopoly);
 
         // Build a hotel on property C
@@ -160,7 +160,7 @@ public class MonopolyTest {
     @Test
     void testPlayerCannotSellHouseWith000Configuration() {
         String[] properties = {"A", "B", "C"};
-        Monopoly monopoly = new Monopoly(properties);
+        Monopoly monopoly = new Monopoly(properties, null);
         System.out.println("Before alterations:\n" + monopoly);
 
         // Build a hotel on property C
@@ -172,7 +172,7 @@ public class MonopolyTest {
     @Test
     void testPlayerCannotSellHotelWith000Configuration() {
         String[] properties = {"A", "B", "C"};
-        Monopoly monopoly = new Monopoly(properties);
+        Monopoly monopoly = new Monopoly(properties, null);
         System.out.println("Before alterations:\n" + monopoly);
 
         // Build a hotel on property C

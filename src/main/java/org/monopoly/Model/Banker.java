@@ -1,5 +1,6 @@
 package org.monopoly.Model;
 
+import org.monopoly.Model.Cards.ColorGroup;
 import org.monopoly.Model.GameTiles.PropertySpace;
 import org.monopoly.Model.Cards.TitleDeedDeck;
 import org.monopoly.Model.Players.Player;
@@ -249,33 +250,55 @@ public class Banker {
      * Checks if the player has a monopoly.
      * @author walshj05
      */
-    public ArrayList<String> checkForMonopolies(ArrayList<String> propertiesOwned) {
-        ArrayList<String> currMonopolies = new ArrayList<>();
+    public void checkForMonopolies(ArrayList<String> propertiesOwned, ArrayList<Monopoly> monopolies, ArrayList<ColorGroup> colorGroups) {
         if (propertiesOwned.contains("Mediterranean Avenue") && propertiesOwned.contains("Baltic Avenue")) {
-            currMonopolies.add("brown");
+            if (!colorGroups.contains(ColorGroup.BROWN)) {
+                String[] brownProperties = {"Mediterranean Avenue", "Baltic Avenue"};
+                monopolies.add(new Monopoly(brownProperties, ColorGroup.BROWN));
+            }
         }
         if (propertiesOwned.contains("Oriental Avenue") && propertiesOwned.contains("Vermont Avenue") && propertiesOwned.contains("Connecticut Avenue")) {
-            currMonopolies.add("lightBlue");
+            if (!colorGroups.contains(ColorGroup.LIGHT_BLUE)) {
+                String[] lightBlueProperties = {"Oriental Avenue", "Vermont Avenue", "Connecticut Avenue"};
+                monopolies.add(new Monopoly(lightBlueProperties, ColorGroup.LIGHT_BLUE));
+            }
         }
         if (propertiesOwned.contains("St. Charles Place") && propertiesOwned.contains("States Avenue") && propertiesOwned.contains("Virginia Avenue")) {
-            currMonopolies.add("pink");
+            if (!colorGroups.contains(ColorGroup.PINK)) {
+                String[] pinkProperties = {"St. Charles Place", "States Avenue", "Virginia Avenue"};
+                monopolies.add(new Monopoly(pinkProperties, ColorGroup.PINK));
+            }
         }
         if (propertiesOwned.contains("St. James Place") && propertiesOwned.contains("Tennessee Avenue") && propertiesOwned.contains("New York Avenue")) {
-            currMonopolies.add("orange");
+            if (!colorGroups.contains(ColorGroup.ORANGE)) {
+                String[] orangeProperties = {"St. James Place", "Tennessee Avenue", "New York Avenue"};
+                monopolies.add(new Monopoly(orangeProperties, ColorGroup.ORANGE));
+            }
         }
         if (propertiesOwned.contains("Kentucky Avenue") && propertiesOwned.contains("Indiana Avenue") && propertiesOwned.contains("Illinois Avenue")) {
-            currMonopolies.add("red");
+            if (!colorGroups.contains(ColorGroup.RED)) {
+                String[] redProperties = {"Kentucky Avenue", "Indiana Avenue", "Illinois Avenue"};
+                monopolies.add(new Monopoly(redProperties, ColorGroup.RED));
+            }
         }
         if (propertiesOwned.contains("Atlantic Avenue") && propertiesOwned.contains("Ventnor Avenue") && propertiesOwned.contains("Marvin Gardens")) {
-            currMonopolies.add("yellow");
+            if (!colorGroups.contains(ColorGroup.YELLOW)) {
+                String[] yellowProperties = {"Atlantic Avenue", "Ventnor Avenue", "Marvin Gardens"};
+                monopolies.add(new Monopoly(yellowProperties, ColorGroup.YELLOW));
+            }
         }
         if (propertiesOwned.contains("Pacific Avenue") && propertiesOwned.contains("North Carolina Avenue") && propertiesOwned.contains("Pennsylvania Avenue")) {
-            currMonopolies.add("green");
+            if (!colorGroups.contains(ColorGroup.GREEN)) {
+                String[] greenProperties = {"Pacific Avenue", "North Carolina Avenue", "Pennsylvania Avenue"};
+                monopolies.add(new Monopoly(greenProperties, ColorGroup.GREEN));
+            }
         }
         if (propertiesOwned.contains("Park Place") && propertiesOwned.contains("Boardwalk")) {
-            currMonopolies.add("darkBlue");
+            if (!colorGroups.contains(ColorGroup.DARK_BLUE)) {
+                String[] darkBlueProperties = {"Park Place", "Boardwalk"};
+                monopolies.add(new Monopoly(darkBlueProperties, ColorGroup.DARK_BLUE));
+            }
         }
-        return currMonopolies;
     }
 
     public TitleDeedDeck getDeck() {

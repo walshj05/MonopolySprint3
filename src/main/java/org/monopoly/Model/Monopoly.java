@@ -1,5 +1,7 @@
 package org.monopoly.Model;
 
+import org.monopoly.Model.Cards.ColorGroup;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -10,14 +12,15 @@ import java.util.Collections;
 public class Monopoly {
     private final ArrayList<String> properties;
     private final int[] buildings;
-    //todo add a field for color group.
+    private final ColorGroup colorGroup;
 
     /**
      * Initializes the properties array with the number of houses on each property
      * @param properties The properties to be initialized
      */
-    public Monopoly(String[] properties) {
+    public Monopoly(String[] properties, ColorGroup colorGroup) {
         this.properties = new ArrayList<>();
+        this.colorGroup = colorGroup;
         Collections.addAll(this.properties, properties);
         buildings = new int[properties.length];
         for (int i = 0; i < properties.length; i++) {
@@ -32,8 +35,9 @@ public class Monopoly {
      * @param properties The properties to be initialized
      * @param houses The number of houses on each property
      */
-    public Monopoly(String[] properties, int[] houses) {
+    public Monopoly(String[] properties, int[] houses, ColorGroup colorGroup) {
         this.properties = new ArrayList<>();
+        this.colorGroup = colorGroup;
         Collections.addAll(this.properties, properties);
         this.buildings = houses;
     }
@@ -213,5 +217,9 @@ public class Monopoly {
             sb.append(properties.get(i)).append(": ").append(buildings[i]).append(" houses\n");
         }
         return sb.toString();
+    }
+
+    public ColorGroup getColorGroup() {
+        return colorGroup;
     }
 }

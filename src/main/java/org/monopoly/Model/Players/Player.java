@@ -4,6 +4,7 @@ import org.monopoly.Exceptions.HotelCannotBeBuiltException;
 import org.monopoly.Exceptions.HouseCannotBeBuiltException;
 import org.monopoly.Exceptions.InsufficientFundsException;
 import org.monopoly.Exceptions.NoSuchPropertyException;
+import org.monopoly.Model.Cards.ColorGroup;
 import org.monopoly.Model.Dice;
 
 /**
@@ -38,7 +39,7 @@ public abstract class Player {
 
     public abstract void sellProperty(String property, int propertyCost) throws NoSuchPropertyException;
 
-    public abstract boolean hasMonopoly(String colorGroup);
+    public abstract boolean hasMonopoly(ColorGroup colorGroup);
 
     public abstract void addToBalance(int amount);
 

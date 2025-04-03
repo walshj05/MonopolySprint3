@@ -3,7 +3,9 @@ package org.monopoly.Model.Players;
 import org.monopoly.Exceptions.InsufficientFundsException;
 import org.monopoly.Exceptions.NoSuchPropertyException;
 import org.monopoly.Model.Banker;
+import org.monopoly.Model.Cards.ColorGroup;
 import org.monopoly.Model.Dice;
+import org.monopoly.Model.Monopoly;
 
 import java.util.ArrayList;
 
@@ -20,7 +22,7 @@ public class HumanPlayer extends Player {
     private Token token;
     private ArrayList<String> propertiesOwned;
     private ArrayList<String> propertiesMortgaged;
-    private ArrayList<String> monopolies;
+    private ArrayList<Monopoly> monopolies;
     private ArrayList<String> cards;
     private int jailTurns;
 
@@ -187,8 +189,13 @@ public class HumanPlayer extends Player {
      * @return boolean
      * @author walshj05
      */
-    public boolean hasMonopoly(String colorGroup) {
-        return monopolies.contains(colorGroup);
+    public boolean hasMonopoly(ColorGroup colorGroup) {
+        for (Monopoly monopoly : monopolies) {
+            if (monopoly.getColorGroup() == colorGroup) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -304,6 +311,10 @@ public class HumanPlayer extends Player {
      */
     private void updateMonopolies() {
         Banker banker = Banker.getInstance();
-        monopolies= banker.checkForMonopolies(propertiesOwned);
+        ArrayList<ColorGroup> colorGroups = new ArrayList<>();
+        for (Monopoly monopoly : monopolies) {
+            colorGroups.add(monopoly.getColorGroup());
+        }
+        banker.checkForMonopolies(propertiesOwned, monopolies, colorGroups);
     }
 }

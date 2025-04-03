@@ -3,6 +3,7 @@ package org.monopoly.Model.Players;
 import org.junit.jupiter.api.Test;
 import org.monopoly.Exceptions.InsufficientFundsException;
 import org.monopoly.Exceptions.NoSuchPropertyException;
+import org.monopoly.Model.Cards.ColorGroup;
 import org.monopoly.Model.Dice;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -172,6 +173,6 @@ public class HumanPlayerTest {
         HumanPlayer humanPlayer = new HumanPlayer("John Doe", new Token( "John Doe","BattleShip.png"));
         humanPlayer.purchaseProperty("Park Place", 350);
         humanPlayer.purchaseProperty("Boardwalk", 400);
-        assertTrue(humanPlayer.hasMonopoly("darkBlue"));
+        assertTrue(humanPlayer.hasMonopoly(ColorGroup.DARK_BLUE));
     }
 }
