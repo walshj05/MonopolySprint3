@@ -293,4 +293,44 @@ public class Banker {
     public double getBalance() {
         return this.bankBalance;
     }
+
+    /*
+    NOTE: THE FOLLOWING METHODS ARE MEANT TO BE USED FOR THE NEW IMPLEMENTATION OF MONOPOLY CLASS
+    NOTE: WE CAN REFACTOR THE BANKER CLASS OR MONOPOLY CLASS AS NEEDED, BUT THIS IS NEEDED FOR TESTS
+    NOTE: TO PASS!
+     */
+
+    /**
+     * This method is used to buy a house from the banker.
+     * @author walshj05
+     */
+    public void buyHouse() {
+        this.numHouses--;
+    }
+
+    /**
+     * This method is used to buy a hotel from the banker.
+     * @author walshj05
+     */
+    public void buyHotel() {
+        this.numHotels--;
+    }
+
+    /**
+     * This method is used to return a number of houses to the banker.
+     * @param numHouses The number of houses to return.
+     * @author walshj05
+     */
+    public void returnHouses(int numHouses) {
+        this.numHouses += numHouses;
+    }
+
+    /**
+     * This method is used to return a hotel to the banker.
+     * @author walshj05
+     */
+    public void returnHotel() {
+        this.numHotels++;
+        this.numHouses -= 4;
+    }
 }
