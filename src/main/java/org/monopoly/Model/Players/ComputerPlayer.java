@@ -10,11 +10,12 @@ import org.monopoly.Model.Monopoly;
 import java.util.ArrayList;
 
 /**
- * A class representing a player in the Monopoly game.
- * More functionality will be added
+ * A class that will represent a computer player in the game of Monopoly.
+ * This class has a random number generator that will be used to determine the moves of the player.
  * @author walshj05, crevelings
+ *
  */
-public class HumanPlayer extends Player {
+public class ComputerPlayer extends Player {
     private final String name;
     private int position;
     private int balance;
@@ -33,7 +34,7 @@ public class HumanPlayer extends Player {
      * @param token Token
      * @author walshj05
      */
-    public HumanPlayer(String name, Token token) {
+    public ComputerPlayer(String name, Token token) {
         this.name = name;
         this.token = token;
         this.balance = 1500; // Starting balance
@@ -145,6 +146,7 @@ public class HumanPlayer extends Player {
      * @author walshj05
      */
     public void purchaseProperty(String property, int price) throws InsufficientFundsException {
+        // fixme RANDOMIZE
         if (balance >= price) {
             propertiesOwned.add(property);
             balance -= price;
@@ -161,6 +163,7 @@ public class HumanPlayer extends Player {
      * @author walshj05
      */
     public void mortgageProperty(String property, int mortgageCost) throws NoSuchPropertyException {
+        // fixme RANDOMIZE
         if (propertiesOwned.contains(property)) {
             propertiesOwned.remove(property);
             propertiesMortgaged.add(property);
@@ -177,6 +180,7 @@ public class HumanPlayer extends Player {
      * @author walshj05
      */
     public void sellProperty(String property, int propertyCost) throws NoSuchPropertyException {
+        // fixme RANDOMIZE
         if (propertiesOwned.contains(property)) {
             propertiesOwned.remove(property);
             balance += propertyCost;
@@ -270,6 +274,7 @@ public class HumanPlayer extends Player {
     }
 
     public void buyHouse(String propertyName, ColorGroup colorGroup, int price) throws InsufficientFundsException {
+        // fixme RANDOMIZE
         if (balance - price < 0) {
             throw new InsufficientFundsException("Insufficient funds to buy a house");
         }
@@ -286,6 +291,7 @@ public class HumanPlayer extends Player {
     }
 
     public void sellHouse(String propertyName, ColorGroup colorGroup) throws InsufficientFundsException {
+        // fixme RANDOMIZE
         if (!propertiesOwned.contains(propertyName) || !colorGroups.contains(colorGroup)) {
             throw new RuntimeException("Property not registered to player.");
         }
@@ -299,6 +305,7 @@ public class HumanPlayer extends Player {
     }
 
     public void buyHotel(String propertyName, ColorGroup colorGroup, int price) throws InsufficientFundsException {
+        // fixme RANDOMIZE
         if (balance - price < 0) {
             throw new InsufficientFundsException("Insufficient funds to buy a hotel");
         }
@@ -315,6 +322,7 @@ public class HumanPlayer extends Player {
     }
 
     public void sellHotel(String propertyName, ColorGroup colorGroup) throws InsufficientFundsException {
+        // fixme RANDOMIZE
         if (!propertiesOwned.contains(propertyName) || !colorGroups.contains(colorGroup)) {
             throw new RuntimeException("Property not registered to player.");
         }
