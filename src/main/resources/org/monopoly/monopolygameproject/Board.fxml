@@ -2,7 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -437,7 +437,7 @@
          </Pane>
       </children>
    </GridPane>
-   <AnchorPane layoutX="780.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="195.0" prefWidth="450.0">
+   <AnchorPane style="-fx-border-width: 0 0 1 0; -fx-border-color: grey; -fx-border-style: solid;" layoutX="780.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="195.0" prefWidth="450.0">
       <children>
          <HBox layoutX="12.0" layoutY="129.0" prefHeight="26.0" prefWidth="450.0" spacing="10.0">
             <children>
@@ -502,21 +502,21 @@
                </Button>
             </children>
          </HBox>
-         <TextArea layoutX="130" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="85.0" text="Name&#10;">
+         <Label layoutX="130" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="85.0" text="Name&#10;">
             <font>
                <Font name="Futura Bold" size="14.0" />
             </font>
-         </TextArea>
+         </Label>
          <ImageView layoutX="10" fitHeight="100.0" fitWidth="160.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@../../../TokenPNGs/Boot.png" />
             </image>
          </ImageView>
-         <TextArea layoutY="60" layoutX="130.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="85.0" text="Money&#10;">
+         <Label layoutY="60" layoutX="130.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="85.0" text="Money&#10;">
             <font>
                <Font name="Futura Bold" size="14.0" />
             </font>
-         </TextArea>
+         </Label>
          <ScrollPane layoutX="280.0" prefHeight="120.0" prefWidth="170.0">
             <content>
              <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="195.0" prefWidth="120.0">
@@ -528,7 +528,7 @@
          </ScrollPane>
       </children>
    </AnchorPane>
-   <AnchorPane layoutY="195" layoutX="780.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="195.0" prefWidth="450.0">
+   <AnchorPane style="-fx-border-width: 0 0 1 0; -fx-border-color: grey; -fx-border-style: solid;" layoutY="195" layoutX="780.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="195.0" prefWidth="450.0">
       <children>
          <HBox layoutX="12.0" layoutY="129.0" prefHeight="26.0" prefWidth="450.0" spacing="10.0">
             <children>
@@ -593,21 +593,21 @@
                </Button>
             </children>
          </HBox>
-         <TextArea layoutX="130" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="85.0" text="Name&#10;">
+         <Label layoutX="130" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="85.0" text="Name&#10;">
             <font>
                <Font name="Futura Bold" size="14.0" />
             </font>
-         </TextArea>
+         </Label>
          <ImageView layoutX="10" fitHeight="100.0" fitWidth="160.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@../../../TokenPNGs/Boot.png" />
             </image>
          </ImageView>
-         <TextArea layoutY="60" layoutX="130.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="85.0" text="Money&#10;">
+         <Label layoutY="60" layoutX="130.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="85.0" text="Money&#10;">
             <font>
                <Font name="Futura Bold" size="14.0" />
             </font>
-         </TextArea>
+         </Label>
          <ScrollPane layoutX="280.0" prefHeight="120.0" prefWidth="170.0">
             <content>
                <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="195.0" prefWidth="120.0">
@@ -619,7 +619,7 @@
          </ScrollPane>
       </children>
    </AnchorPane>
-   <AnchorPane layoutY="390" layoutX="780.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="195.0" prefWidth="450.0">
+   <AnchorPane style="-fx-border-width: 0 0 1 0; -fx-border-color: grey; -fx-border-style: solid;" layoutY="390" layoutX="780.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="195.0" prefWidth="450.0">
       <children>
          <HBox layoutX="12.0" layoutY="129.0" prefHeight="26.0" prefWidth="450.0" spacing="10.0">
             <children>
@@ -684,21 +684,21 @@
                </Button>
             </children>
          </HBox>
-         <TextArea layoutX="130" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="85.0" text="Name&#10;">
+         <Label layoutX="130" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="85.0" text="Name&#10;">
             <font>
                <Font name="Futura Bold" size="14.0" />
             </font>
-         </TextArea>
+         </Label>
          <ImageView layoutX="10" fitHeight="100.0" fitWidth="160.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@../../../TokenPNGs/Boot.png" />
             </image>
          </ImageView>
-         <TextArea layoutY="60" layoutX="130.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="85.0" text="Money&#10;">
+         <Label layoutY="60" layoutX="130.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="85.0" text="Money&#10;">
             <font>
                <Font name="Futura Bold" size="14.0" />
             </font>
-         </TextArea>
+         </Label>
          <ScrollPane layoutX="280.0" prefHeight="120.0" prefWidth="170.0">
             <content>
                <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="195.0" prefWidth="120.0">
@@ -710,7 +710,7 @@
          </ScrollPane>
       </children>
    </AnchorPane>
-   <AnchorPane style="fx-border-color: black; fx-border-width: 2; fx-border-radius: 5;" layoutY="585" layoutX="780.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="195.0" prefWidth="450.0">
+   <AnchorPane style="-fx-border-width: 0 0 1 0; -fx-border-color: grey; -fx-border-style: solid;" layoutY="585" layoutX="780.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="195.0" prefWidth="450.0">
       <children>
          <HBox layoutX="12.0" layoutY="129.0" prefHeight="26.0" prefWidth="450.0" spacing="10.0">
             <children>
@@ -775,21 +775,21 @@
                </Button>
             </children>
          </HBox>
-         <TextArea layoutX="130" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="85.0" text="Name&#10;">
+         <Label layoutX="130" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="85.0" text="Name&#10;">
             <font>
                <Font name="Futura Bold" size="14.0" />
             </font>
-         </TextArea>
+         </Label>
          <ImageView layoutX="10" fitHeight="100.0" fitWidth="160.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@../../../TokenPNGs/Boot.png" />
             </image>
          </ImageView>
-         <TextArea layoutY="60" layoutX="130.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="85.0" text="Money&#10;">
+         <Label layoutY="60" layoutX="130.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="85.0" text="Money&#10;">
             <font>
                <Font name="Futura Bold" size="14.0" />
             </font>
-         </TextArea>
+         </Label>
          <ScrollPane layoutX="280.0" prefHeight="120.0" prefWidth="170.0">
             <content>
                <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="195.0" prefWidth="120.0">
