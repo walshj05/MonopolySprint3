@@ -8,6 +8,7 @@ import org.monopoly.Model.Dice;
 import org.monopoly.Model.Monopoly;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * A class that will represent a computer player in the game of Monopoly.
@@ -144,9 +145,24 @@ public class ComputerPlayer extends Player {
      * @param property String
      * @throws InsufficientFundsException exception
      * @author walshj05
+     *
+     * Modified by: shifmans
      */
     public void purchaseProperty(String property, int price) throws InsufficientFundsException {
-        // fixme RANDOMIZE
+        boolean decision;
+
+        if (balance > 500) {
+            decision = runOdds(0.85);
+        }
+        else {
+            decision = runOdds(0.50);
+        }
+
+        if (!decision) {
+            System.out.println("Player has decided not to purchase " + property);
+            return;
+        }
+
         if (balance >= price) {
             propertiesOwned.add(property);
             balance -= price;
@@ -161,9 +177,24 @@ public class ComputerPlayer extends Player {
      * @param property String
      * @throws NoSuchPropertyException exception
      * @author walshj05
+     *
+     * Modified by: shifmans
      */
     public void mortgageProperty(String property, int mortgageCost) throws NoSuchPropertyException {
-        // fixme RANDOMIZE
+        boolean decision;
+
+        if (balance > 500) {
+            decision = runOdds(0.35);
+        }
+        else {
+            decision = runOdds(0.65);
+        }
+
+        if (!decision) {
+            System.out.println("Player has decided not to mortgage " + property);
+            return;
+        }
+
         if (propertiesOwned.contains(property)) {
             propertiesOwned.remove(property);
             propertiesMortgaged.add(property);
@@ -178,9 +209,24 @@ public class ComputerPlayer extends Player {
      * @param property String
      * @throws NoSuchPropertyException exception
      * @author walshj05
+     *
+     * Modified by: shifmans
      */
     public void sellProperty(String property, int propertyCost) throws NoSuchPropertyException {
-        // fixme RANDOMIZE
+        boolean decision;
+
+        if (balance > 500) {
+            decision = runOdds(0.35);
+        }
+        else {
+            decision = runOdds(0.65);
+        }
+
+        if (!decision) {
+            System.out.println("Player has decided not to sell " + property);
+            return;
+        }
+
         if (propertiesOwned.contains(property)) {
             propertiesOwned.remove(property);
             balance += propertyCost;
@@ -273,8 +319,24 @@ public class ComputerPlayer extends Player {
         return balance == 0;
     }
 
+    /**
+     * Modified by: shifmans
+     */
     public void buyHouse(String propertyName, ColorGroup colorGroup, int price) throws InsufficientFundsException {
-        // fixme RANDOMIZE
+        boolean decision;
+
+        if (balance > 500) {
+            decision = runOdds(0.75);
+        }
+        else {
+            decision = runOdds(0.25);
+        }
+
+        if (!decision) {
+            System.out.println("Player has decided not to buy a house on " + propertyName);
+            return;
+        }
+
         if (balance - price < 0) {
             throw new InsufficientFundsException("Insufficient funds to buy a house");
         }
@@ -290,8 +352,24 @@ public class ComputerPlayer extends Player {
         }
     }
 
-    public void sellHouse(String propertyName, ColorGroup colorGroup) throws InsufficientFundsException {
-        // fixme RANDOMIZE
+    /**
+     * Modified by: shifmans
+     */
+    public void sellHouse(String propertyName, ColorGroup colorGroup) {
+        boolean decision;
+
+        if (balance > 500) {
+            decision = runOdds(0.35);
+        }
+        else {
+            decision = runOdds(0.65);
+        }
+
+        if (!decision) {
+            System.out.println("Player has decided not to sell a house on " + propertyName);
+            return;
+        }
+
         if (!propertiesOwned.contains(propertyName) || !colorGroups.contains(colorGroup)) {
             throw new RuntimeException("Property not registered to player.");
         }
@@ -304,8 +382,24 @@ public class ComputerPlayer extends Player {
         }
     }
 
+    /**
+     * Modified by: shifmans
+     */
     public void buyHotel(String propertyName, ColorGroup colorGroup, int price) throws InsufficientFundsException {
-        // fixme RANDOMIZE
+        boolean decision;
+
+        if (balance > 750) {
+            decision = runOdds(0.75);
+        }
+        else {
+            decision = runOdds(0.25);
+        }
+
+        if (!decision) {
+            System.out.println("Player has decided not to buy a hotel on " + propertyName);
+            return;
+        }
+
         if (balance - price < 0) {
             throw new InsufficientFundsException("Insufficient funds to buy a hotel");
         }
@@ -321,8 +415,24 @@ public class ComputerPlayer extends Player {
         }
     }
 
-    public void sellHotel(String propertyName, ColorGroup colorGroup) throws InsufficientFundsException {
-        // fixme RANDOMIZE
+    /**
+     * Modified by: shifmans
+     */
+    public void sellHotel(String propertyName, ColorGroup colorGroup) {
+        boolean decision;
+
+        if (balance > 750) {
+            decision = runOdds(0.35);
+        }
+        else {
+            decision = runOdds(0.65);
+        }
+
+        if (!decision) {
+            System.out.println("Player has decided not to sell a hotel on " + propertyName);
+            return;
+        }
+
         if (!propertiesOwned.contains(propertyName) || !colorGroups.contains(colorGroup)) {
             throw new RuntimeException("Property not registered to player.");
         }
@@ -385,5 +495,18 @@ public class ComputerPlayer extends Player {
             }
         }
         banker.checkForMonopolies(propertiesOwned, monopolies, colorGroups);
+    }
+
+    /**
+     * Determines if the player will run a certain odd
+     * @param odd Likelihood of the event occurring
+     * @return Whether the event will likely occur
+     *
+     * Developed by: shifmans
+     */
+    public boolean runOdds(double odd) {
+        Random rand = new Random();
+
+        return rand.nextDouble() <= odd;
     }
 }
