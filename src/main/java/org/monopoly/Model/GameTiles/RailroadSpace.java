@@ -82,6 +82,18 @@ public class RailroadSpace extends GameTile {
     }
 
     /**
+     * Gets the rent price based on the number of railroads owned.
+     * @param numRailroadsOwned The number of Railroads owned.
+     * @return The rent price based on the number of railroads owned.
+     *
+     * Developed by: shifmans
+     */
+    @Override
+    public int getRentPrice(int numRailroadsOwned) {
+        return rentPrices.get(numRailroadsOwned-1);
+    }
+
+    /**
      * Gets the rent prices of a RailroadSpace.
      * @return The list of rent prices of a RailroadSpace.
      *

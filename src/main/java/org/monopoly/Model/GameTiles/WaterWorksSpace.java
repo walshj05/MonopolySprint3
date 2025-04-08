@@ -87,6 +87,7 @@ public class WaterWorksSpace extends GameTile {
      *
      * Developed by: shifmans
      */
+    @Override
     public int getRentPrice(int numUtilitiesOwned) {
         Dice dice = new Dice();
         int[] diceRoll = dice.roll();

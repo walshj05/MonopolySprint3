@@ -108,6 +108,16 @@ public abstract class GameTile implements Strategy {
     }
 
     /**
+     * Sets the rent price of a GameTile.
+     * @return The rent price of a GameTile.
+     *
+     * Developed by: shifmans
+     */
+    public int getRentPrice(int numThing) {
+        return 0;
+    }
+
+    /**
      * Gets the color group of a GameTile.
      * @return The color group of a GameTile.
      *

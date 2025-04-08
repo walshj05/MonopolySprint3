@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import org.monopoly.Model.Cards.TitleDeedDeck;
 import org.monopoly.Model.GameTiles.ElectricCompanySpace;
+import org.monopoly.Model.GameTiles.PropertySpace;
+import org.monopoly.Model.GameTiles.RailroadSpace;
 import org.monopoly.Model.GameTiles.WaterWorksSpace;
 import org.monopoly.Model.Players.HumanPlayer;
 import org.monopoly.Model.Players.Player;
@@ -225,6 +227,36 @@ public class BankerTests {
         banker.receiveMoney(humanPlayer, 200);
         assertEquals(1300, humanPlayer.getBalance());
         assertEquals(Double.POSITIVE_INFINITY, banker.getBalance());
+    }
+
+    /**
+     * Developed by: shifmans
+     * */
+    @Test
+    public void testPropertyGetRent() {
+        Banker banker = new Banker();
+        PropertySpace property = (PropertySpace) banker.getDeck().getTitleDeeds().getProperty("Mediterranean Avenue");
+
+        assertEquals(2, property.getRentPrice(0));
+        assertEquals(10, property.getRentPrice(1));
+        assertEquals(30, property.getRentPrice(2));
+        assertEquals(90, property.getRentPrice(3));
+        assertEquals(160, property.getRentPrice(4));
+        assertEquals(250, property.getRentPrice(5));
+    }
+
+    /**
+     * Developed by: shifmans
+     * */
+    @Test
+    public void testRailroadGetRent() {
+        Banker banker = new Banker();
+        RailroadSpace railroadSpace = (RailroadSpace) banker.getDeck().getTitleDeeds().getProperty("Short Line Railroad");
+
+        assertEquals(25, railroadSpace.getRentPrice(1));
+        assertEquals(50, railroadSpace.getRentPrice(2));
+        assertEquals(100, railroadSpace.getRentPrice(3));
+        assertEquals(200, railroadSpace.getRentPrice(4));
     }
 
     /**

@@ -244,9 +244,18 @@ class GameTileTest {
      * Developed by: shifmans
      * */
     @Test
-    public void testGameTilePrice() {
+    public void testGameTileGetPrice() {
         GameTile tile = new TestGameTile("Tile", "Test Action");
         assertEquals(0, tile.getPrice());
+    }
+
+    /**
+     * Developed by: shifmans
+     */
+    @Test
+    public void testGameTileGetRentPrice() {
+        GameTile tile = new TestGameTile("Tile", "Test Action");
+        assertEquals(0, tile.getRentPrice(0));
     }
 
     /**
