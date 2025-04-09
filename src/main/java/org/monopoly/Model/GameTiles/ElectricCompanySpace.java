@@ -174,7 +174,6 @@ public class ElectricCompanySpace extends GameTile {
     /**
      * Sets the owner of a ElectricCompanySpace.
      * @param owner The owner of a ElectricCompanySpace.
-     *
      * Developed by: shifmans
      */
     public void setOwner(String owner) {
@@ -184,6 +183,7 @@ public class ElectricCompanySpace extends GameTile {
     /**
      * Executes the strategy for the ElectricCompanySpace.
      * @author crevelings
+     * Modified by: crevelings (4/8/25) Configured for CPU
      */
     @Override
     public void executeStrategy(Player player) {

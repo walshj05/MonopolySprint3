@@ -249,6 +249,7 @@ public class PropertySpace extends GameTile {
     /**
      * Executes the strategy for the PropertySpace.
      * @author crevelings
+     * Modified by: crevelings (4/8/25) Configured for CPU
      */
     @Override
     public void executeStrategy(Player player) {

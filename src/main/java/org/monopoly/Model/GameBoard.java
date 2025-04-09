@@ -31,6 +31,11 @@ public class GameBoard {
         initializeBoard();
     }
 
+    /**
+     * Made into singleton
+     * @return instance
+     * @author crevelings (4/8/25)
+     */
     public static GameBoard getInstance(){
         if (instance == null) {
             instance = new GameBoard();

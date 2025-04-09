@@ -183,6 +183,7 @@ public class WaterWorksSpace extends GameTile {
     /**
      * Executes the strategy for the WaterWorksSpace.
      * @author crevelings
+     * Modified by: crevelings (4/8/25) Configured for CPU
      */
     @Override
     public void executeStrategy(Player player) {

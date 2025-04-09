@@ -24,6 +24,11 @@ public class TitleDeedCards {
         initializeCards();
     }
 
+    /**
+     * Made into singleton
+     * @return instance
+     * @author crevelings (4/8/25)
+     */
     public static TitleDeedCards getInstance() {
         if (instance == null) {
             instance = new TitleDeedCards();
