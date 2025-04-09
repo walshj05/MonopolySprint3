@@ -3,6 +3,7 @@ package org.monopoly.Model;
 import org.monopoly.Model.Cards.ChanceDeck;
 import org.monopoly.Model.Cards.ColorGroup;
 import org.monopoly.Model.Cards.CommunityChestDeck;
+import org.monopoly.Model.Cards.TitleDeedCards;
 import org.monopoly.Model.GameTiles.*;
 import org.monopoly.Model.Players.Player;
 
@@ -18,6 +19,7 @@ public class GameBoard {
     private List<GameTile> tiles;
     private CommunityChestDeck communityChestDeck;
     private ChanceDeck chanceDeck;
+    private static GameBoard instance;
 
     /**
      * Constructs a GameSpace object
@@ -27,6 +29,13 @@ public class GameBoard {
         this.communityChestDeck = new CommunityChestDeck();
         this.chanceDeck = new ChanceDeck();
         initializeBoard();
+    }
+
+    public static GameBoard getInstance(){
+        if (instance == null) {
+            instance = new GameBoard();
+        }
+        return instance;
     }
 
     /**

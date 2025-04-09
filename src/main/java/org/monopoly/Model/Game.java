@@ -30,7 +30,7 @@ public class Game {
             players.add(new HumanPlayer("Player" + (i + 1), playerTokens[i]));
         }
 
-        this.gameBoard = new GameBoard();
+        this.gameBoard = GameBoard.getInstance();
         this.turnManager = new TurnManager(numHumanPlayers, players); // todo implement players rolling for order
     }
 
