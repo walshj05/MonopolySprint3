@@ -96,6 +96,18 @@ public class PropertySpace extends GameTile {
     }
 
     /**
+     * Gets the rent price based on the number of buildings built on property.
+     * @param numBuildingsBuilt The number of buildings built on property.
+     * @return The rent price based on the number of buildings built on property.
+     *
+     * Developed by: shifmans
+     */
+    @Override
+    public int getRentPrice(int numBuildingsBuilt) {
+        return rentPrices.get(numBuildingsBuilt);
+    }
+
+    /**
      * Gets the rent prices of a PropertySpace.
      * @return The list of rent prices of a PropertySpace.
      *
