@@ -45,6 +45,15 @@ public class Banker {
     }
 
     /**
+     * Resets the instance of Banker for testing purposes.
+     *
+     * Developed by: shifmans
+     */
+    public static void resetInstance() {
+        instance = new Banker();
+    }
+
+    /**
      * This method is used to buy a property from the banker.
      * @param propertyName The name of the property to buy.
      * @param player The player who is buying the property.

@@ -4,7 +4,9 @@ import org.monopoly.Exceptions.InsufficientFundsException;
 import org.monopoly.Exceptions.NoSuchPropertyException;
 import org.monopoly.Model.Banker;
 import org.monopoly.Model.Cards.ColorGroup;
+import org.monopoly.Model.Cards.TitleDeedCards;
 import org.monopoly.Model.Dice;
+import org.monopoly.Model.GameTiles.PropertySpace;
 import org.monopoly.Model.Monopoly;
 
 import java.util.ArrayList;
@@ -71,6 +73,26 @@ public class HumanPlayer extends Player {
 
     public void setPosition(int position) {
         this.position = position;
+    }
+
+    /**
+     * Gets the properties owned by the player.
+     * @return Properties owned by the player.
+     *
+     * Developed by: shifmans
+     */
+    public ArrayList<String> getPropertiesOwned() {
+        return propertiesOwned;
+    }
+
+    /**
+     * Gets the monopolies a player has.
+     * @return Monopolies a player has.
+     *
+     * Developed by: shifmans
+     */
+    public ArrayList<Monopoly> getMonopolies() {
+        return monopolies;
     }
 
 
@@ -269,11 +291,11 @@ public class HumanPlayer extends Player {
         return balance == 0;
     }
 
-    public void buyHouse(String propertyName, ColorGroup colorGroup, int price) throws InsufficientFundsException {
+    public void buyHouse(String propertyName, ColorGroup colorGroup, int price) throws InsufficientFundsException, RuntimeException {
         if (balance - price < 0) {
             throw new InsufficientFundsException("Insufficient funds to buy a house");
         }
-        if (!propertiesOwned.contains(propertyName) || !colorGroups.contains(colorGroup)) {
+        if (!propertiesOwned.contains(propertyName)) {
             throw new RuntimeException("Property not registered to player.");
         }
 
@@ -281,11 +303,16 @@ public class HumanPlayer extends Player {
         try {
             monopolies.get(index).buildHouse(propertyName);
         } catch (Exception e) {
+            if (e.getMessage().equals("Index -1 out of bounds for length 0")) {
+                throw new RuntimeException("Player does not have all properties in this monopoly.");
+            }
             throw new RuntimeException(e.getMessage());
         }
+
+        balance -= price;
     }
 
-    public void sellHouse(String propertyName, ColorGroup colorGroup) throws InsufficientFundsException {
+    public void sellHouse(String propertyName, ColorGroup colorGroup) {
         if (!propertiesOwned.contains(propertyName) || !colorGroups.contains(colorGroup)) {
             throw new RuntimeException("Property not registered to player.");
         }
@@ -296,6 +323,10 @@ public class HumanPlayer extends Player {
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
+
+        TitleDeedCards cards = TitleDeedCards.getInstance();
+        PropertySpace property = (PropertySpace) cards.getProperty(propertyName);
+        balance += property.getHousePrice()/2;
     }
 
     public void buyHotel(String propertyName, ColorGroup colorGroup, int price) throws InsufficientFundsException {
@@ -312,9 +343,11 @@ public class HumanPlayer extends Player {
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
+
+        balance -= price;
     }
 
-    public void sellHotel(String propertyName, ColorGroup colorGroup) throws InsufficientFundsException {
+    public void sellHotel(String propertyName, ColorGroup colorGroup) {
         if (!propertiesOwned.contains(propertyName) || !colorGroups.contains(colorGroup)) {
             throw new RuntimeException("Property not registered to player.");
         }
@@ -325,6 +358,10 @@ public class HumanPlayer extends Player {
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
+
+        TitleDeedCards cards = TitleDeedCards.getInstance();
+        PropertySpace property = (PropertySpace) cards.getProperty(propertyName);
+        balance += property.getHotelPrice()/2;
     }
 
     /**
@@ -371,11 +408,11 @@ public class HumanPlayer extends Player {
      */
     private void updateMonopolies() {
         Banker banker = Banker.getInstance();
+        banker.checkForMonopolies(propertiesOwned, monopolies, colorGroups);
         for (Monopoly monopoly : monopolies) {
             if (!colorGroups.contains(monopoly.getColorGroup())) {
                 colorGroups.add(monopoly.getColorGroup());
             }
         }
-        banker.checkForMonopolies(propertiesOwned, monopolies, colorGroups);
     }
 }
