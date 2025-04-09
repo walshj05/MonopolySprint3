@@ -13,6 +13,14 @@ public class TurnManager {
     private int currentPlayerIndex;
     private final ArrayList<Player> players;
     private int numPlayers;
+    private static TurnManager instance;
+
+    public static TurnManager getInstance() {
+        if (instance == null) {
+            instance = new TurnManager(0, new ArrayList<>());
+        }
+        return instance;
+    }
     /**
      * Constructor for the TurnManager class.
      * @param numPlayers the number of players in the game
