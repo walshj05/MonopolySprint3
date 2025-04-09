@@ -3,8 +3,11 @@ package org.monopoly.Model.Players;
 import org.junit.jupiter.api.Test;
 import org.monopoly.Exceptions.InsufficientFundsException;
 import org.monopoly.Exceptions.NoSuchPropertyException;
+import org.monopoly.Model.Banker;
 import org.monopoly.Model.Cards.ColorGroup;
 import org.monopoly.Model.Dice;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -174,5 +177,393 @@ public class HumanPlayerTest {
         humanPlayer.purchaseProperty("Park Place", 350);
         humanPlayer.purchaseProperty("Boardwalk", 400);
         assertTrue(humanPlayer.hasMonopoly(ColorGroup.DARK_BLUE));
+    }
+
+    /**
+     * Developed by: shifmans
+     */
+    @Test
+    public void testPlayerBuyOneHouseNoMonopoly() throws InsufficientFundsException {
+        HumanPlayer humanPlayer = new HumanPlayer("John Doe", new Token( "John Doe","BattleShip.png"));
+        assertEquals(1500, humanPlayer.getBalance());
+
+        humanPlayer.purchaseProperty("Park Place", 350);
+        assertEquals(1150, humanPlayer.getBalance());
+        assertTrue(humanPlayer.hasProperty("Park Place"));
+        assertFalse(humanPlayer.hasMonopoly(ColorGroup.DARK_BLUE));
+        assertThrows(RuntimeException.class, () -> humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200));
+        assertEquals(1150, humanPlayer.getBalance());
+    }
+
+    /**
+     * Developed by: shifmans
+     */
+    @Test
+    public void testPlayerBuyOneHouseNoMoney() throws InsufficientFundsException {
+        HumanPlayer humanPlayer = new HumanPlayer("John Doe", new Token( "John Doe","BattleShip.png"));
+        assertEquals(1500, humanPlayer.getBalance());
+
+        humanPlayer.purchaseProperty("Park Place", 350);
+        assertEquals(1150, humanPlayer.getBalance());
+
+        // Take player money for testing purposes
+        humanPlayer.subtractFromBalance(1000);
+
+        assertThrows(InsufficientFundsException.class, () -> humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200));
+    }
+
+    /**
+     * Developed by: shifmans
+     */
+    @Test
+    public void testPlayerBuyHouseUnownedProperty() throws InsufficientFundsException {
+        HumanPlayer humanPlayer = new HumanPlayer("John Doe", new Token( "John Doe","BattleShip.png"));
+        assertEquals(List.of(), humanPlayer.getPropertiesOwned());
+        assertThrows(RuntimeException.class, () -> humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200));
+
+        humanPlayer.purchaseProperty("Park Place", 350);
+        assertEquals(1150, humanPlayer.getBalance());
+        assertThrows(RuntimeException.class, () -> humanPlayer.buyHouse("Boardwalk", ColorGroup.DARK_BLUE, 200));
+    }
+
+    /**
+     * Developed by: shifmans
+     */
+    @Test
+    public void testPlayerBuyOneHouse() throws InsufficientFundsException {
+        HumanPlayer humanPlayer = new HumanPlayer("John Doe", new Token( "John Doe","BattleShip.png"));
+        assertEquals(1500, humanPlayer.getBalance());
+
+        humanPlayer.purchaseProperty("Park Place", 350);
+        assertEquals(1150, humanPlayer.getBalance());
+        assertTrue(humanPlayer.hasProperty("Park Place"));
+        assertEquals(List.of("Park Place"), humanPlayer.getPropertiesOwned());
+        assertFalse(humanPlayer.hasMonopoly(ColorGroup.DARK_BLUE));
+        assertEquals(0, humanPlayer.getMonopolies().size());
+
+        humanPlayer.purchaseProperty("Boardwalk", 400);
+        assertEquals(750, humanPlayer.getBalance());
+        assertTrue(humanPlayer.hasProperty("Boardwalk"));
+        assertEquals(Arrays.asList("Park Place", "Boardwalk"), humanPlayer.getPropertiesOwned());
+        assertTrue(humanPlayer.hasMonopoly(ColorGroup.DARK_BLUE));
+        assertEquals(1, humanPlayer.getMonopolies().size());
+
+        humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200);
+        assertEquals(550, humanPlayer.getBalance());
+    }
+
+    /**
+     * Developed by: shifmans
+     */
+    @Test
+    public void testCheckEvenBuildRule() throws InsufficientFundsException {
+        Banker.resetInstance();
+        HumanPlayer humanPlayer = new HumanPlayer("John Doe", new Token( "John Doe","BattleShip.png"));
+        assertEquals(1500, humanPlayer.getBalance());
+
+        humanPlayer.purchaseProperty("Park Place", 350);
+        assertEquals(1150, humanPlayer.getBalance());
+        assertTrue(humanPlayer.hasProperty("Park Place"));
+        assertEquals(List.of("Park Place"), humanPlayer.getPropertiesOwned());
+        assertFalse(humanPlayer.hasMonopoly(ColorGroup.DARK_BLUE));
+        assertEquals(0, humanPlayer.getMonopolies().size());
+
+        humanPlayer.purchaseProperty("Boardwalk", 400);
+        assertEquals(750, humanPlayer.getBalance());
+        assertTrue(humanPlayer.hasProperty("Boardwalk"));
+        assertEquals(Arrays.asList("Park Place", "Boardwalk"), humanPlayer.getPropertiesOwned());
+        assertTrue(humanPlayer.hasMonopoly(ColorGroup.DARK_BLUE));
+        assertEquals(1, humanPlayer.getMonopolies().size());
+
+        humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200);
+        assertEquals(550, humanPlayer.getBalance());
+
+        assertThrows(RuntimeException.class, () -> humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200));
+    }
+
+    /**
+     * Developed by: shifmans
+     */
+    @Test
+    public void testPlayerOverBuyHouses() throws InsufficientFundsException {
+        HumanPlayer humanPlayer = new HumanPlayer("John Doe", new Token( "John Doe","BattleShip.png"));
+        assertEquals(1500, humanPlayer.getBalance());
+
+        // Give player money for testing purposes
+        humanPlayer.addToBalance(10000);
+        assertEquals(11500, humanPlayer.getBalance());
+
+        humanPlayer.purchaseProperty("Park Place", 350);
+        humanPlayer.purchaseProperty("Boardwalk", 400);
+        humanPlayer.hasMonopoly(ColorGroup.DARK_BLUE);
+        assertEquals(10750, humanPlayer.getBalance());
+
+        humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Boardwalk", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Boardwalk", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Boardwalk", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Boardwalk", ColorGroup.DARK_BLUE, 200);
+        assertEquals(9150, humanPlayer.getBalance());
+
+        assertThrows(RuntimeException.class, () -> humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200));
+        assertThrows(RuntimeException.class, () -> humanPlayer.buyHouse("Boardwalk", ColorGroup.DARK_BLUE, 200));
+    }
+
+    /**
+     * Developed by: shifmans
+     */
+    @Test void testPlayerSellOneHouse() throws InsufficientFundsException {
+        Banker.resetInstance();
+        HumanPlayer humanPlayer = new HumanPlayer("John Doe", new Token( "John Doe","BattleShip.png"));
+        assertEquals(1500, humanPlayer.getBalance());
+
+        humanPlayer.purchaseProperty("Park Place", 350);
+        assertTrue(humanPlayer.hasProperty("Park Place"));
+        assertFalse(humanPlayer.hasMonopoly(ColorGroup.DARK_BLUE));
+
+        humanPlayer.purchaseProperty("Boardwalk", 400);
+        humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200);
+        assertEquals(550, humanPlayer.getBalance());
+
+        humanPlayer.sellHouse("Park Place", ColorGroup.DARK_BLUE);
+        assertEquals(650, humanPlayer.getBalance());
+    }
+
+    /**
+     * Developed by: shifmans
+     */
+    @Test
+    public void testCheckEvenSellRule() throws InsufficientFundsException {
+        HumanPlayer humanPlayer = new HumanPlayer("John Doe", new Token( "John Doe","BattleShip.png"));
+        assertEquals(1500, humanPlayer.getBalance());
+
+        humanPlayer.purchaseProperty("Park Place", 350);
+        assertTrue(humanPlayer.hasProperty("Park Place"));
+        assertFalse(humanPlayer.hasMonopoly(ColorGroup.DARK_BLUE));
+
+        humanPlayer.purchaseProperty("Boardwalk", 400);
+        humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200);
+        assertEquals(550, humanPlayer.getBalance());
+
+        humanPlayer.sellHouse("Park Place", ColorGroup.DARK_BLUE);
+        assertEquals(650, humanPlayer.getBalance());
+
+        assertThrows(RuntimeException.class, () -> humanPlayer.sellHouse("Park Place", ColorGroup.DARK_BLUE));
+    }
+
+    /**
+     * Developed by: shifmans
+     */
+    @Test
+    public void testPlayerOverSellHouses() throws InsufficientFundsException {
+        HumanPlayer humanPlayer = new HumanPlayer("John Doe", new Token( "John Doe","BattleShip.png"));
+        assertEquals(1500, humanPlayer.getBalance());
+
+        // Give player money for testing purposes
+        humanPlayer.addToBalance(10000);
+        assertEquals(11500, humanPlayer.getBalance());
+
+        humanPlayer.purchaseProperty("Park Place", 350);
+        humanPlayer.purchaseProperty("Boardwalk", 400);
+        humanPlayer.hasMonopoly(ColorGroup.DARK_BLUE);
+        assertEquals(10750, humanPlayer.getBalance());
+
+        humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Boardwalk", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Boardwalk", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Boardwalk", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Boardwalk", ColorGroup.DARK_BLUE, 200);
+        assertEquals(9150, humanPlayer.getBalance());
+
+        humanPlayer.sellHouse("Park Place", ColorGroup.DARK_BLUE);
+        humanPlayer.sellHouse("Boardwalk", ColorGroup.DARK_BLUE);
+        humanPlayer.sellHouse("Park Place", ColorGroup.DARK_BLUE);
+        humanPlayer.sellHouse("Boardwalk", ColorGroup.DARK_BLUE);
+        humanPlayer.sellHouse("Park Place", ColorGroup.DARK_BLUE);
+        humanPlayer.sellHouse("Boardwalk", ColorGroup.DARK_BLUE);
+        humanPlayer.sellHouse("Park Place", ColorGroup.DARK_BLUE);
+        humanPlayer.sellHouse("Boardwalk", ColorGroup.DARK_BLUE);
+
+        assertEquals(9950, humanPlayer.getBalance());
+    }
+
+    /**
+     * Developed by: shifmans
+     */
+    @Test
+    public void testPlayerSellHouseUnownedProperty() throws InsufficientFundsException {
+        HumanPlayer humanPlayer = new HumanPlayer("John Doe", new Token( "John Doe","BattleShip.png"));
+        assertEquals(List.of(), humanPlayer.getPropertiesOwned());
+        assertThrows(RuntimeException.class, () -> humanPlayer.sellHouse("Park Place", ColorGroup.DARK_BLUE));
+
+        humanPlayer.purchaseProperty("Park Place", 350);
+        assertEquals(1150, humanPlayer.getBalance());
+        assertThrows(RuntimeException.class, () -> humanPlayer.sellHouse("Boardwalk", ColorGroup.DARK_BLUE));
+    }
+
+    /**
+     * Developed by: shifmans
+     */
+    @Test
+    public void testPlayerBuyHotel() throws InsufficientFundsException {
+        HumanPlayer humanPlayer = new HumanPlayer("John Doe", new Token( "John Doe","BattleShip.png"));
+        assertEquals(1500, humanPlayer.getBalance());
+
+        // Give player money for testing purposes
+        humanPlayer.addToBalance(10000);
+        assertEquals(11500, humanPlayer.getBalance());
+
+        humanPlayer.purchaseProperty("Park Place", 350);
+        humanPlayer.purchaseProperty("Boardwalk", 400);
+        humanPlayer.hasMonopoly(ColorGroup.DARK_BLUE);
+        assertEquals(10750, humanPlayer.getBalance());
+
+        humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Boardwalk", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Boardwalk", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Boardwalk", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Boardwalk", ColorGroup.DARK_BLUE, 200);
+        assertEquals(9150, humanPlayer.getBalance());
+
+        humanPlayer.buyHotel("Park Place", ColorGroup.DARK_BLUE, 200);
+        assertEquals(8950, humanPlayer.getBalance());
+    }
+
+    /**
+     * Developed by: shifmans
+     */
+    @Test
+    public void testPlayerBuyHotelNoMoney() throws InsufficientFundsException {
+        Banker.resetInstance();
+        HumanPlayer humanPlayer = new HumanPlayer("John Doe", new Token( "John Doe","BattleShip.png"));
+        assertEquals(1500, humanPlayer.getBalance());
+
+        // Give player money for testing purposes
+        humanPlayer.addToBalance(900);
+        assertEquals(2400, humanPlayer.getBalance());
+
+        humanPlayer.purchaseProperty("Park Place", 350);
+        humanPlayer.purchaseProperty("Boardwalk", 400);
+        humanPlayer.hasMonopoly(ColorGroup.DARK_BLUE);
+        assertEquals(1650, humanPlayer.getBalance());
+
+        humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Boardwalk", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Boardwalk", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Boardwalk", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Boardwalk", ColorGroup.DARK_BLUE, 200);
+        assertEquals(50, humanPlayer.getBalance());
+
+        assertThrows(InsufficientFundsException.class, () -> humanPlayer.buyHotel("Park Place", ColorGroup.DARK_BLUE, 200));
+    }
+
+    /**
+     * Developed by: shifmans
+     */
+    @Test
+    public void testPlayerBuyHotelUnownedProperty() throws InsufficientFundsException {
+        HumanPlayer humanPlayer = new HumanPlayer("John Doe", new Token( "John Doe","BattleShip.png"));
+        assertEquals(1500, humanPlayer.getBalance());
+
+        // Give player money for testing purposes
+        humanPlayer.addToBalance(1500);
+        assertEquals(3000, humanPlayer.getBalance());
+
+        humanPlayer.purchaseProperty("Park Place", 350);
+        humanPlayer.purchaseProperty("Boardwalk", 400);
+        humanPlayer.hasMonopoly(ColorGroup.DARK_BLUE);
+        assertEquals(2250, humanPlayer.getBalance());
+
+        humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Boardwalk", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Boardwalk", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Boardwalk", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Boardwalk", ColorGroup.DARK_BLUE, 200);
+        assertEquals(650, humanPlayer.getBalance());
+
+        assertThrows(RuntimeException.class, () -> humanPlayer.buyHotel("Short Line Railroad", ColorGroup.DARK_BLUE, 200));
+    }
+
+    /**
+     * Developed by: shifmans
+     */
+    @Test
+    public void testPlayerSellHotel() throws InsufficientFundsException {
+        Banker.resetInstance();
+        HumanPlayer humanPlayer = new HumanPlayer("John Doe", new Token( "John Doe","BattleShip.png"));
+        assertEquals(1500, humanPlayer.getBalance());
+
+        // Give player money for testing purposes
+        humanPlayer.addToBalance(10000);
+        assertEquals(11500, humanPlayer.getBalance());
+
+        humanPlayer.purchaseProperty("Park Place", 350);
+        humanPlayer.purchaseProperty("Boardwalk", 400);
+        humanPlayer.hasMonopoly(ColorGroup.DARK_BLUE);
+        assertEquals(10750, humanPlayer.getBalance());
+
+        humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Boardwalk", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Boardwalk", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Boardwalk", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Boardwalk", ColorGroup.DARK_BLUE, 200);
+        assertEquals(9150, humanPlayer.getBalance());
+
+        humanPlayer.buyHotel("Park Place", ColorGroup.DARK_BLUE, 200);
+        assertEquals(8950, humanPlayer.getBalance());
+
+        humanPlayer.sellHotel("Park Place", ColorGroup.DARK_BLUE);
+        assertEquals(9050, humanPlayer.getBalance());
+    }
+
+    /**
+     * Developed by: shifmans
+     */
+    @Test
+    public void testPlayerSellHotelUnownedProperty() throws InsufficientFundsException {
+        HumanPlayer humanPlayer = new HumanPlayer("John Doe", new Token( "John Doe","BattleShip.png"));
+        assertEquals(1500, humanPlayer.getBalance());
+
+        // Give player money for testing purposes
+        humanPlayer.addToBalance(10000);
+        assertEquals(11500, humanPlayer.getBalance());
+
+        humanPlayer.purchaseProperty("Park Place", 350);
+        humanPlayer.purchaseProperty("Boardwalk", 400);
+        humanPlayer.hasMonopoly(ColorGroup.DARK_BLUE);
+        assertEquals(10750, humanPlayer.getBalance());
+
+        humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Boardwalk", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Boardwalk", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Boardwalk", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200);
+        humanPlayer.buyHouse("Boardwalk", ColorGroup.DARK_BLUE, 200);
+        assertEquals(9150, humanPlayer.getBalance());
+
+        humanPlayer.buyHotel("Park Place", ColorGroup.DARK_BLUE, 200);
+        assertEquals(8950, humanPlayer.getBalance());
+
+        assertThrows(RuntimeException.class, () -> humanPlayer.sellHotel("Short Line Railroad", ColorGroup.DARK_BLUE));
     }
 }
