@@ -10,7 +10,8 @@ import java.util.*;
  * Developed by: shifmans
  */
 public class TitleDeedCards {
-    private HashMap<String, GameTile> properties;
+    private final HashMap<String, GameTile> properties;
+    private static TitleDeedCards instance;
 
     /**
      * Constructor for TitleDeedCards.
@@ -23,6 +24,17 @@ public class TitleDeedCards {
         initializeCards();
     }
 
+    /**
+     * Made into singleton
+     * @return instance
+     * @author crevelings (4/8/25)
+     */
+    public static TitleDeedCards getInstance() {
+        if (instance == null) {
+            instance = new TitleDeedCards();
+        }
+        return instance;
+    }
     /**
      * Initializes the properties with their respective details.
      *

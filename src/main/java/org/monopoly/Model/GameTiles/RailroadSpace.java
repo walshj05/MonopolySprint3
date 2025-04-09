@@ -2,6 +2,7 @@ package org.monopoly.Model.GameTiles;
 
 import org.monopoly.Exceptions.InsufficientFundsException;
 import org.monopoly.Model.Cards.ColorGroup;
+import org.monopoly.Model.Players.ComputerPlayer;
 import org.monopoly.Model.Players.Player;
 
 import java.util.ArrayList;
@@ -175,6 +176,7 @@ public class RailroadSpace extends GameTile {
     /**
      * Executes the strategy for the RailRoadSpace.
      * @author crevelings
+     * Modified by: crevelings (4/8/25) Configured for CPU
      */
     @Override
     public void executeStrategy(Player player) {
@@ -186,6 +188,9 @@ public class RailroadSpace extends GameTile {
                 System.out.println("Or property can be auctioned");
             } else {
                 System.out.println(getOwner() + " already owns the " + getName() + "!");
+                if (player.getClass() == ComputerPlayer.class) {
+                    ((ComputerPlayer) player).handleLanding(this.rentPrices);
+                }
             }
             try {
                 player.purchaseProperty(getName(), price);

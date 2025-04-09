@@ -3,6 +3,7 @@ package org.monopoly.Model.GameTiles;
 import org.monopoly.Exceptions.InsufficientFundsException;
 import org.monopoly.Model.Cards.ColorGroup;
 import org.monopoly.Model.Dice;
+import org.monopoly.Model.Players.ComputerPlayer;
 import org.monopoly.Model.Players.Player;
 
 import java.util.ArrayList;
@@ -182,6 +183,7 @@ public class WaterWorksSpace extends GameTile {
     /**
      * Executes the strategy for the WaterWorksSpace.
      * @author crevelings
+     * Modified by: crevelings (4/8/25) Configured for CPU
      */
     @Override
     public void executeStrategy(Player player) {
@@ -193,6 +195,9 @@ public class WaterWorksSpace extends GameTile {
                 System.out.println("Or property can be auctioned");
             } else {
                 System.out.println(getOwner() + " already owns the " + getName() + "!");
+                if (player.getClass() == ComputerPlayer.class) {
+                    ((ComputerPlayer) player).handleLanding(this.rentPriceMultiplier);
+                }
             }
             try {
                 player.purchaseProperty(getName(), price);
