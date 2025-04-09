@@ -4,11 +4,14 @@ import org.monopoly.Exceptions.InsufficientFundsException;
 import org.monopoly.Exceptions.NoSuchPropertyException;
 import org.monopoly.Model.Banker;
 import org.monopoly.Model.Cards.ColorGroup;
+import org.monopoly.Model.Cards.TitleDeedCards;
 import org.monopoly.Model.Dice;
+import org.monopoly.Model.GameBoard;
+import org.monopoly.Model.GameTiles.GameTile;
+import org.monopoly.Model.GameTiles.PropertySpace;
 import org.monopoly.Model.Monopoly;
 
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.*;
 
 /**
  * A class that will represent a computer player in the game of Monopoly.
@@ -31,7 +34,8 @@ public class ComputerPlayer extends Player {
 
     /**
      * Constructor for a HumanPlayer
-     * @param name String
+     *
+     * @param name  String
      * @param token Token
      * @author walshj05
      */
@@ -52,6 +56,7 @@ public class ComputerPlayer extends Player {
 
     /**
      * Getters and Setters
+     *
      * @author walshj05
      */
     public String getName() {
@@ -79,6 +84,7 @@ public class ComputerPlayer extends Player {
     /**
      * Moves player a certain number of spaces
      * Also checks if they are in jail or not
+     *
      * @param spaces num spaces moved
      * @author walshj05
      */
@@ -86,6 +92,7 @@ public class ComputerPlayer extends Player {
         if (!inJail) {
             position += spaces; // Move the player
             System.out.println(name + " moved " + spaces + " spaces to position " + position);
+
         } else {
             System.out.println(name + " is in jail and cannot move.");
         }
@@ -93,6 +100,7 @@ public class ComputerPlayer extends Player {
 
     /**
      * Puts player in jail
+     *
      * @author walshj05
      */
     public void goToJail() {
@@ -103,6 +111,7 @@ public class ComputerPlayer extends Player {
 
     /**
      * Checks to see if the player is in jail
+     *
      * @return boolean
      * @author walshj05
      */
@@ -112,6 +121,7 @@ public class ComputerPlayer extends Player {
 
     /**
      * Releases player from jail
+     *
      * @author walshj05
      */
     public void releaseFromJail() {
@@ -122,10 +132,11 @@ public class ComputerPlayer extends Player {
 
     /**
      * A method for a player to take a turn in the game
+     *
      * @param dice Dice object
      * @author walshj05
      */
-    public void takeTurn (Dice dice) {
+    public void takeTurn(Dice dice) {
         if (inJail) {
             System.out.println(name + " is in jail and cannot roll.");
         }
@@ -138,14 +149,17 @@ public class ComputerPlayer extends Player {
         System.out.println(name + " rolled a " + die1 + " and a " + die2 + " (Total: " + total + ")");
 
         move(total);
+
+
     }
 
     /**
      * Player buys a property
+     *
      * @param property String
      * @throws InsufficientFundsException exception
      * @author walshj05
-     *
+     * <p>
      * Modified by: shifmans
      */
     public void purchaseProperty(String property, int price) throws InsufficientFundsException {
@@ -153,8 +167,7 @@ public class ComputerPlayer extends Player {
 
         if (balance > 500) {
             decision = runOdds(0.85);
-        }
-        else {
+        } else {
             decision = runOdds(0.50);
         }
 
@@ -174,10 +187,10 @@ public class ComputerPlayer extends Player {
 
     /**
      * Player sells a property
+     *
      * @param property String
      * @throws NoSuchPropertyException exception
      * @author walshj05
-     *
      * Modified by: shifmans
      */
     public void mortgageProperty(String property, int mortgageCost) throws NoSuchPropertyException {
@@ -185,8 +198,7 @@ public class ComputerPlayer extends Player {
 
         if (balance > 500) {
             decision = runOdds(0.35);
-        }
-        else {
+        } else {
             decision = runOdds(0.65);
         }
 
@@ -205,11 +217,29 @@ public class ComputerPlayer extends Player {
     }
 
     /**
+     * Unmortgages a property for the player.
+     * @param property The name of the property.
+     * @param mortgageValue The value to unmortgage the property.
+     * @throws NoSuchPropertyException If the property is not owned or has not been mortgaged.
+     */
+    public void unmortgageProperty(String property, int mortgageValue) throws NoSuchPropertyException {
+        if (propertiesMortgaged.contains(property)) {
+            propertiesMortgaged.remove(property);
+            propertiesOwned.add(property);
+            balance -= mortgageValue; // Deduct the mortgage value from the player's balance
+            System.out.println(name + " unmortgaged " + property + " for $" + mortgageValue);
+        } else {
+            throw new NoSuchPropertyException("You do not have this property mortgaged.");
+        }
+    }
+
+    /**
      * Player sells a property
+     *
      * @param property String
      * @throws NoSuchPropertyException exception
      * @author walshj05
-     *
+     * <p>
      * Modified by: shifmans
      */
     public void sellProperty(String property, int propertyCost) throws NoSuchPropertyException {
@@ -217,8 +247,7 @@ public class ComputerPlayer extends Player {
 
         if (balance > 500) {
             decision = runOdds(0.35);
-        }
-        else {
+        } else {
             decision = runOdds(0.65);
         }
 
@@ -238,6 +267,7 @@ public class ComputerPlayer extends Player {
 
     /**
      * Checks if the player has a monopoly
+     *
      * @return boolean
      * @author walshj05
      */
@@ -252,6 +282,7 @@ public class ComputerPlayer extends Player {
 
     /**
      * Adds a certain amount to the player's balance
+     *
      * @param amount int
      * @author walshj05
      */
@@ -261,6 +292,7 @@ public class ComputerPlayer extends Player {
 
     /**
      * Subtracts a certain amount from the player's balance
+     *
      * @param amount int
      * @author walshj05
      */
@@ -274,6 +306,7 @@ public class ComputerPlayer extends Player {
 
     /**
      * Checks if the player has a certain property
+     *
      * @param property String
      * @return boolean
      * @author walshj05
@@ -284,6 +317,7 @@ public class ComputerPlayer extends Player {
 
     /**
      * Adds a community chest card to the player's hand
+     *
      * @param card String
      * @author walshj05
      */
@@ -293,6 +327,7 @@ public class ComputerPlayer extends Player {
 
     /**
      * Removes a community chest card from the player's hand
+     *
      * @param card String
      * @author walshj05
      */
@@ -302,6 +337,7 @@ public class ComputerPlayer extends Player {
 
     /**
      * Checks if the player has a certain community chest card
+     *
      * @param card String
      * @return boolean
      * @author walshj05
@@ -312,6 +348,7 @@ public class ComputerPlayer extends Player {
 
     /**
      * Checks if the player is bankrupt
+     *
      * @return boolean
      * @author walshj05
      */
@@ -327,8 +364,7 @@ public class ComputerPlayer extends Player {
 
         if (balance > 500) {
             decision = runOdds(0.75);
-        }
-        else {
+        } else {
             decision = runOdds(0.25);
         }
 
@@ -360,8 +396,7 @@ public class ComputerPlayer extends Player {
 
         if (balance > 500) {
             decision = runOdds(0.35);
-        }
-        else {
+        } else {
             decision = runOdds(0.65);
         }
 
@@ -390,8 +425,7 @@ public class ComputerPlayer extends Player {
 
         if (balance > 750) {
             decision = runOdds(0.75);
-        }
-        else {
+        } else {
             decision = runOdds(0.25);
         }
 
@@ -423,8 +457,7 @@ public class ComputerPlayer extends Player {
 
         if (balance > 750) {
             decision = runOdds(0.35);
-        }
-        else {
+        } else {
             decision = runOdds(0.65);
         }
 
@@ -457,6 +490,7 @@ public class ComputerPlayer extends Player {
 
     /**
      * Gets the number of turns the player has been in jail
+     *
      * @return int
      * @author walshj05
      */
@@ -467,24 +501,27 @@ public class ComputerPlayer extends Player {
 
     /**
      * Resets the number of turns the player has been in jail
+     *
      * @author walshj05
      */
     @Override
-    public void resetJailTurns(){
+    public void resetJailTurns() {
         this.jailTurns = 0;
     }
 
     /**
      * Increments the number of turns the player has been in jail
+     *
      * @author walshj05
      */
     @Override
-    public void incrementJailTurns(){
+    public void incrementJailTurns() {
         this.jailTurns++;
     }
 
     /**
      * Updates the monopolies of the player
+     *
      * @author walshj05
      */
     private void updateMonopolies() {
@@ -499,14 +536,85 @@ public class ComputerPlayer extends Player {
 
     /**
      * Determines if the player will run a certain odd
+     *
      * @param odd Likelihood of the event occurring
      * @return Whether the event will likely occur
-     *
+     * <p>
      * Developed by: shifmans
      */
     public boolean runOdds(double odd) {
-        Random rand = new Random();
+        Random rand = new Random(System.nanoTime());
 
         return rand.nextDouble() <= odd;
+    }
+
+    /**
+     * Handles the computer player landing on a property space
+     * @param rentPrices list of prices for rent of a space
+     * @author crevelings (4/7/25)
+     */
+    public void handleLanding( ArrayList<Integer> rentPrices) {
+        GameTile space = GameBoard.getInstance().getTile(position);
+        System.out.println(name + " landed on " + space.getName());
+
+        // Check if property is owned
+        if (space.getOwner().isEmpty()) {
+            try {
+                purchaseProperty(space.getName(), space.getPrice());
+                System.out.println(name + " bought " + space.getName() + " for $" + space.getPrice());
+                space.setOwner(name);
+            } catch (InsufficientFundsException e) {
+                System.out.println(name + " could not afford " + space.getName() + ". Property will be auctioned.");
+                // todo auction property allow global access to list of game players
+            }
+        } else if (!space.getOwner().equals(name)) {
+            int baseRent = rentPrices.getFirst();
+            System.out.println(name + " pays rent of $" + baseRent + " to " + space.getOwner());
+            subtractFromBalance(baseRent);
+        } else {
+            System.out.println(name + " already owns " + space.getName());
+        }
+    }
+
+    /**
+     * Checks to see if a player has a monopoly
+     * @return All properties are owned in the same color group as given property
+     * @author crevelings (4/8/25)
+     */
+    public boolean checkPropertyHasMonopoly(String property) {
+        TitleDeedCards cards = TitleDeedCards.getInstance();
+        ColorGroup color = cards.getProperty(property).getColorGroup();
+        return colorGroups.contains(color);
+    }
+
+    /**
+     * Handles the chances of players at the end of their turn and the processes that they can do and the chances of CPU doing these processes
+     * @throws InsufficientFundsException
+     * @throws NoSuchPropertyException
+     */
+    public void handleEndOfTurn() throws InsufficientFundsException, NoSuchPropertyException {
+        Random random = new Random(System.nanoTime());
+        int index = random.nextInt(propertiesOwned.size());
+        PropertySpace space = (PropertySpace) TitleDeedCards.getInstance().getProperty(propertiesOwned.get(index));
+        String spaceName = space.getName();
+        ColorGroup spaceColor = space.getColorGroup();
+
+        if (runOdds(0.9)){
+            buyHouse(spaceName, spaceColor, space.getHousePrice());
+        } else {
+            sellHouse(spaceName, spaceColor);
+        }
+
+        if (runOdds(0.9)){
+            buyHotel(spaceName, spaceColor, space.getHotelPrice());
+        } else {
+            sellHotel(spaceName, spaceColor);
+        }
+
+        if (runOdds(0.5)){
+            sellProperty(spaceName, space.getPrice());
+        } else {
+            mortgageProperty(spaceName, space.getMortgageValue());
+        }
     }
 }

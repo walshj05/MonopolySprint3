@@ -20,7 +20,7 @@ public class TitleDeedDeck {
      */
     public TitleDeedDeck() {
         this.drawPile = new ArrayList<>();
-        this.properties = new TitleDeedCards();
+        this.properties = TitleDeedCards.getInstance();
         initializeDeck();
     }
 
