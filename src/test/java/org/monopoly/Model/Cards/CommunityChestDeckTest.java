@@ -1,6 +1,8 @@
 package org.monopoly.Model.Cards;
 
 import org.junit.jupiter.api.Test;
+import org.monopoly.Model.Banker;
+import org.monopoly.Model.GameTiles.PropertySpace;
 import org.monopoly.Model.Players.HumanPlayer;
 import org.monopoly.Model.Players.Player;
 import org.monopoly.Model.Players.Token;
