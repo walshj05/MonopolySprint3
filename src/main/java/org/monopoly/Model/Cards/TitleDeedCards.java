@@ -1,6 +1,5 @@
 package org.monopoly.Model.Cards;
 
-import org.monopoly.Model.Banker;
 import org.monopoly.Model.GameTiles.*;
 import java.util.*;
 

@@ -8,6 +8,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import org.monopoly.Model.Players.Player;
 
+/**
+ * Controller for the human player interface.
+ * This class handles the player's actions and updates the UI accordingly.
+ * @author walshj05
+ */
 public class HumanPlayerController {
     @FXML
     public Button mortProp;
@@ -43,14 +48,27 @@ public class HumanPlayerController {
     private VBox properties;
     private Player player;
 
+    /**
+     * Initializes the player interface with the given player.
+     * @param player The player to initialize the interface for.
+     * @author walshj05
+     */
     public void setPlayer(Player player) {
         this.player = player;
         name.setText(player.getName());
         money.setText("Balance: $" + player.getBalance());
     }
 
+    /**
+     * Sets the token image for the player.
+     * @author walshj05
+     */
     public void updateProperties(){}
 
+    /**
+     * Updates the players information
+     * @author walshj05
+     */
     public void updatePlayerInfo(){
         money.setText("Balance: $" + player.getBalance());
 

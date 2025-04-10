@@ -6,6 +6,10 @@ import org.monopoly.Model.Players.Token;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Tests for the Dice class.
+ * @author crevelings
+ */
 class DiceTest {
 
     @Test

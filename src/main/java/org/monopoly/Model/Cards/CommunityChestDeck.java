@@ -12,7 +12,6 @@ import java.util.List;
  * and has methods for drawing a card from the deck.
  */
 public class CommunityChestDeck extends CardDeck {
-    private final List<Player> players;
     /**
      * Creates a deck of Community Chest cards
      * Shuffles the draw deck
@@ -20,7 +19,6 @@ public class CommunityChestDeck extends CardDeck {
      */
     public CommunityChestDeck() {
         super(CommunityChestDeck.initializeCards());
-        players = new ArrayList<>();
     }
 
     /**

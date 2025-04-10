@@ -9,9 +9,6 @@ import org.monopoly.Model.Cards.ColorGroup;
 import org.monopoly.Model.Cards.TitleDeedCards;
 import org.monopoly.Model.Dice;
 import org.monopoly.Model.GameBoard;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
