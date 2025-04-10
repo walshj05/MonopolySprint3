@@ -58,4 +58,6 @@ public abstract class Player {
     public abstract void resetJailTurns();
     public abstract void incrementJailTurns();
     public abstract int getJailTurns();
+    public abstract int getNumHouses();
+    public abstract int getNumHotels();
 }
