@@ -3,9 +3,10 @@ package org.monopoly.Model;
 import org.monopoly.Model.Cards.ChanceDeck;
 import org.monopoly.Model.Cards.ColorGroup;
 import org.monopoly.Model.Cards.CommunityChestDeck;
-import org.monopoly.Model.Cards.TitleDeedCards;
 import org.monopoly.Model.GameTiles.*;
 import org.monopoly.Model.Players.Player;
+import org.monopoly.Model.Players.Token;
+import org.monopoly.View.GameScene;
 
 import java.util.*;
 
@@ -19,6 +20,7 @@ public class GameBoard {
     private List<GameTile> tiles;
     private CommunityChestDeck communityChestDeck;
     private ChanceDeck chanceDeck;
+    private ArrayList<Token>[] tokens;
     private static GameBoard instance;
 
     /**
@@ -29,6 +31,34 @@ public class GameBoard {
         this.communityChestDeck = new CommunityChestDeck();
         this.chanceDeck = new ChanceDeck();
         initializeBoard();
+        initializeTokens();
+    }
+
+
+    private void initializeTokens(){
+        this.tokens = new ArrayList[40];
+        for (int i = 0; i < tokens.length; i++) {
+            tokens[i] = new ArrayList<>();
+        }
+    }
+
+    public void removeToken(Token token, int position) {
+        if (position >= 0 && position < tokens.length) {
+            tokens[position].remove(token);
+        }
+    }
+
+    public void addToken(Token token, int position) {
+        if (position >= 0 && position < tokens.length) {
+            tokens[position].add(token);
+        }
+    }
+
+    public ArrayList<Token> getTokens(int position) {
+        if (position >= 0 && position < tokens.length) {
+            return tokens[position];
+        }
+        return null;
     }
 
     /**
@@ -179,6 +209,15 @@ public class GameBoard {
         } else if (type.contains("chance:")) { // player uses get out of jail card
             String card = type.split(":")[1];
             chanceDeck.executeStrategy(player, card);
+        }
+    }
+
+    public void setPropertyNumHouses(int index, int numHouses) {
+        if (index >= 0 && index < numHouses) {
+            GameTile tile = tiles.get(index);
+            if (tile instanceof PropertySpace) {
+                ((PropertySpace) tile).setNumHouses(numHouses);
+            }
         }
     }
 }
