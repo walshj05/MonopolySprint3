@@ -75,11 +75,38 @@ public class ComputerPlayer extends Player {
         return balance;
     }
 
-
     public void setPosition(int position) {
         this.position = position;
     }
 
+    /**
+     * Gets the properties owned by the player.
+     *
+     * Developed by: shifmans
+     */
+    public ArrayList<String> getPropertiesOwned() {
+        return propertiesOwned;
+    }
+
+    /**
+     * Gets the properties that are mortgaged.
+     * @return Properties that are mortgaged.
+     *
+     * Developed by: shifmans
+     */
+    public ArrayList<String> getPropertiesMortgaged() {
+        return propertiesMortgaged;
+    }
+
+    /**
+     * Gets the monopolies a player has.
+     * @return Monopolies a player has.
+     *
+     * Developed by: shifmans
+     */
+    public ArrayList<Monopoly> getMonopolies() {
+        return monopolies;
+    }
 
     /**
      * Moves player a certain number of spaces
@@ -221,8 +248,22 @@ public class ComputerPlayer extends Player {
      * @param property The name of the property.
      * @param mortgageValue The value to unmortgage the property.
      * @throws NoSuchPropertyException If the property is not owned or has not been mortgaged.
+     * Modified by: shifmans
      */
     public void unmortgageProperty(String property, int mortgageValue) throws NoSuchPropertyException {
+        boolean decision;
+
+        if (balance > 500) {
+            decision = runOdds(0.65);
+        } else {
+            decision = runOdds(0.35);
+        }
+
+        if (!decision) {
+            System.out.println("Player has decided not to unmortgage " + property);
+            return;
+        }
+
         if (propertiesMortgaged.contains(property)) {
             propertiesMortgaged.remove(property);
             propertiesOwned.add(property);
@@ -376,7 +417,7 @@ public class ComputerPlayer extends Player {
         if (balance - price < 0) {
             throw new InsufficientFundsException("Insufficient funds to buy a house");
         }
-        if (!propertiesOwned.contains(propertyName) || !colorGroups.contains(colorGroup)) {
+        if (!propertiesOwned.contains(propertyName)) {
             throw new RuntimeException("Property not registered to player.");
         }
 
@@ -384,8 +425,13 @@ public class ComputerPlayer extends Player {
         try {
             monopolies.get(index).buildHouse(propertyName);
         } catch (Exception e) {
+            if (e.getMessage().equals("Index -1 out of bounds for length 0")) {
+                throw new RuntimeException("Player does not have all properties in this monopoly.");
+            }
             throw new RuntimeException(e.getMessage());
         }
+
+        balance -= price;
     }
 
     /**
@@ -415,6 +461,10 @@ public class ComputerPlayer extends Player {
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
+
+        TitleDeedCards cards = TitleDeedCards.getInstance();
+        PropertySpace property = (PropertySpace) cards.getProperty(propertyName);
+        balance += property.getHousePrice()/2;
     }
 
     /**
@@ -447,6 +497,8 @@ public class ComputerPlayer extends Player {
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
+
+        balance -= price;
     }
 
     /**
@@ -476,6 +528,10 @@ public class ComputerPlayer extends Player {
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
+
+        TitleDeedCards cards = TitleDeedCards.getInstance();
+        PropertySpace property = (PropertySpace) cards.getProperty(propertyName);
+        balance += property.getHotelPrice()/2;
     }
 
     /**
@@ -526,12 +582,12 @@ public class ComputerPlayer extends Player {
      */
     private void updateMonopolies() {
         Banker banker = Banker.getInstance();
+        banker.checkForMonopolies(propertiesOwned, monopolies, colorGroups);
         for (Monopoly monopoly : monopolies) {
             if (!colorGroups.contains(monopoly.getColorGroup())) {
                 colorGroups.add(monopoly.getColorGroup());
             }
         }
-        banker.checkForMonopolies(propertiesOwned, monopolies, colorGroups);
     }
 
     /**
