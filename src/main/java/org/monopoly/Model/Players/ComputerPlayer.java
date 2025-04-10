@@ -640,17 +640,6 @@ public class ComputerPlayer extends Player {
     }
 
     /**
-     * Checks to see if a player has a monopoly
-     * @return All properties are owned in the same color group as given property
-     * @author crevelings (4/8/25)
-     */
-    public boolean checkPropertyHasMonopoly(String property) {
-        TitleDeedCards cards = TitleDeedCards.getInstance();
-        ColorGroup color = cards.getProperty(property).getColorGroup();
-        return colorGroups.contains(color);
-    }
-
-    /**
      * Handles the chances of players at the end of their turn and the processes that they can do and the chances of CPU doing these processes
      * @throws InsufficientFundsException No money
      * @throws NoSuchPropertyException Property isn't there anymore
