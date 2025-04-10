@@ -7,6 +7,8 @@ import org.monopoly.Model.Dice;
 /**
  * Abstract class for the different types of players in the Monopoly game.
  * @author walshj05
+ * Modified by: crevelings (4/9/25)
+ * 4/9/25: Added methods to match up both player inheritors
  */
 public abstract class Player {
 
