@@ -431,6 +431,11 @@ public class HumanPlayer extends Player {
         }
     }
 
+    /**
+     * Gives the number of hotels the player owns
+     * @return numHotels
+     * @author crevelings
+     */
     @Override
     public int getNumHotels() {
         int numHotels = 0;
@@ -445,6 +450,10 @@ public class HumanPlayer extends Player {
         return numHotels;
     }
 
+    /**
+     * Gives the number of houses the player owns
+     * @return
+     */
     @Override
     public int getNumHouses() {
         int numHouses = 0;
@@ -459,6 +468,12 @@ public class HumanPlayer extends Player {
         return numHouses;
     }
 
+    /**
+     * Process for having players mortgage their assets off when they are in debt
+     * @param amount
+     * @throws BankruptcyException
+     * @author crevelings
+     */
     @Override
     public void mortgageAssetsToRaiseFunds(int amount) throws BankruptcyException {
         for (String propertyName : propertiesOwned) {
@@ -479,6 +494,12 @@ public class HumanPlayer extends Player {
         }
     }
 
+    /**
+     * Process for having players sell their buildings off when they are in debt
+     * @param amount
+     * @throws BankruptcyException
+     * @author crevelings
+     */
     @Override
     public void sellBuildingsToRaiseFunds(int amount) throws BankruptcyException {
         for (String propertyName : propertiesOwned) {
@@ -510,6 +531,12 @@ public class HumanPlayer extends Player {
         }
     }
 
+    /**
+     * Calls both debt helper methods
+     * @param amount
+     * @throws BankruptcyException
+     * @author crevelings
+     */
     @Override
     public void attemptToRaiseFunds(int amount) throws BankruptcyException {
         sellBuildingsToRaiseFunds(amount);
