@@ -1,8 +1,5 @@
 package org.monopoly.Model.Players;
 
-
-import org.monopoly.Exceptions.BankruptcyException;
-import org.monopoly.Exceptions.HotelCannotBeBuiltException;
 import org.monopoly.Exceptions.BankruptcyException;
 import org.monopoly.Exceptions.InsufficientFundsException;
 import org.monopoly.Exceptions.NoSuchPropertyException;
