@@ -10,6 +10,8 @@ import org.monopoly.Model.Cards.ColorGroup;
 import org.monopoly.Model.Cards.TitleDeedCards;
 import org.monopoly.Model.Dice;
 import org.monopoly.Model.GameBoard;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -210,7 +212,7 @@ public class ComputerPlayerTests {
      * Developed by: shifmans
      */
     @Test
-    public void testComputerPlayerMortgagePropertyUnknown() throws InsufficientFundsException, NoSuchPropertyException {
+    public void testComputerPlayerMortgagePropertyUnknown() {
         ComputerPlayer cpu = new ComputerPlayer("CPU", new Token( "CPU","BattleShip.png"));
         assertEquals(1500, cpu.getBalance());
         assertEquals(List.of(), cpu.getPropertiesOwned());
@@ -1026,7 +1028,7 @@ public class ComputerPlayerTests {
         TitleDeedCards tiles = TitleDeedCards.getInstance();
         System.out.println(tiles.getProperty("Mediterranean Avenue").getOwner());
 
-        ArrayList<Integer> rentPrices = new ArrayList<>(Arrays.asList(2, 10, 30, 90, 160, 250));
+        ArrayList<Integer> rentPrices = new ArrayList<>(List.of(2, 10, 30, 90, 160, 250));
         cpu.handleLanding(rentPrices);
 
         assertFalse(cpu.hasProperty("Mediterranean Avenue"));
