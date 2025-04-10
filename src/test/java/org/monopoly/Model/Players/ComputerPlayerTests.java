@@ -1,11 +1,16 @@
 package org.monopoly.Model.Players;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.monopoly.Exceptions.InsufficientFundsException;
 import org.monopoly.Exceptions.NoSuchPropertyException;
 import org.monopoly.Model.Banker;
 import org.monopoly.Model.Cards.ColorGroup;
+import org.monopoly.Model.Cards.TitleDeedCards;
 import org.monopoly.Model.Dice;
+import org.monopoly.Model.GameBoard;
+
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,6 +22,19 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class ComputerPlayerTests {
 
+    /**
+     * Developed by: shifmans
+     */
+    @BeforeEach
+    public void resetSingletons() {
+        Banker.resetInstance();
+        TitleDeedCards.resetInstance();
+        GameBoard.resetInstance();
+    }
+
+    /**
+     * Developed by: shifmans
+     */
     @Test
     public void testComputerPlayerConstructor() {
         ComputerPlayer cpu = new ComputerPlayer("CPU", new Token( "CPU","BattleShip.png"));
@@ -26,12 +44,18 @@ public class ComputerPlayerTests {
         assertEquals(0, cpu.getPosition());
     }
 
+    /**
+     * Developed by: shifmans
+     */
     @Test
     public void testComputerPlayerHasAGameToken () {
         ComputerPlayer cpu = new ComputerPlayer("CPU", new Token( "CPU","BattleShip.png"));
         assertNotNull(cpu.getToken());
     }
 
+    /**
+     * Developed by: shifmans
+     */
     @Test
     public void testComputerPlayerBalance() {
         ComputerPlayer cpu = new ComputerPlayer("CPU", new Token( "CPU","BattleShip.png"));
@@ -42,6 +66,9 @@ public class ComputerPlayerTests {
         assertEquals(2500, cpu.getBalance());
     }
 
+    /**
+     * Developed by: shifmans
+     */
     @Test
     public void testComputerPlayerSetPosition() {
         ComputerPlayer cpu = new ComputerPlayer("CPU", new Token( "CPU","BattleShip.png"));
@@ -49,6 +76,9 @@ public class ComputerPlayerTests {
         assertEquals(5, cpu.getPosition());
     }
 
+    /**
+     * Developed by: shifmans
+     */
     @Test
     public void testComputerPlayerMoveWorksWhenNotInJail() {
         ComputerPlayer cpu = new ComputerPlayer("CPU", new Token( "CPU","BattleShip.png"));
@@ -56,6 +86,9 @@ public class ComputerPlayerTests {
         assertEquals(5, cpu.getPosition());
     }
 
+    /**
+     * Developed by: shifmans
+     */
     @Test
     public void testComputerPlayerDoesNotMoveWhenInJail() {
         ComputerPlayer cpu = new ComputerPlayer("CPU", new Token( "CPU","BattleShip.png"));
@@ -68,6 +101,9 @@ public class ComputerPlayerTests {
         assertTrue(cpu.isInJail());
     }
 
+    /**
+     * Developed by: shifmans
+     */
     @Test
     public void testComputerPlayerGetsOutOfJail() {
         ComputerPlayer cpu = new ComputerPlayer("CPU", new Token( "CPU","BattleShip.png"));
@@ -83,6 +119,9 @@ public class ComputerPlayerTests {
         assertEquals(15, cpu.getPosition());
     }
 
+    /**
+     * Developed by: shifmans
+     */
     @Test
     public void testComputerPlayerTakeTurn() {
         ComputerPlayer cpu = new ComputerPlayer("CPU", new Token( "CPU","BattleShip.png"));
@@ -91,6 +130,9 @@ public class ComputerPlayerTests {
         assertTrue((cpu.getPosition() > 0) && (cpu.getPosition() <= 12));
     }
 
+    /**
+     * Developed by: shifmans
+     */
     @Test
     public void testComputerPlayerPurchaseProperty() throws InsufficientFundsException {
         ComputerPlayer cpu = new ComputerPlayer("CPU", new Token( "CPU","BattleShip.png"));
@@ -109,6 +151,9 @@ public class ComputerPlayerTests {
         assertTrue(cpu.hasProperty("Park Place"));
     }
 
+    /**
+     * Developed by: shifmans
+     */
     @Test
     public void testComputerPlayerHasMonopoly() throws InsufficientFundsException {
         ComputerPlayer cpu = new ComputerPlayer("CPU", new Token( "CPU","BattleShip.png"));
@@ -135,6 +180,9 @@ public class ComputerPlayerTests {
         assertTrue(cpu.hasProperty("Boardwalk"));
     }
 
+    /**
+     * Developed by: shifmans
+     */
     @Test
     public void testComputerPlayerMortgageProperty() throws InsufficientFundsException, NoSuchPropertyException {
         ComputerPlayer cpu = new ComputerPlayer("CPU", new Token( "CPU","BattleShip.png"));
@@ -159,6 +207,9 @@ public class ComputerPlayerTests {
         assertEquals(List.of("Park Place"), cpu.getPropertiesMortgaged());
     }
 
+    /**
+     * Developed by: shifmans
+     */
     @Test
     public void testComputerPlayerUnmortgageProperty() throws InsufficientFundsException, NoSuchPropertyException {
         ComputerPlayer cpu = new ComputerPlayer("CPU", new Token( "CPU","BattleShip.png"));
@@ -191,6 +242,9 @@ public class ComputerPlayerTests {
         assertEquals(0, cpu.getPropertiesMortgaged().size());
     }
 
+    /**
+     * Developed by: shifmans
+     */
     @Test
     public void testComputerPlayerSellProperty() throws InsufficientFundsException, NoSuchPropertyException {
         ComputerPlayer cpu = new ComputerPlayer("CPU", new Token( "CPU","BattleShip.png"));
@@ -214,6 +268,9 @@ public class ComputerPlayerTests {
         assertEquals(0, cpu.getPropertiesOwned().size());
     }
 
+    /**
+     * Developed by: shifmans
+     */
     @Test
     public void testComputerPlayerCard() {
         ComputerPlayer cpu = new ComputerPlayer("CPU", new Token( "CPU","BattleShip.png"));
@@ -226,6 +283,9 @@ public class ComputerPlayerTests {
         assertFalse(cpu.hasCard("Get Out of Jail Free"));
     }
 
+    /**
+     * Developed by: shifmans
+     */
     @Test
     public void testComputerPlayerIsBankrupt() {
         ComputerPlayer cpu = new ComputerPlayer("CPU", new Token( "CPU","BattleShip.png"));
@@ -237,6 +297,9 @@ public class ComputerPlayerTests {
         assertTrue(cpu.isBankrupt());
     }
 
+    /**
+     * Developed by: shifmans
+     */
     @Test
     public void testComputerPlayerBuyOneHouseNoMonopoly() throws InsufficientFundsException {
         ComputerPlayer cpu = new ComputerPlayer("CPU", new Token( "CPU","BattleShip.png"));
@@ -257,6 +320,9 @@ public class ComputerPlayerTests {
         assertEquals(1150, cpu.getBalance());
     }
 
+    /**
+     * Developed by: shifmans
+     */
     @Test
     public void testComputerPlayerBuyOneHouseNoMoney() throws InsufficientFundsException {
         ComputerPlayer cpu = new ComputerPlayer("CPU", new Token("CPU", "BattleShip.png"));
@@ -280,6 +346,9 @@ public class ComputerPlayerTests {
         assertEquals(150, cpu.getBalance());
     }
 
+    /**
+     * Developed by: shifmans
+     */
     @Test
     public void testComputerPlayerBuyHouseUnownedProperty() throws InsufficientFundsException {
         ComputerPlayer cpu = new ComputerPlayer("CPU", new Token("CPU", "BattleShip.png"));
@@ -304,12 +373,18 @@ public class ComputerPlayerTests {
 
     //Add other tests here
 
+    /**
+     * Developed by: shifmans
+     */
     @Test
     public void testComputerPlayerToString() {
         ComputerPlayer cpu = new ComputerPlayer("CPU", new Token( "CPU","BattleShip.png"));
         assertEquals("CPU (Token: CPU)", cpu.toString());
     }
 
+    /**
+     * Developed by: shifmans
+     */
     @Test
     public void testComputerPlayerJailTurns() {
         ComputerPlayer cpu = new ComputerPlayer("CPU", new Token( "CPU","BattleShip.png"));
@@ -322,6 +397,9 @@ public class ComputerPlayerTests {
         assertEquals(0, cpu.getJailTurns());
     }
 
+    /**
+     * Developed by: shifmans
+     */
     @Test
     public void testComputerPlayerRunOdds() {
         ComputerPlayer cpu = new ComputerPlayer("CPU", new Token( "CPU","BattleShip.png"));
@@ -330,31 +408,5 @@ public class ComputerPlayerTests {
         assertFalse(cpu.runOdds(0));
     }
 
-    /*
-    @Test
-    public void testComputerPlayerHandleLandingPayRent() throws InsufficientFundsException {
-        HumanPlayer humanPlayer = new HumanPlayer("Player 1", new Token( "Player 1","BattleShip.png"));
-        assertEquals(1500, humanPlayer.getBalance());
-        assertFalse(humanPlayer.hasProperty("Mediterranean Avenue"));
-
-        humanPlayer.purchaseProperty("Mediterranean Avenue", 350);
-
-        assertEquals(1150, humanPlayer.getBalance());
-        assertTrue(humanPlayer.hasProperty("Mediterranean Avenue"));
-
-        ComputerPlayer cpu = new ComputerPlayer("CPU", new Token( "CPU","TopHat.png"));
-        assertEquals(1500, cpu.getBalance());
-        assertEquals(0, cpu.getPosition());
-        assertFalse(cpu.hasProperty("Mediterranean Avenue"));
-
-        cpu.move(1);
-        assertEquals(1, cpu.getPosition());
-
-        ArrayList<Integer> rentPrices = new ArrayList<>(Arrays.asList(2, 10, 30, 90, 160, 250));
-        cpu.handleLanding(rentPrices);
-
-        assertFalse(cpu.hasProperty("Mediterranean Avenue"));
-        assertEquals(1498, cpu.getBalance());
-    }
-     */
+    // Add more tests as needed
 }
