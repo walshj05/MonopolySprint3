@@ -2,12 +2,10 @@ package org.monopoly.Model.Players;
 
 import org.monopoly.Exceptions.InsufficientFundsException;
 import org.monopoly.Exceptions.NoSuchPropertyException;
-import org.monopoly.Model.Banker;
+import org.monopoly.Model.*;
 import org.monopoly.Model.Cards.ColorGroup;
 import org.monopoly.Model.Cards.TitleDeedCards;
-import org.monopoly.Model.Dice;
 import org.monopoly.Model.GameTiles.PropertySpace;
-import org.monopoly.Model.Monopoly;
 
 import java.util.ArrayList;
 
@@ -48,6 +46,7 @@ public class HumanPlayer extends Player {
         this.monopolies = new ArrayList<>();
         this.cards = new ArrayList<>();
         this.colorGroups = new ArrayList<>();
+        GameBoard.getInstance().addToken(token, position);
     }
 
     /**
@@ -103,12 +102,14 @@ public class HumanPlayer extends Player {
      * @author walshj05
      */
     public void move(int spaces) {
+        GameBoard.getInstance().removeToken(this.token, position);
         if (!inJail) {
-            position += spaces; // Move the player
+            position = (position + spaces) % 40; // Move the player
             System.out.println(name + " moved " + spaces + " spaces to position " + position);
         } else {
             System.out.println(name + " is in jail and cannot move.");
         }
+        GameBoard.getInstance().addToken(this.token, position);
     }
 
     /**

@@ -3,6 +3,8 @@ package org.monopoly.Model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.monopoly.Model.GameTiles.GameTile;
+import org.monopoly.Model.Players.HumanPlayer;
+import org.monopoly.Model.Players.Token;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,7 +13,7 @@ class GameBoardTest {
 
     @BeforeEach
     void setUp() {
-        gameBoard = new GameBoard();
+        gameBoard = GameBoard.getInstance();
     }
 
     @Test
@@ -54,5 +56,21 @@ class GameBoardTest {
         assertEquals("Community Chest Space", gameBoard.getTile(2).getName(), "Position 2 should be Community Chest Space.");
         assertEquals("Community Chest Space", gameBoard.getTile(17).getName(), "Position 17 should be Community Chest Space.");
         assertEquals("Community Chest Space", gameBoard.getTile(33).getName(), "Position 33 should be Community Chest Space.");
+    }
+
+    @Test
+    void testGetInstance() {
+        GameBoard anotherGameBoard = GameBoard.getInstance();
+        assertSame(gameBoard, anotherGameBoard, "getInstance should return the same instance.");
+    }
+
+    @Test
+    void testTokensArrayListsAreEmpty() {
+        HumanPlayer humanPlayer = new HumanPlayer("Test Player", new Token("Test Token", "BattleShip.png"));
+        assertTrue(gameBoard.getTokens(0).contains(humanPlayer.getToken()));
+        humanPlayer.move(10);
+        assertTrue(gameBoard.getTokens(10).contains(humanPlayer.getToken()));
+        assertFalse(gameBoard.getTokens(0).contains(humanPlayer.getToken()), "Token should not be in the original position.");
+
     }
 }
