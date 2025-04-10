@@ -2,10 +2,13 @@ package org.monopoly.Model;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+import org.monopoly.Model.Players.HumanPlayer;
 import org.monopoly.Model.Players.Player;
 import org.monopoly.Model.Players.Token;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 class GameTest {
     @Test
@@ -103,5 +106,27 @@ class GameTest {
             }
         }
         assertEquals(2, players.size());
+    }
+
+    /**
+     * Developed by: shifmans
+     */
+    @Test
+    public void testGetPlayers() {
+        Token token1 = new Token("Player1", "BattleShip.png");
+        Token token2 = new Token("Player2", "Car.png");
+
+        Player player1 = new HumanPlayer("Player1", token1);
+        Player player2 = new HumanPlayer("Player2", token2);
+
+        ArrayList<Player> players = new ArrayList<>();
+        players.add(player1);
+        players.add(player2);
+        TurnManager turnManager = new TurnManager(players.size(), players, null, null);
+
+        ArrayList<Player> retrievedPlayers = turnManager.getPlayers();
+        assertEquals(players.size(), retrievedPlayers.size());
+        assertTrue(retrievedPlayers.contains(player1));
+        assertTrue(retrievedPlayers.contains(player2));
     }
 }
