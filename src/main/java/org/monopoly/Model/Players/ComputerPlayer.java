@@ -1,5 +1,6 @@
 package org.monopoly.Model.Players;
 
+import org.monopoly.Exceptions.HotelCannotBeBuiltException;
 import org.monopoly.Exceptions.InsufficientFundsException;
 import org.monopoly.Exceptions.NoSuchPropertyException;
 import org.monopoly.Model.Banker;
@@ -616,5 +617,33 @@ public class ComputerPlayer extends Player {
         } else {
             mortgageProperty(spaceName, space.getMortgageValue());
         }
+    }
+
+    @Override
+    public int getNumHotels() {
+        int numHotels = 0;
+        for (Monopoly monopoly : monopolies) {
+            int[] buildings = monopoly.getBuildings();
+            for (int i = 0; i < buildings.length; i++) {
+                if (buildings[i] == 5) {
+                    numHotels++;
+                }
+            }
+        }
+        return numHotels;
+    }
+
+    @Override
+    public int getNumHouses() {
+        int numHouses = 0;
+        for (Monopoly monopoly : monopolies) {
+            int[] buildings = monopoly.getBuildings();
+            for (int i = 0; i < buildings.length; i++) {
+                if (buildings[i] > 0 && buildings[i] < 5) {
+                    numHouses += buildings[i];
+                }
+            }
+        }
+        return numHouses;
     }
 }

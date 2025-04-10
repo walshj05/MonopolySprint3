@@ -1,8 +1,10 @@
 package org.monopoly.Model.Cards;
 
 import org.monopoly.Model.Players.Player;
+import org.monopoly.Model.TurnManager;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author walshj05
@@ -85,6 +87,8 @@ public class ChanceDeck extends CardDeck {
      * @param player The player to execute the strategy for.
      * @param card The card to execute the strategy for.
      * @author walshj05
+     * Modified by: crevelings (4/9/25)
+     * 4/9/25: Added cases for certain cards that involved from other player balances
      */
     public void executeStrategy(Player player, String card) {
         switch (card) {
@@ -149,8 +153,8 @@ public class ChanceDeck extends CardDeck {
                 player.goToJail();
                 break;
             case "Make general repairs on all your property. For each house pay $25. For each hotel pay $100.":
-//                int total = (player.getNumHotels() * 100) + (player.getNumHouses() * 25);
-                player.subtractFromBalance(0); // todo add logic to charge player for repairs -> gameState
+                int total = (player.getNumHotels() * 100) + (player.getNumHouses() * 25);
+                player.subtractFromBalance(total);
                 break;
             case "Speeding fine $15.":
                 player.subtractFromBalance(15);
@@ -162,7 +166,16 @@ public class ChanceDeck extends CardDeck {
                 player.setPosition(5);
                 break;
             case "You have been elected Chairman of the Board. Pay each player $50.":
-                // todo find way to pay all
+                TurnManager turnManager = TurnManager.getInstance();
+                List<Player> players = turnManager.getPlayers();
+                for (Player otherPlayer : players) {
+                    if (otherPlayer != player) {
+                        otherPlayer.addToBalance(50);
+                    }
+                }
+
+                int totalAmount = (players.size() - 1) * 50;
+                player.subtractFromBalance(totalAmount);
                 break;
             case "Your building loan matures. Collect $150":
                 player.addToBalance(150);

@@ -4,6 +4,7 @@ import org.monopoly.Exceptions.InsufficientFundsException;
 import org.monopoly.Model.Cards.ColorGroup;
 import org.monopoly.Model.Players.ComputerPlayer;
 import org.monopoly.Model.Players.Player;
+import org.monopoly.Model.TurnManager;
 
 import java.util.ArrayList;
 
@@ -255,22 +256,31 @@ public class PropertySpace extends GameTile {
     public void executeStrategy(Player player) {
         if (player.hasProperty(getName())) {
             System.out.println("You already own the " + getName() + "!");
+            TurnManager.getInstance();
+            return;
+        }
+
+        if (owner == null || owner.isEmpty()) { // Proper null check
+            System.out.println("You can buy the " + getName() + " for $" + price);
+            System.out.println("Or property can be auctioned");
         } else {
-            if (owner == null || owner.isEmpty()) { // Proper null check
-                System.out.println("You can buy the " + getName() + " for $" + price);
-                System.out.println("Or property can be auctioned");
-            } else {
-                System.out.println(getOwner() + " already owns the " + getName() + "!");
-                if (player.getClass() == ComputerPlayer.class){
-                    ((ComputerPlayer) player).handleLanding(this.rentPrices);
-                }
-            }
-            try {
-                player.purchaseProperty(getName(), price);
-                System.out.println("You bought the " + getName());
-            } catch (InsufficientFundsException e) {
-                throw new RuntimeException(e);
+            System.out.println(getOwner() + " already owns the " + getName() + "!");
+            if (player.getClass() == ComputerPlayer.class) {
+                ((ComputerPlayer) player).handleLanding(this.rentPrices);
+                TurnManager turnManager = TurnManager.getInstance();
+                int ownerIndex = turnManager.getPlayers().indexOf(this.owner);
+                Player owner = turnManager.getPlayers().get(ownerIndex);
+
             }
         }
+        try {
+            player.purchaseProperty(getName(), price);
+            System.out.println("You bought the " + getName());
+        } catch (InsufficientFundsException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public int getCurrentRentPrice(){
+        return rentPrices.get(numHouses);
     }
 }
