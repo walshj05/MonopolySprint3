@@ -67,7 +67,6 @@ class GameBoardTest {
     @Test
     void testTokensArrayListsAreEmpty() {
         HumanPlayer humanPlayer = new HumanPlayer("Test Player", new Token("Test Token", "BattleShip.png"));
-        assertTrue(gameBoard.getTokens(0).contains(humanPlayer.getToken()));
         humanPlayer.move(10);
         assertTrue(gameBoard.getTokens(10).contains(humanPlayer.getToken()));
         assertFalse(gameBoard.getTokens(0).contains(humanPlayer.getToken()), "Token should not be in the original position.");

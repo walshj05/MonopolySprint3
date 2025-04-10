@@ -12,5 +12,8 @@ module org.monopoly.monopolygameproject {
     requires com.almasb.fxgl.all;
 
     opens org.monopoly.monopolygameproject to javafx.fxml;
+    opens org.monopoly.View to javafx.fxml;
     exports org.monopoly.monopolygameproject;
+    exports org.monopoly.View to javafx.fxml;
+    opens org.monopoly.View.Controllers to javafx.fxml;
 }

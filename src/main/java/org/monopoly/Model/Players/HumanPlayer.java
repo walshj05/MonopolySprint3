@@ -46,7 +46,6 @@ public class HumanPlayer extends Player {
         this.monopolies = new ArrayList<>();
         this.cards = new ArrayList<>();
         this.colorGroups = new ArrayList<>();
-        GameBoard.getInstance().addToken(token, position);
     }
 
     /**

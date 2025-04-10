@@ -6,6 +6,7 @@ import org.monopoly.Model.Cards.CommunityChestDeck;
 import org.monopoly.Model.GameTiles.*;
 import org.monopoly.Model.Players.Player;
 import org.monopoly.Model.Players.Token;
+import org.monopoly.View.GameScene;
 
 import java.util.*;
 
@@ -45,14 +46,12 @@ public class GameBoard {
         if (position >= 0 && position < tokens.length) {
             tokens[position].remove(token);
         }
-        // add method call to gameScene to update the board
     }
 
     public void addToken(Token token, int position) {
         if (position >= 0 && position < tokens.length) {
             tokens[position].add(token);
         }
-        // add method call to gameScene to update the board
     }
 
     public ArrayList<Token> getTokens(int position) {
