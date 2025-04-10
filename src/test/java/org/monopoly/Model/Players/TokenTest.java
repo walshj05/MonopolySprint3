@@ -5,6 +5,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Tests for the Token class.
+ * @author crevelings
+ */
 class TokenTest {
     private Token token;
     private HumanPlayer humanPlayer;

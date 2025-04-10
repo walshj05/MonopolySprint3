@@ -9,24 +9,36 @@ import org.monopoly.monopolygameproject.HelloApplication;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Controller for the board
+ * @author walshj05
+ */
 public class BoardController {
     @FXML
     private GridPane board;
     private TileController[] tileControllers;
 
+    /**
+     * Initializes the board with tiles
+     * @throws IOException if an error occurs while loading the FXML files
+     * @author walshj05
+     */
     @FXML
     public void initialize() throws IOException {
         tileControllers = new TileController[40];
-        initializeTileControllers();
+        initializeCorners();
         initializeLeftEdge();
         initializeTopEdge();
         initializeBottomEdge();
         initializeRightEdge();
-
-        RegularGameTileController ctrl = (RegularGameTileController) tileControllers[0];
     }
 
-    private void initializeTileControllers() throws IOException {
+    /**
+     * Initializes the corners of the board
+     * @throws IOException if an error occurs while loading the FXML files
+     * @author walshj05
+     */
+    private void initializeCorners() throws IOException {
         // initialize corners of the board
         tileControllers[0] = initializeCornerTile( 10, 10);
         tileControllers[10] = initializeCornerTile(10, 0);
@@ -35,6 +47,11 @@ public class BoardController {
         // initialize the rest of the tiles
     }
 
+    /**
+     * Initializes the left edge of the board
+     * @throws IOException if an error occurs while loading the FXML files
+     * @author walshj05
+     */
     private void initializeLeftEdge() throws IOException {
         tileControllers[19] = initializePropertyTile(1, 0, 90);
         tileControllers[18] = initializePropertyTile(2, 0, 90);
@@ -46,6 +63,11 @@ public class BoardController {
         tileControllers[12] = initializeEdgeTile(8, 0, 90);
         tileControllers[11] = initializePropertyTile(9, 0, 90);
     }
+    /**
+     * Initializes the top edge of the board
+     * @throws IOException if an error occurs while loading the FXML files
+     * @author walshj05
+     */
     private void initializeTopEdge() throws IOException {
         tileControllers[21] = initializePropertyTile(0, 1, 180);
         tileControllers[22] = initializeEdgeTile(0, 2, 180);
@@ -56,8 +78,12 @@ public class BoardController {
         tileControllers[27] = initializePropertyTile(0, 7, 180);
         tileControllers[28] = initializeEdgeTile(0, 8, 180);
         tileControllers[29] = initializePropertyTile(0, 9, 180);
-
     }
+    /**
+     * Initializes the bottom edge of the board
+     * @throws IOException if an error occurs while loading the FXML files
+     * @author walshj05
+     */
     private void initializeBottomEdge() throws IOException {
         tileControllers[1] = initializePropertyTile(10, 9, 0);
         tileControllers[2] = initializeEdgeTile(10, 8, 0);
@@ -70,6 +96,11 @@ public class BoardController {
         tileControllers[9] = initializePropertyTile(10, 1, 0);
     }
 
+    /**
+     * Initializes the right edge of the board
+     * @throws IOException if an error occurs while loading the FXML files
+     * @author walshj05
+     */
     private void initializeRightEdge() throws IOException {
         tileControllers[31] = initializePropertyTile(1, 10, 270);
         tileControllers[32] = initializePropertyTile(2, 10, 270);
@@ -80,37 +111,78 @@ public class BoardController {
         tileControllers[37] = initializePropertyTile(7, 10, 270);
         tileControllers[38] = initializeEdgeTile(8, 10, 270);
         tileControllers[39] = initializePropertyTile(9, 10, 270);
-
     }
+
+    /**
+     * Initializes a corner tile
+     * @param row the row of the tile
+     * @param column the column of the tile
+     * @return the controller for the tile
+     * @throws IOException if an error occurs while loading the FXML files
+     * @author walshj05
+     */
     private TileController initializeCornerTile(int row, int column) throws IOException {
         FXMLLoader tileLoader = new FXMLLoader(HelloApplication.class.getResource("CornerTile.fxml"));
         Parent tileRoot = tileLoader.load();
         RegularGameTileController controller = tileLoader.getController();
         GridPane.setColumnIndex(tileRoot, column);
         GridPane.setRowIndex(tileRoot, row);
+        GridPane.setColumnSpan(tileRoot, 1);
+        GridPane.setRowSpan(tileRoot, 1);
         board.getChildren().add(tileRoot);
         return controller;
     }
+
+    /**
+     * Initializes an edge tile
+     * @param row the row of the tile
+     * @param column the column of the tile
+     * @param rotation the rotation of the tile
+     * @return the controller for the tile
+     * @throws IOException if an error occurs while loading the FXML files
+     * @author walshj05
+     */
     private TileController initializeEdgeTile(int row, int column, int rotation) throws IOException {
         FXMLLoader tileLoader = new FXMLLoader(HelloApplication.class.getResource("EdgeTile.fxml"));
         Parent tileRoot = tileLoader.load();
         RegularGameTileController controller = tileLoader.getController();
         GridPane.setColumnIndex(tileRoot, column);
         GridPane.setRowIndex(tileRoot, row);
+        GridPane.setColumnSpan(tileRoot, 1);
+        GridPane.setRowSpan(tileRoot, 1);
         controller.rotatePane(rotation);
         board.getChildren().add(tileRoot);
         return controller;
     }
+
+    /**
+     * Initializes a property tile
+     * @param row the row of the tile
+     * @param column the column of the tile
+     * @param rotation the rotation of the tile
+     * @return the controller for the tile
+     * @throws IOException if an error occurs while loading the FXML files
+     * @author walshj05
+     */
     private TileController initializePropertyTile(int row, int column, int rotation) throws IOException {
         FXMLLoader tileLoader = new FXMLLoader(HelloApplication.class.getResource("PropertyTile.fxml"));
         Parent tileRoot = tileLoader.load();
         PropertyTileController controller = tileLoader.getController();
         GridPane.setColumnIndex(tileRoot, column);
         GridPane.setRowIndex(tileRoot, row);
+        GridPane.setColumnSpan(tileRoot, 1);
+        GridPane.setRowSpan(tileRoot, 1);
         controller.rotatePane(rotation);
         board.getChildren().add(tileRoot);
         return tileLoader.getController();
     }
+
+    /**
+     * Updates the tokens on a tile
+     * @param tokens the list of tokens to update
+     * @param tileIndex the index of the tile to update
+     * @author walshj05
+     */
     public void updateTokens(ArrayList<Token> tokens, int tileIndex) {
         tileControllers[tileIndex].updateTokens(tokens);
     }

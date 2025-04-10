@@ -14,6 +14,11 @@ import org.monopoly.monopolygameproject.HelloApplication;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * GameScene class that represents the main game scene.
+ * This class is responsible for creating the game scene and initializing the player interfaces.
+ * @author walshj05
+ */
 public class GameScene {
     private final Scene scene;
     private BoardController boardController;
@@ -41,6 +46,13 @@ public class GameScene {
         this.scene = new Scene(root, 1190, 740);
     }
 
+    /**
+     * Initializes the player interfaces for both human and computer players.
+     * @param humanPlayers The list of human players.
+     * @param computerPlayers The list of computer players.
+     * @param root The root pane to add the player interfaces to.
+     * @throws IOException if an error occurs while loading the FXML files
+     */
     private void initializePlayerInterfaces(ArrayList<Player> humanPlayers, ArrayList<Player> computerPlayers, AnchorPane root) throws IOException {
         // Initialize the board with players
         int yStart = 0;
@@ -70,9 +82,19 @@ public class GameScene {
     }
 
 
+    /**
+     * Updates the tokens on the board.
+     * @param tokens The list of tokens to update.
+     * @param tileIndex The index of the tile to update.
+     */
     public void updateTokens(ArrayList<Token> tokens, int tileIndex) {
         boardController.updateTokens(tokens, tileIndex);
     }
+
+    /**
+     * Returns the game scene controller.
+     * @return The board controller.
+     */
     public Scene getScene() {
         return scene;
     }

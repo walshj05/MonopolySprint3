@@ -31,10 +31,6 @@ public class GoToJailSpace extends GameTile {
     }
 
     /**
-     * Executes the strategy for the GoToJailSpace.
-     * @author crevelings
-     */
-    /**
      * Player goes directly to Jail after landing on element space.
      * @return Instructions for going directly to Jail.
      *
@@ -44,6 +40,10 @@ public class GoToJailSpace extends GameTile {
         return "Go directly to Jail";
     }
 
+    /**
+     * Executes the strategy for the GoToJailSpace.
+     * @author crevelings
+     */
     @Override
     public void executeStrategy(Player player) {
         player.goToJail();

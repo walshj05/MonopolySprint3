@@ -18,6 +18,7 @@ import java.util.List;
 
 /**
  * This test Class focuses on and tests that every single possible strategy and process for every single tile
+ * @author walshj05
  */
 public class StrategyTests {
 

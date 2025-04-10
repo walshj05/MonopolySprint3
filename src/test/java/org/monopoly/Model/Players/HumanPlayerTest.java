@@ -16,6 +16,11 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Tests for the HumanPlayer class.
+ *
+ * @author walshj05
+ */
 public class HumanPlayerTest {
 
     /**

@@ -10,6 +10,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Tests for the Game class.
+ * @author walshj05
+ * tests added by shifmans
+ */
 class GameTest {
     @Test
     public void testGameCreation() {

@@ -184,7 +184,7 @@ public class ComputerPlayer extends Player {
      * @param property String
      * @throws InsufficientFundsException exception
      * @author walshj05
-     * <p>
+     *
      * Modified by: shifmans
      */
     public void purchaseProperty(String property, int price) throws InsufficientFundsException {
@@ -211,11 +211,11 @@ public class ComputerPlayer extends Player {
     }
 
     /**
-     * Player sells a property
+     * Player mortgages a property
      *
      * @param property String
      * @throws NoSuchPropertyException exception
-     * @author walshj05
+     * @author crevelings
      * Modified by: shifmans
      */
     public void mortgageProperty(String property, int mortgageCost) throws NoSuchPropertyException {
@@ -246,6 +246,7 @@ public class ComputerPlayer extends Player {
      * @param property The name of the property.
      * @param mortgageValue The value to unmortgage the property.
      * @throws NoSuchPropertyException If the property is not owned or has not been mortgaged.
+     * @author crevelings
      * Modified by: shifmans
      */
     public void unmortgageProperty(String property, int mortgageValue) throws NoSuchPropertyException {
@@ -277,8 +278,7 @@ public class ComputerPlayer extends Player {
      *
      * @param property String
      * @throws NoSuchPropertyException exception
-     * @author walshj05
-     * <p>
+     * @author crevelings
      * Modified by: shifmans
      */
     public void sellProperty(String property, int propertyCost) throws NoSuchPropertyException {
@@ -322,7 +322,7 @@ public class ComputerPlayer extends Player {
     /**
      * Adds a certain amount to the player's balance
      *
-     * @param amount int
+     * @param amount int amount
      * @author walshj05
      */
     public void addToBalance(int amount) {
@@ -355,7 +355,7 @@ public class ComputerPlayer extends Player {
     }
 
     /**
-     * Adds a community chest card to the player's hand
+     * Adds a card to the player's hand
      *
      * @param card String
      * @author walshj05
@@ -365,7 +365,7 @@ public class ComputerPlayer extends Player {
     }
 
     /**
-     * Removes a community chest card from the player's hand
+     * Removes a card from the player's hand
      *
      * @param card String
      * @author walshj05
@@ -597,7 +597,7 @@ public class ComputerPlayer extends Player {
      *
      * @param odd Likelihood of the event occurring
      * @return Whether the event will likely occur
-     * <p>
+     *
      * Developed by: shifmans
      */
     public boolean runOdds(double odd) {
@@ -670,7 +670,7 @@ public class ComputerPlayer extends Player {
     /**
      * Gives the number of hotels the player owns
      * @return numHotels
-     * @author crevelings
+     * @author crevelings and walshj05
      */
     @Override
     public int getNumHotels() {
@@ -689,7 +689,7 @@ public class ComputerPlayer extends Player {
     /**
      * Gives the number of houses the player owns
      * @return numHouses
-     * @author crevelings
+     * @author crevelings and walshj05
      */
     @Override
     public int getNumHouses() {

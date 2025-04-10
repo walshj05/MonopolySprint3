@@ -6,7 +6,6 @@ import org.monopoly.Model.Cards.CommunityChestDeck;
 import org.monopoly.Model.GameTiles.*;
 import org.monopoly.Model.Players.Player;
 import org.monopoly.Model.Players.Token;
-import org.monopoly.View.GameScene;
 
 import java.util.*;
 
@@ -164,6 +163,7 @@ public class GameBoard {
      * Gets the game tile at the specified position.
      * @param position The position of the tile.
      * @return The game tile at the specified position.
+     * @author walshj05
      */
     public GameTile getTile(int position) {
         if (position >= 0 && position < tiles.size()) {
@@ -175,6 +175,7 @@ public class GameBoard {
     /**
      * Draws a card from the Community Chest deck.
      * @return The card drawn from the Community Chest deck.
+     * @author walshj05
      */
     public String drawCommunityChestCard() {
         return communityChestDeck.drawCard();
@@ -183,11 +184,17 @@ public class GameBoard {
     /**
      * Draws a card from the Chance deck.
      * @return The card drawn from the Chance deck.
+     * @author walshj05
      */
     public String drawChanceCard() {
         return chanceDeck.drawCard();
     }
 
+    /**
+     * Gets the number of tiles on the board
+     * @return The list of tiles on the game board.
+     * @author walshj05
+     */
     public int getNumberOfTiles() {
         return tiles.size();
     }
@@ -218,15 +225,6 @@ public class GameBoard {
         } else if (type.contains("chance:")) { // player uses get out of jail card
             String card = type.split(":")[1];
             chanceDeck.executeStrategy(player, card);
-        }
-    }
-
-    public void setPropertyNumHouses(int index, int numHouses) {
-        if (index >= 0 && index < numHouses) {
-            GameTile tile = tiles.get(index);
-            if (tile instanceof PropertySpace) {
-                ((PropertySpace) tile).setNumHouses(numHouses);
-            }
         }
     }
 }

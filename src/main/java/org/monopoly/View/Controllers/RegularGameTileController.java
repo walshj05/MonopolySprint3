@@ -9,6 +9,11 @@ import org.monopoly.monopolygameproject.HelloApplication;
 
 import java.util.ArrayList;
 
+/**
+ * Controller for the regular game tile.
+ * This class handles the display of tokens on the tile.
+ * @author walshj05
+ */
 public class RegularGameTileController implements TileController {
     @FXML
     private AnchorPane tile;
@@ -21,41 +26,31 @@ public class RegularGameTileController implements TileController {
     @FXML
     private ImageView token4;
 
+    /**
+     * Initializes the tile with default settings.
+     * @author walshj05
+     */
     public void initialize() {
         // Initialize the tile if needed
         // For example, set a default image or style
         tile.setVisible(true);
     }
+    /**
+     * Updates the tokens to display on the tile
+     * @param tokens The tokens to display on the tile.
+     * @author walshj05
+     */
     @Override
     public void updateTokens(ArrayList<Token> tokens) {
         if (tokens.size() > 4) { // assuming max 4 tokens on a tile
             return;
         }
-        // Clear existing tokens
-//        token1.setImage(null);
-//        token2.setImage(null);
-//        token3.setImage(null);
-//        token4.setImage(null);
-        // Set new tokens based on length of tokens
-//        if (tokens.size() == 1) {
-//            Image image = new Image(String.valueOf(HelloApplication.class.getResource("/" + tokens.getFirst().getIcon())));
-//            token4.setImage(image);
-//        }
-//        if (tokens.size() > 1) {
-//            Image image = new Image(String.valueOf(HelloApplication.class.getResource("/" + tokens.get(1).getIcon())));
-//            token2.setImage(image);
-//        }
-//        if (tokens.size() > 2) {
-//            Image image = new Image(String.valueOf(HelloApplication.class.getResource("/" + tokens.get(2).getIcon())));
-//            token3.setImage(image);
-//        }
-//        if (tokens.size() > 3) {
-//            Image image = new Image(String.valueOf(HelloApplication.class.getResource("/" + tokens.get(3).getIcon())));
-//            token4.setImage(image);
-//        }
-        System.out.println(token4.getImage().getUrl());
     }
 
+    /**
+     * Rotates the tile by the specified degrees.
+     * @param degrees The degrees to rotate the tile.
+     */
     public void rotatePane(int degrees){
         tile.setRotate(tile.getRotate() + degrees);
     }

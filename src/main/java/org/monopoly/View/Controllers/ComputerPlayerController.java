@@ -19,6 +19,12 @@ public class ComputerPlayerController {
     @FXML
     private VBox properties;
     private Player player;
+
+    /**
+     * Initializes the player interface with the given player.
+     * @param player The player to initialize the interface for.
+     * @author walshj05
+     */
     public void setPlayer(Player player) {
         this.player = player;
         name.setText(player.getName());

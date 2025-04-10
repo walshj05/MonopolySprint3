@@ -120,6 +120,7 @@ public class MonopolyTest {
 
     /**
      * Tests houses cannot be built on A, B, C
+     * @author walshj05
      */
     @Test
     void test445ConfigNotAllowed() {
@@ -134,6 +135,11 @@ public class MonopolyTest {
         System.out.println("Attempted to build on C, but did not follow rule:\n" + monopoly);
     }
 
+    /**
+     * Tests that a given state allows building in specific configurations.
+     * This test checks that the player cannot build on property C without first building on A, B
+     * @author walshj05
+     */
     @Test
     void testPlayerCanBuyHotelWith444Configuration() {
         int[] variation1 = {4, 4, 4};
@@ -157,6 +163,11 @@ public class MonopolyTest {
         System.out.println("Built hotel on A:\n" + monopoly);
     }
 
+    /**
+     * Tests that a given state allows building in specific configurations.
+     * This test checks that the player cannot build on property C without first building on A, B
+     * @author walshj05
+     */
     @Test
     void testPlayerCannotSellHouseWith000Configuration() {
         String[] properties = {"A", "B", "C"};
@@ -169,6 +180,11 @@ public class MonopolyTest {
         System.out.println("Attempted to sell house on C, but did not have any houses:\n" + monopoly);
     }
 
+    /**
+     * Tests that a given state allows building in specific configurations.
+     * This test checks that the player cannot build on property C without first building on A, B
+     * @author walshj05
+     */
     @Test
     void testPlayerCannotSellHotelWith000Configuration() {
         String[] properties = {"A", "B", "C"};

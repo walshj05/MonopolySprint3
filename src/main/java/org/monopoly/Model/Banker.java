@@ -454,12 +454,6 @@ public class Banker {
         return this.bankBalance;
     }
 
-    /*
-    NOTE: THE FOLLOWING METHODS ARE MEANT TO BE USED FOR THE NEW IMPLEMENTATION OF MONOPOLY CLASS
-    NOTE: WE CAN REFACTOR THE BANKER CLASS OR MONOPOLY CLASS AS NEEDED, BUT THIS IS NEEDED FOR TESTS
-    NOTE: TO PASS!
-     */
-
     /**
      * This method is used to buy a house from the banker.
      * @author walshj05
