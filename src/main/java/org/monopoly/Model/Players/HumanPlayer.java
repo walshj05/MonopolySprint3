@@ -432,6 +432,34 @@ public class HumanPlayer extends Player {
     }
 
     @Override
+    public int getNumHotels() {
+        int numHotels = 0;
+        for (Monopoly monopoly : monopolies) {
+            int[] buildings = monopoly.getBuildings();
+            for (int i = 0; i < buildings.length; i++) {
+                if (buildings[i] == 5) {
+                    numHotels++;
+                }
+            }
+        }
+        return numHotels;
+    }
+
+    @Override
+    public int getNumHouses() {
+        int numHouses = 0;
+        for (Monopoly monopoly : monopolies) {
+            int[] buildings = monopoly.getBuildings();
+            for (int i = 0; i < buildings.length; i++) {
+                if (buildings[i] > 0 && buildings[i] < 5) {
+                    numHouses += buildings[i];
+                }
+            }
+        }
+        return numHouses;
+    }
+
+    @Override
     public void mortgageAssetsToRaiseFunds(int amount) throws BankruptcyException {
         for (String propertyName : propertiesOwned) {
             PropertySpace property = (PropertySpace) TitleDeedCards.getInstance().getProperty(propertyName);
