@@ -1,9 +1,6 @@
 package org.monopoly.Model.Players;
 
-import org.monopoly.Exceptions.HotelCannotBeBuiltException;
-import org.monopoly.Exceptions.HouseCannotBeBuiltException;
-import org.monopoly.Exceptions.InsufficientFundsException;
-import org.monopoly.Exceptions.NoSuchPropertyException;
+import org.monopoly.Exceptions.*;
 import org.monopoly.Model.Cards.ColorGroup;
 import org.monopoly.Model.Dice;
 
@@ -58,6 +55,12 @@ public abstract class Player {
     public abstract void resetJailTurns();
     public abstract void incrementJailTurns();
     public abstract int getJailTurns();
-    public abstract int getNumHouses();
-    public abstract int getNumHotels();
+
+    public abstract void buyHouse(String propertyName, ColorGroup colorGroup, int price) throws InsufficientFundsException, RuntimeException;
+    public abstract void sellHouse(String propertyName, ColorGroup colorGroup) throws NoSuchPropertyException, HouseCannotBeBuiltException;
+    public abstract void buyHotel(String propertyName, ColorGroup colorGroup, int price) throws InsufficientFundsException, RuntimeException;
+    public abstract void sellHotel(String propertyName, ColorGroup colorGroup) throws NoSuchPropertyException, HotelCannotBeBuiltException;
+    public abstract void mortgageAssetsToRaiseFunds(int amount) throws BankruptcyException;
+    public abstract void sellBuildingsToRaiseFunds(int amount) throws BankruptcyException;
+    public abstract void attemptToRaiseFunds(int amount) throws BankruptcyException;
 }

@@ -14,6 +14,7 @@ import org.monopoly.Model.Players.Player;
 import org.monopoly.Model.Players.Token;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This test Class focuses on and tests that every single possible strategy and process for every single tile
@@ -175,7 +176,8 @@ public class StrategyTests {
     @Test
     public void testPlayerDoesNotOwnElectricCompanyButSomeoneElseDoes() {
         Token token = new Token("Thimble", "TokensPNGs/Thimble.png");
-        ElectricCompanySpace strategy = new ElectricCompanySpace("Electric Company", 150, new ArrayList<>(), null, 0);
+        ArrayList<Integer> multipliers = new ArrayList<>(List.of(4, 10));
+        ElectricCompanySpace strategy = new ElectricCompanySpace("Electric Company", 150, multipliers, null, 0);
         HumanPlayer player = new HumanPlayer("Test Player", token);
         HumanPlayer owner = new HumanPlayer("Someone Else", token);
 
@@ -231,7 +233,8 @@ public class StrategyTests {
     @Test
     public void testPlayerDoesNotOwnWaterWorksButSomeoneElseDoes() {
         Token token = new Token("Thimble", "TokensPNGs/Thimble.png");
-        WaterWorksSpace strategy = new WaterWorksSpace("Water Works", 150, new ArrayList<>(), null, 0);
+        ArrayList<Integer> multipliers = new ArrayList<>(List.of(4, 10));
+        WaterWorksSpace strategy = new WaterWorksSpace("Water Works", 150, multipliers, null, 0);
         HumanPlayer player = new HumanPlayer("Test Player", token);
         HumanPlayer owner = new HumanPlayer("Someone Else", token);
 
@@ -288,7 +291,8 @@ public class StrategyTests {
     @Test
     public void testPlayerDoesNotOwnRailRoadButSomeoneElseDoes() {
         Token token = new Token("Thimble", "TokensPNGs/Thimble.png");
-        RailroadSpace strategy = new RailroadSpace("B&O Railroad", "", 200, new ArrayList<>(), RAILROAD, 100);
+        ArrayList<Integer> rentPrices = new ArrayList<>(List.of(25, 50, 100, 200)); // example rents
+        RailroadSpace strategy = new RailroadSpace("B&O Railroad", "", 200, rentPrices, RAILROAD, 100);
         HumanPlayer player = new HumanPlayer("Test Player", token);
         HumanPlayer owner = new HumanPlayer("Someone Else", token);
 
@@ -344,7 +348,9 @@ public class StrategyTests {
     @Test
     public void testPlayerDoesNotOwnPropertySpaceButSomeoneElseDoes() {
         Token token = new Token("Thimble", "TokensPNGs/Thimble.png");
-        PropertySpace strategy = new PropertySpace("Mediterranean Avenue", "", 60, new ArrayList<>(), BROWN, 50,50,30);
+        ArrayList<Integer> rentPrices = new ArrayList<>(List.of(2, 10, 30, 90, 160, 250)); // example rents
+        PropertySpace strategy = new PropertySpace(
+                "Mediterranean Avenue", "", 60, rentPrices, BROWN, 50, 50, 30);
         HumanPlayer player = new HumanPlayer("Test Player", token);
         HumanPlayer owner = new HumanPlayer("Someone Else", token);
 
