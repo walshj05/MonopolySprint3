@@ -486,6 +486,4 @@ public class HumanPlayer extends Player {
         sellBuildingsToRaiseFunds(amount);
         mortgageAssetsToRaiseFunds(amount);
     }
-
-
 }
