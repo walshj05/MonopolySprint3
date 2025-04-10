@@ -74,6 +74,15 @@ public class GameBoard {
     }
 
     /**
+     * Resets the instance of GameBoard for testing purposes.
+     *
+     * Developed by: shifmans
+     */
+    public static void resetInstance() {
+        instance = new GameBoard();
+    }
+
+    /**
      * Initializes the Monopoly GameBoard with all 40 spaces (including Chance and Community Chest Spaces)
      *
      * Modified by: shifmans

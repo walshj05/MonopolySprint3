@@ -1,17 +1,31 @@
 package org.monopoly.Model.Players;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.monopoly.Exceptions.InsufficientFundsException;
 import org.monopoly.Exceptions.NoSuchPropertyException;
 import org.monopoly.Model.Banker;
 import org.monopoly.Model.Cards.ColorGroup;
+import org.monopoly.Model.Cards.TitleDeedCards;
 import org.monopoly.Model.Dice;
+import org.monopoly.Model.GameBoard;
+
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class HumanPlayerTest {
+
+    /**
+     * Developed by: shifmans
+     */
+    @BeforeEach
+    public void resetSingletons() {
+        Banker.resetInstance();
+        TitleDeedCards.resetInstance();
+        GameBoard.resetInstance();
+    }
 
     @Test
     public void testPlayerCreation() {
@@ -257,7 +271,6 @@ public class HumanPlayerTest {
      */
     @Test
     public void testCheckEvenBuildRule() throws InsufficientFundsException {
-        Banker.resetInstance();
         HumanPlayer humanPlayer = new HumanPlayer("John Doe", new Token( "John Doe","BattleShip.png"));
         assertEquals(1500, humanPlayer.getBalance());
 
@@ -316,7 +329,6 @@ public class HumanPlayerTest {
      * Developed by: shifmans
      */
     @Test void testPlayerSellOneHouse() throws InsufficientFundsException {
-        Banker.resetInstance();
         HumanPlayer humanPlayer = new HumanPlayer("John Doe", new Token( "John Doe","BattleShip.png"));
         assertEquals(1500, humanPlayer.getBalance());
 
@@ -443,7 +455,6 @@ public class HumanPlayerTest {
      */
     @Test
     public void testPlayerBuyHotelNoMoney() throws InsufficientFundsException {
-        Banker.resetInstance();
         HumanPlayer humanPlayer = new HumanPlayer("John Doe", new Token( "John Doe","BattleShip.png"));
         assertEquals(1500, humanPlayer.getBalance());
 
@@ -504,7 +515,6 @@ public class HumanPlayerTest {
      */
     @Test
     public void testPlayerSellHotel() throws InsufficientFundsException {
-        Banker.resetInstance();
         HumanPlayer humanPlayer = new HumanPlayer("John Doe", new Token( "John Doe","BattleShip.png"));
         assertEquals(1500, humanPlayer.getBalance());
 
