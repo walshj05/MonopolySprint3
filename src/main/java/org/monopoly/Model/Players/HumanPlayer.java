@@ -192,6 +192,12 @@ public class HumanPlayer extends Player {
         }
     }
 
+    /**
+     * Player unmortgages a property
+     * @param property String
+     * @throws NoSuchPropertyException exception
+     * @author crevelings
+     */
     public void unmortgageProperty(String property, int mortgageValue) throws NoSuchPropertyException {
         if (propertiesMortgaged.contains(property)) {
             propertiesMortgaged.remove(property);
@@ -302,6 +308,10 @@ public class HumanPlayer extends Player {
         return balance == 0;
     }
 
+    /**
+     * Buys a hous on a certain property
+     * @author walshj05
+     */
     @Override
     public void buyHouse(String propertyName, ColorGroup colorGroup, int price) throws InsufficientFundsException, RuntimeException {
         if (balance - price < 0) {
@@ -324,6 +334,10 @@ public class HumanPlayer extends Player {
         balance -= price;
     }
 
+    /**
+     * Sells a house on a certain property
+     * @author walshj05
+     */
     @Override
     public void sellHouse(String propertyName, ColorGroup colorGroup) {
         if (!propertiesOwned.contains(propertyName) || !colorGroups.contains(colorGroup)) {
@@ -342,6 +356,10 @@ public class HumanPlayer extends Player {
         balance += property.getHousePrice()/2;
     }
 
+    /**
+     * Buys a hotel on a certain property
+     * @author walshj05
+     */
     @Override
     public void buyHotel(String propertyName, ColorGroup colorGroup, int price) throws InsufficientFundsException {
         if (balance - price < 0) {
@@ -361,6 +379,10 @@ public class HumanPlayer extends Player {
         balance -= price;
     }
 
+    /**
+     * Sells a hotel on a certain property
+     * @author walshj05
+     */
     @Override
     public void sellHotel(String propertyName, ColorGroup colorGroup) {
         if (!propertiesOwned.contains(propertyName) || !colorGroups.contains(colorGroup)) {
@@ -434,7 +456,7 @@ public class HumanPlayer extends Player {
     /**
      * Gives the number of hotels the player owns
      * @return numHotels
-     * @author crevelings
+     * @author crevelings and walshj05
      */
     @Override
     public int getNumHotels() {
@@ -452,7 +474,8 @@ public class HumanPlayer extends Player {
 
     /**
      * Gives the number of houses the player owns
-     * @return
+     * @return numHouses
+     * @author crevelings and walshj05
      */
     @Override
     public int getNumHouses() {

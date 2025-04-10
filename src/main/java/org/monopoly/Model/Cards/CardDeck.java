@@ -38,6 +38,7 @@ public abstract class CardDeck implements Strategy {
 
     /**
      * Reshuffles the discard pile into the draw pile
+     * @author walshj05
      */
     protected void reshuffleDrawPile(){
         Collections.shuffle(this.discardPile);

@@ -36,6 +36,8 @@ public class Dice {
     /**
      * Rolls the dice and returns the 2 dice that are stored in an array
      * Also tracks if doubles have been rolled
+     * @return an array of 2 integers representing the rolled dice
+     * @author crevelings
      */
     public int[] roll() {
         int die1 = random.nextInt(SIDES) + 1; // Random number between 1 and 6
@@ -46,19 +48,34 @@ public class Dice {
 
     /**
      * Checks if doubles have been rolled
+     * @return true if doubles have been rolled, false otherwise
+     * @author crevelings
      */
     public boolean isDouble() {
         return isDouble;
     }
 
+    /**
+     * Returns the number of doubles rolled in the current turn
+     * @return the number of doubles rolled
+     * @author crevelings
+     */
     public int getNumDoubles() {
         return numDoubles;
     }
 
+    /**
+     * Increments the number of doubles rolled in the current turn
+     * @author crevelings
+     */
     public void incrementNumDoubles() {
         numDoubles++;
     }
 
+    /**
+     * Resets the number of doubles rolled in the current turn
+     * @author crevelings
+     */
     public void resetNumDoubles() {
         numDoubles = 0;
     }

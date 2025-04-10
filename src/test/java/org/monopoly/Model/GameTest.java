@@ -7,6 +7,11 @@ import org.monopoly.Model.Players.Token;
 
 import java.util.ArrayList;
 
+/**
+ * Tests for the Game class.
+ * @author walshj05
+ * tests added by shifmans
+ */
 class GameTest {
     @Test
     public void testGameCreation() {
