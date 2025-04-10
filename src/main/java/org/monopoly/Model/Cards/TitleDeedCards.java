@@ -1,5 +1,6 @@
 package org.monopoly.Model.Cards;
 
+import org.monopoly.Model.Banker;
 import org.monopoly.Model.GameTiles.*;
 import java.util.*;
 
@@ -35,6 +36,16 @@ public class TitleDeedCards {
         }
         return instance;
     }
+
+    /**
+     * Resets the instance of TitleDeedCards for testing purposes.
+     *
+     * Developed by: shifmans
+     */
+    public static void resetInstance() {
+        instance = new TitleDeedCards();
+    }
+
     /**
      * Initializes the properties with their respective details.
      *
