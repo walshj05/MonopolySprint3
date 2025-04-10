@@ -52,7 +52,7 @@
             <children>
                <ImageView fitHeight="120.0" fitWidth="120.0" style="visibility: True;">
                   <image>
-                     <Image url="@../../../TilePNGs/image-2.png" />
+                     <Image url="@TilePNGs/image-2.png" />
                   </image>
                </ImageView>
             </children>
@@ -61,7 +61,7 @@
             <children>
                <ImageView fitHeight="120.0" fitWidth="120.0">
                   <image>
-                     <Image url="@../../../TilePNGs/image.png" />
+                     <Image url="@TilePNGs/image.png" />
                   </image>
                </ImageView>
             </children>
@@ -70,7 +70,7 @@
             <children>
                <ImageView fitHeight="120.0" fitWidth="120.0">
                   <image>
-                     <Image url="@../../../TilePNGs/image-6.png" />
+                     <Image url="@TilePNGs/image-6.png" />
                   </image>
                </ImageView>
             </children>
@@ -79,7 +79,7 @@
             <children>
                <ImageView fitHeight="120.0" fitWidth="120.0">
                   <image>
-                     <Image url="@../../../TilePNGs/30.png" />
+                     <Image url="@TilePNGs/30.png" />
                   </image>
                </ImageView>
             </children>
@@ -88,7 +88,7 @@
             <children>
                <ImageView fitHeight="120.0" fitWidth="60.0">
                   <image>
-                     <Image url="@../../../TilePNGs/Screenshot_2025-04-03_at_9.20.53_PM.png" />
+                     <Image url="@TilePNGs/Screenshot_2025-04-03_at_9.20.53_PM.png" />
                   </image>
                </ImageView>
             </children>
@@ -97,7 +97,7 @@
             <children>
                <ImageView fitHeight="120.0" fitWidth="60.0">
                   <image>
-                     <Image url="@../../../TilePNGs/Screenshot_2025-04-03_at_9.21.13_PM.png" />
+                     <Image url="@TilePNGs/Screenshot_2025-04-03_at_9.21.13_PM.png" />
                   </image>
                </ImageView>
             </children>
@@ -106,7 +106,7 @@
             <children>
                <ImageView fitHeight="120.0" fitWidth="60.0">
                   <image>
-                     <Image url="@../../../TilePNGs/7.png" />
+                     <Image url="@TilePNGs/7.png" />
                   </image>
                </ImageView>
             </children>
@@ -115,7 +115,7 @@
             <children>
                <ImageView fitHeight="120.0" fitWidth="60.0">
                   <image>
-                     <Image url="@../../../TilePNGs/6.png" />
+                     <Image url="@TilePNGs/6.png" />
                   </image>
                </ImageView>
             </children>
@@ -124,7 +124,7 @@
             <children>
                <ImageView fitHeight="120.0" fitWidth="60.0">
                   <image>
-                     <Image url="@../../../TilePNGs/5.png" />
+                     <Image url="@TilePNGs/5.png" />
                   </image>
                </ImageView>
             </children>
@@ -133,7 +133,7 @@
             <children>
                <ImageView fitHeight="120.0" fitWidth="60.0">
                   <image>
-                     <Image url="@../../../TilePNGs/4.png" />
+                     <Image url="@TilePNGs/4.png" />
                   </image>
                </ImageView>
             </children>
@@ -142,7 +142,7 @@
             <children>
                <ImageView fitHeight="120.0" fitWidth="60.0">
                   <image>
-                     <Image url="@../../../TilePNGs/3.png" />
+                     <Image url="@TilePNGs/3.png" />
                   </image>
                </ImageView>
             </children>
@@ -151,7 +151,7 @@
             <children>
                <ImageView fitHeight="120.0" fitWidth="60.0">
                   <image>
-                     <Image url="@../../../TilePNGs/2.png" />
+                     <Image url="@TilePNGs/2.png" />
                   </image>
                </ImageView>
             </children>
@@ -160,7 +160,7 @@
             <children>
                <ImageView fitHeight="120.0" fitWidth="60.0">
                   <image>
-                     <Image url="@../../../TilePNGs/1.png" />
+                     <Image url="@TilePNGs/1.png" />
                   </image>
                </ImageView>
             </children>
@@ -169,7 +169,7 @@
             <children>
                <ImageView fitHeight="60.0" fitWidth="120.0">
                   <image>
-                     <Image url="@../../../TilePNGs/11.png" />
+                     <Image url="@TilePNGs/11.png" />
                   </image>
                </ImageView>
             </children>
@@ -178,7 +178,7 @@
             <children>
                <ImageView fitHeight="60.0" fitWidth="120.0">
                   <image>
-                     <Image url="@../../../TilePNGs/12.png" />
+                     <Image url="@TilePNGs/12.png" />
                   </image>
                </ImageView>
             </children>
@@ -187,7 +187,7 @@
             <children>
                <ImageView fitHeight="60.0" fitWidth="120.0">
                   <image>
-                     <Image url="@../../../TilePNGs/13.png" />
+                     <Image url="@TilePNGs/13.png" />
                   </image>
                </ImageView>
             </children>
@@ -196,7 +196,7 @@
             <children>
                <ImageView fitHeight="60.0" fitWidth="120.0">
                   <image>
-                     <Image url="@../../../TilePNGs/14.png" />
+                     <Image url="@TilePNGs/14.png" />
                   </image>
                </ImageView>
             </children>
@@ -205,7 +205,7 @@
             <children>
                <ImageView fitHeight="60.0" fitWidth="120.0">
                   <image>
-                     <Image url="@../../../TilePNGs/15.png" />
+                     <Image url="@TilePNGs/15.png" />
                   </image>
                </ImageView>
             </children>
@@ -214,7 +214,7 @@
             <children>
                <ImageView fitHeight="60.0" fitWidth="120.0">
                   <image>
-                     <Image url="@../../../TilePNGs/16.png" />
+                     <Image url="@TilePNGs/16.png" />
                   </image>
                </ImageView>
             </children>
@@ -223,7 +223,7 @@
             <children>
                <ImageView fitHeight="60.0" fitWidth="120.0">
                   <image>
-                     <Image url="@../../../TilePNGs/17.png" />
+                     <Image url="@TilePNGs/17.png" />
                   </image>
                </ImageView>
             </children>
@@ -232,7 +232,7 @@
             <children>
                <ImageView fitHeight="60.0" fitWidth="120.0">
                   <image>
-                     <Image url="@../../../TilePNGs/18.png" />
+                     <Image url="@TilePNGs/18.png" />
                   </image>
                </ImageView>
             </children>
@@ -241,7 +241,7 @@
             <children>
                <ImageView fitHeight="60.0" fitWidth="120.0">
                   <image>
-                     <Image url="@../../../TilePNGs/19.png" />
+                     <Image url="@TilePNGs/19.png" />
                   </image>
                </ImageView>
             </children>
@@ -250,7 +250,7 @@
             <children>
                <ImageView fitHeight="120.0" fitWidth="60.0">
                   <image>
-                     <Image url="@../../../TilePNGs/21.png" />
+                     <Image url="@TilePNGs/21.png" />
                   </image>
                </ImageView>
             </children>
@@ -259,7 +259,7 @@
             <children>
                <ImageView fitHeight="120.0" fitWidth="60.0">
                   <image>
-                     <Image url="@../../../TilePNGs/22.png" />
+                     <Image url="@TilePNGs/22.png" />
                   </image>
                </ImageView>
             </children>
@@ -268,7 +268,7 @@
             <children>
                <ImageView fitHeight="120.0" fitWidth="60.0">
                   <image>
-                     <Image url="@../../../TilePNGs/23.png" />
+                     <Image url="@TilePNGs/23.png" />
                   </image>
                </ImageView>
             </children>
@@ -277,7 +277,7 @@
             <children>
                <ImageView fitHeight="120.0" fitWidth="60.0">
                   <image>
-                     <Image url="@../../../TilePNGs/image-3.png" />
+                     <Image url="@TilePNGs/image-3.png" />
                   </image>
                </ImageView>
             </children>
@@ -286,7 +286,7 @@
             <children>
                <ImageView fitHeight="120.0" fitWidth="60.0">
                   <image>
-                     <Image url="@../../../TilePNGs/25.png" />
+                     <Image url="@TilePNGs/25.png" />
                   </image>
                </ImageView>
             </children>
@@ -295,7 +295,7 @@
             <children>
                <ImageView fitHeight="120.0" fitWidth="60.0">
                   <image>
-                     <Image url="@../../../TilePNGs/image-5.png" />
+                     <Image url="@TilePNGs/image-5.png" />
                   </image>
                </ImageView>
             </children>
@@ -304,7 +304,7 @@
             <children>
                <ImageView fitHeight="120.0" fitWidth="60.0">
                   <image>
-                     <Image url="@../../../TilePNGs/27.png" />
+                     <Image url="@TilePNGs/27.png" />
                   </image>
                </ImageView>
             </children>
@@ -313,7 +313,7 @@
             <children>
                <ImageView fitHeight="120.0" fitWidth="60.0">
                   <image>
-                     <Image url="@../../../TilePNGs/28.png" />
+                     <Image url="@TilePNGs/28.png" />
                   </image>
                </ImageView>
             </children>
@@ -322,7 +322,7 @@
             <children>
                <ImageView fitHeight="120.0" fitWidth="60.0">
                   <image>
-                     <Image url="@../../../TilePNGs/29.png" />
+                     <Image url="@TilePNGs/29.png" />
                   </image>
                </ImageView>
             </children>
@@ -331,7 +331,7 @@
             <children>
                <ImageView fitHeight="60.0" fitWidth="120.0">
                   <image>
-                     <Image url="@../../../TilePNGs/31.png" />
+                     <Image url="@TilePNGs/31.png" />
                   </image>
                </ImageView>
             </children>
@@ -340,7 +340,7 @@
             <children>
                <ImageView fitHeight="60.0" fitWidth="120.0">
                   <image>
-                     <Image url="@../../../TilePNGs/32.png" />
+                     <Image url="@TilePNGs/32.png" />
                   </image>
                </ImageView>
             </children>
@@ -349,7 +349,7 @@
             <children>
                <ImageView fitHeight="60.0" fitWidth="120.0">
                   <image>
-                     <Image url="@../../../TilePNGs/33.png" />
+                     <Image url="@TilePNGs/33.png" />
                   </image>
                </ImageView>
             </children>
@@ -358,7 +358,7 @@
             <children>
                <ImageView fitHeight="60.0" fitWidth="120.0">
                   <image>
-                     <Image url="@../../../TilePNGs/34.png" />
+                     <Image url="@TilePNGs/34.png" />
                   </image>
                </ImageView>
             </children>
@@ -367,7 +367,7 @@
             <children>
                <ImageView fitHeight="60.0" fitWidth="120.0">
                   <image>
-                     <Image url="@../../../TilePNGs/35.png" />
+                     <Image url="@TilePNGs/35.png" />
                   </image>
                </ImageView>
             </children>
@@ -376,7 +376,7 @@
             <children>
                <ImageView fitHeight="60.0" fitWidth="120.0">
                   <image>
-                     <Image url="@../../../TilePNGs/36.png" />
+                     <Image url="@TilePNGs/36.png" />
                   </image>
                </ImageView>
             </children>
@@ -385,7 +385,7 @@
             <children>
                <ImageView fitHeight="60.0" fitWidth="120.0">
                   <image>
-                     <Image url="@../../../TilePNGs/37.png" />
+                     <Image url="@TilePNGs/37.png" />
                   </image>
                </ImageView>
             </children>
@@ -394,7 +394,7 @@
             <children>
                <ImageView fitHeight="60.0" fitWidth="120.0">
                   <image>
-                     <Image url="@../../../TilePNGs/38.png" />
+                     <Image url="@TilePNGs/38.png" />
                   </image>
                </ImageView>
             </children>
@@ -403,7 +403,7 @@
             <children>
                <ImageView fitHeight="60.0" fitWidth="120.0">
                   <image>
-                     <Image url="@../../../TilePNGs/39.png" />
+                     <Image url="@TilePNGs/39.png" />
                   </image>
                </ImageView>
             </children>
@@ -412,14 +412,14 @@
             <children>
                <ImageView fitHeight="546.0" fitWidth="540.0">
                   <image>
-                     <Image url="@../../../TilePNGs/MainBoard.png" />
+                     <Image url="@TilePNGs/MainBoard.png" />
                   </image>
                </ImageView>
                <AnchorPane layoutX="255.0" layoutY="200.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="135.0" prefWidth="135.0">
                   <children>
                      <ImageView fitHeight="135.0" fitWidth="135.0" pickOnBounds="true" preserveRatio="true">
                         <image>
-                           <Image url="@../../../TokenPNGs/dice-four.png" />
+                           <Image url="@TokenPNGs/dice-four.png" />
                         </image>
                      </ImageView>
                   </children>
@@ -428,7 +428,7 @@
                   <children>
                      <ImageView fitHeight="135.0" fitWidth="135.0" pickOnBounds="true" preserveRatio="true">
                         <image>
-                           <Image url="@../../../TokenPNGs/dice-four.png" />
+                           <Image url="@TokenPNGs/dice-four.png" />
                         </image>
                      </ImageView>
                   </children>
@@ -509,7 +509,7 @@
          </Label>
          <ImageView layoutX="10" fitHeight="100.0" fitWidth="160.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
             <image>
-               <Image url="@../../../TokenPNGs/Boot.png" />
+               <Image url="@TokenPNGs/Boot.png" />
             </image>
          </ImageView>
          <Label layoutY="60" layoutX="130.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="85.0" text="Money&#10;">
@@ -600,7 +600,7 @@
          </Label>
          <ImageView layoutX="10" fitHeight="100.0" fitWidth="160.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
             <image>
-               <Image url="@../../../TokenPNGs/Boot.png" />
+               <Image url="@TokenPNGs/Boot.png" />
             </image>
          </ImageView>
          <Label layoutY="60" layoutX="130.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="85.0" text="Money&#10;">
@@ -691,7 +691,7 @@
          </Label>
          <ImageView layoutX="10" fitHeight="100.0" fitWidth="160.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
             <image>
-               <Image url="@../../../TokenPNGs/Boot.png" />
+               <Image url="@TokenPNGs/Boot.png" />
             </image>
          </ImageView>
          <Label layoutY="60" layoutX="130.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="85.0" text="Money&#10;">
@@ -782,7 +782,7 @@
          </Label>
          <ImageView layoutX="10" fitHeight="100.0" fitWidth="160.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
             <image>
-               <Image url="@../../../TokenPNGs/Boot.png" />
+               <Image url="@TokenPNGs/Boot.png" />
             </image>
          </ImageView>
          <Label layoutY="60" layoutX="130.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="85.0" text="Money&#10;">

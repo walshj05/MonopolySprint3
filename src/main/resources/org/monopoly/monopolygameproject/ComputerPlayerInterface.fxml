@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.text.Font?>
+
+<?import javafx.scene.image.Image?>
+<AnchorPane fx:controller="org.monopoly.View.Controllers.ComputerPlayerController" fx:id="playerPane" xmlns:fx="http://javafx.com/fxml"
+            style="-fx-border-width: 0 0 1 0; -fx-border-color: grey; -fx-border-style: solid;"
+            layoutX="780.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="185.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/22.0.1">
+    <children>
+        <Label wrapText="true" fx:id="name" layoutX="130" layoutY="30" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="85.0" text="Name&#10;">
+            <font>
+                <Font name="Futura Bold" size="14.0" />
+            </font>
+        </Label>
+        <ImageView fx:id="token" layoutX="10" fitHeight="100.0" fitWidth="100.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@TokenPNGs/TopHat.png" />
+            </image>
+        </ImageView>
+        <Label wrapText="true" fx:id="balance" layoutY="100" layoutX="130.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="85.0" text="Money&#10;">
+            <font>
+                <Font name="Futura Bold" size="14.0" />
+            </font>
+        </Label>
+        <ScrollPane layoutX="280.0" prefHeight="195.0" prefWidth="170.0">
+            <content>
+                <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="195.0" prefWidth="120.0">
+                    <children>
+                        <VBox fx:id="properties" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="195.0" prefWidth="120.0" />
+                    </children>
+                </AnchorPane>
+            </content>
+        </ScrollPane>
+    </children>
+</AnchorPane>
