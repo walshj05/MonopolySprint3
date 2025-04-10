@@ -615,7 +615,7 @@ public class ComputerPlayer extends Player {
         System.out.println(name + " landed on " + space.getName());
 
         // Check if property is owned
-        if (space.getOwner().isEmpty()) {
+        if (Objects.equals(space.getOwner(), "")) {
             try {
                 purchaseProperty(space.getName(), space.getPrice());
                 System.out.println(name + " bought " + space.getName() + " for $" + space.getPrice());
