@@ -11,14 +11,14 @@ class TokenTest {
 
     @BeforeEach
     void setUp() {
-        token = new Token("Top hat", "TokenPNGs/TopHat.png");
+        token = new Token("Top hat", "org/monopoly/monopolygameproject/TokenPNGs/TopHat.png");
         humanPlayer = new HumanPlayer("Alice", token);
     }
 
     @Test
     void testTokenCreation() {
         assertEquals("Top hat", token.getName(), "Token name should be 'Top hat'.");
-        assertEquals("TokenPNGs/TopHat.png", token.getIcon(), "Token icon should match.");
+        assertEquals("org/monopoly/monopolygameproject/TokenPNGs/TopHat.png", token.getIcon(), "Token icon should match.");
     }
 
     @Test
