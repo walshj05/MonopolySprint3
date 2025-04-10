@@ -576,4 +576,20 @@ public class HumanPlayerTest {
 
         assertThrows(RuntimeException.class, () -> humanPlayer.sellHotel("Short Line Railroad", ColorGroup.DARK_BLUE));
     }
+
+    /**
+     * Test to see if the player's position rolls over once it reaches 39
+     */
+    @Test
+    public void testPlayerPositionRollOver() {
+        HumanPlayer humanPlayer = new HumanPlayer("John Doe", new Token( "John Doe","BattleShip.png"));
+        humanPlayer.setPosition(39);
+        humanPlayer.move(2);
+        assertEquals(1, humanPlayer.getPosition());
+
+        humanPlayer.setPosition(38);
+        humanPlayer.move(10);
+        assertEquals(8, humanPlayer.getPosition());
+    }
+
 }

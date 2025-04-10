@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane fx:id="tile" fx:controller="org.monopoly.View.Controllers.RegularGameTileController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="60.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/22.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fx:id="token1" fitHeight="25.0" fitWidth="25.0" layoutX="3.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="token2" fitHeight="25.0" fitWidth="25.0" layoutX="32.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="token3" fitHeight="25.0" fitWidth="25.0" layoutX="3.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="token4" fitHeight="25.0" fitWidth="25.0" layoutX="32.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>

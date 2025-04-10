@@ -1,13 +1,11 @@
 package org.monopoly.Model.Players;
 
-import org.monopoly.Exceptions.InsufficientFundsException;
-import org.monopoly.Exceptions.NoSuchPropertyException;
-import org.monopoly.Model.Banker;
+import org.monopoly.Exceptions.*;
+import org.monopoly.Model.*;
+
 import org.monopoly.Model.Cards.ColorGroup;
 import org.monopoly.Model.Cards.TitleDeedCards;
-import org.monopoly.Model.Dice;
 import org.monopoly.Model.GameTiles.PropertySpace;
-import org.monopoly.Model.Monopoly;
 
 import java.util.ArrayList;
 
@@ -103,12 +101,14 @@ public class HumanPlayer extends Player {
      * @author walshj05
      */
     public void move(int spaces) {
+        GameBoard.getInstance().removeToken(this.token, position);
         if (!inJail) {
-            position += spaces; // Move the player
+            position = (position + spaces) % 40; // Move the player
             System.out.println(name + " moved " + spaces + " spaces to position " + position);
         } else {
             System.out.println(name + " is in jail and cannot move.");
         }
+        GameBoard.getInstance().addToken(this.token, position);
     }
 
     /**
@@ -189,6 +189,17 @@ public class HumanPlayer extends Player {
             balance += mortgageCost;
         } else {
             throw new NoSuchPropertyException("You do not own " + property);
+        }
+    }
+
+    public void unmortgageProperty(String property, int mortgageValue) throws NoSuchPropertyException {
+        if (propertiesMortgaged.contains(property)) {
+            propertiesMortgaged.remove(property);
+            propertiesOwned.add(property);
+            balance -= mortgageValue; // Deduct the mortgage value from the player's balance
+            System.out.println(name + " unmortgaged " + property + " for $" + mortgageValue);
+        } else {
+            throw new NoSuchPropertyException("You do not have this property mortgaged.");
         }
     }
 
@@ -291,6 +302,7 @@ public class HumanPlayer extends Player {
         return balance == 0;
     }
 
+    @Override
     public void buyHouse(String propertyName, ColorGroup colorGroup, int price) throws InsufficientFundsException, RuntimeException {
         if (balance - price < 0) {
             throw new InsufficientFundsException("Insufficient funds to buy a house");
@@ -312,6 +324,7 @@ public class HumanPlayer extends Player {
         balance -= price;
     }
 
+    @Override
     public void sellHouse(String propertyName, ColorGroup colorGroup) {
         if (!propertiesOwned.contains(propertyName) || !colorGroups.contains(colorGroup)) {
             throw new RuntimeException("Property not registered to player.");
@@ -329,6 +342,7 @@ public class HumanPlayer extends Player {
         balance += property.getHousePrice()/2;
     }
 
+    @Override
     public void buyHotel(String propertyName, ColorGroup colorGroup, int price) throws InsufficientFundsException {
         if (balance - price < 0) {
             throw new InsufficientFundsException("Insufficient funds to buy a hotel");
@@ -347,6 +361,7 @@ public class HumanPlayer extends Player {
         balance -= price;
     }
 
+    @Override
     public void sellHotel(String propertyName, ColorGroup colorGroup) {
         if (!propertiesOwned.contains(propertyName) || !colorGroups.contains(colorGroup)) {
             throw new RuntimeException("Property not registered to player.");
@@ -417,30 +432,59 @@ public class HumanPlayer extends Player {
     }
 
     @Override
-    public int getNumHotels() {
-        int numHotels = 0;
-        for (Monopoly monopoly : monopolies) {
-            int[] buildings = monopoly.getBuildings();
-            for (int i = 0; i < buildings.length; i++) {
-                if (buildings[i] == 5) {
-                    numHotels++;
+    public void mortgageAssetsToRaiseFunds(int amount) throws BankruptcyException {
+        for (String propertyName : propertiesOwned) {
+            PropertySpace property = (PropertySpace) TitleDeedCards.getInstance().getProperty(propertyName);
+            if (!property.isMortgaged()) {
+                try {
+                    System.out.println("Mortgaging " + property.getName());
+                    mortgageProperty(property.getName(), property.getMortgageValue()); // defined in subclass
+                    if (getBalance() >= amount) return;
+                } catch (Exception e) {
+                    System.out.println("Error mortgaging property: " + e.getMessage());
                 }
             }
         }
-        return numHotels;
+
+        if (getBalance() < amount) {
+            throw new BankruptcyException(getName() + " could not raise enough funds by mortgaging.");
+        }
     }
 
     @Override
-    public int getNumHouses() {
-        int numHouses = 0;
-        for (Monopoly monopoly : monopolies) {
-            int[] buildings = monopoly.getBuildings();
-            for (int i = 0; i < buildings.length; i++) {
-                if (buildings[i] > 0 && buildings[i] < 5) {
-                    numHouses += buildings[i];
+    public void sellBuildingsToRaiseFunds(int amount) throws BankruptcyException {
+        for (String propertyName : propertiesOwned) {
+            PropertySpace property = (PropertySpace) TitleDeedCards.getInstance().getProperty(propertyName);
+
+            while (getBalance() < amount && property.getNumHotels() > 0) {
+                try {
+                    System.out.println("Selling hotel on " + property.getName());
+                    sellHotel(property.getName(), property.getColorGroup()); // defined in subclass
+                } catch (Exception e) {
+                    System.out.println("Error selling hotel: " + e.getMessage());
                 }
             }
+
+            while (getBalance() < amount && property.getNumHouses() > 0) {
+                try {
+                    System.out.println("Selling house on " + property.getName());
+                    sellHouse(property.getName(), property.getColorGroup()); // defined in subclass
+                } catch (Exception e) {
+                    System.out.println("Error selling house: " + e.getMessage());
+                }
+            }
+
+            if (getBalance() >= amount) return;
         }
-        return numHouses;
+
+        if (getBalance() < amount) {
+            throw new BankruptcyException(getName() + " could not raise enough funds by selling buildings.");
+        }
+    }
+
+    @Override
+    public void attemptToRaiseFunds(int amount) throws BankruptcyException {
+        sellBuildingsToRaiseFunds(amount);
+        mortgageAssetsToRaiseFunds(amount);
     }
 }
