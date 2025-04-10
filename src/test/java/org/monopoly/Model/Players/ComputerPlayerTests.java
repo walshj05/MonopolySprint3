@@ -213,6 +213,23 @@ public class ComputerPlayerTests {
      * Developed by: shifmans
      */
     @Test
+    public void testComputerPlayerMortgagePropertyUnknown() throws InsufficientFundsException, NoSuchPropertyException {
+        ComputerPlayer cpu = new ComputerPlayer("CPU", new Token( "CPU","BattleShip.png"));
+        assertEquals(1500, cpu.getBalance());
+        assertEquals(List.of(), cpu.getPropertiesOwned());
+        assertEquals(List.of(), cpu.getPropertiesMortgaged());
+
+        assertThrows(NoSuchPropertyException.class, () -> {
+            while (cpu.getPropertiesMortgaged().size() != 1) {
+                cpu.mortgageProperty("Park Place", 50);
+            }
+        });
+    }
+
+    /**
+     * Developed by: shifmans
+     */
+    @Test
     public void testComputerPlayerUnmortgageProperty() throws InsufficientFundsException, NoSuchPropertyException {
         ComputerPlayer cpu = new ComputerPlayer("CPU", new Token( "CPU","BattleShip.png"));
         assertEquals(1500, cpu.getBalance());
