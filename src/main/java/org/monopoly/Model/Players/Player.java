@@ -63,4 +63,6 @@ public abstract class Player {
     public abstract void mortgageAssetsToRaiseFunds(int amount) throws BankruptcyException;
     public abstract void sellBuildingsToRaiseFunds(int amount) throws BankruptcyException;
     public abstract void attemptToRaiseFunds(int amount) throws BankruptcyException;
+    public abstract int getNumHouses();
+    public abstract int getNumHotels();
 }
