@@ -222,4 +222,8 @@ public class Monopoly {
     public ColorGroup getColorGroup() {
         return colorGroup;
     }
+
+    public int[] getBuildings() {
+        return buildings;
+    }
 }

@@ -1,8 +1,10 @@
 package org.monopoly.Model.Cards;
 
 import org.monopoly.Model.Players.Player;
+import org.monopoly.Model.TurnManager;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author walshj05
@@ -10,6 +12,7 @@ import java.util.ArrayList;
  * and has methods for drawing a card from the deck.
  */
 public class CommunityChestDeck extends CardDeck {
+    private final List<Player> players;
     /**
      * Creates a deck of Community Chest cards
      * Shuffles the draw deck
@@ -17,6 +20,7 @@ public class CommunityChestDeck extends CardDeck {
      */
     public CommunityChestDeck() {
         super(CommunityChestDeck.initializeCards());
+        players = new ArrayList<>();
     }
 
     /**
@@ -80,6 +84,8 @@ public class CommunityChestDeck extends CardDeck {
      * @param player Player
      * @param card String card
      * @author walshj05
+     * Modified by: crevelings (4/9/25)
+     * 4/9/25: Added cases for certain cards that involved from other player balances
      */
     public void executeStrategy(Player player, String card) {
         switch (card) {
@@ -115,7 +121,16 @@ public class CommunityChestDeck extends CardDeck {
                 player.addToBalance(20);
                 break;
             case "It is your birthday. Collect $10 from every player":
-//                player.addToBalance(0); // todo add logic to collect $10 from every player -> gameState
+                TurnManager turnManager = TurnManager.getInstance();
+                List<Player> players = turnManager.getPlayers();
+                for (Player otherPlayer : players) {
+                    if (otherPlayer != player) {
+                        otherPlayer.subtractFromBalance(10);
+                    }
+                }
+
+                int totalAmount = (players.size() - 1) * 10;
+                player.addToBalance(totalAmount);
                 break;
             case "Pay hospital fees of $100":
                 player.subtractFromBalance(100);
@@ -124,8 +139,8 @@ public class CommunityChestDeck extends CardDeck {
                 player.addToBalance(25);
                 break;
             case "You are assessed for street repair. $40 per house. $115 per hotel":
-//                int totalCharge = (115 * player.getNumHotels()) + (40 * player.getNumHotels());
-                player.subtractFromBalance(0); // todo add logic to charge player for street repair -> gameState
+                int totalCharge = (115 * player.getNumHotels()) + (40 * player.getNumHouses());
+                player.subtractFromBalance(totalCharge);
                 break;
             case "You have won second prize in a beauty contest. Collect $10":
                 player.addToBalance(10);
