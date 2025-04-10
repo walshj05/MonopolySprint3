@@ -1,9 +1,13 @@
 package org.monopoly.Model.GameTiles;
 
+import org.monopoly.Exceptions.*;
 import org.monopoly.Exceptions.InsufficientFundsException;
+import org.monopoly.Model.Banker;
 import org.monopoly.Model.Cards.ColorGroup;
 import org.monopoly.Model.Players.ComputerPlayer;
+import org.monopoly.Model.Players.HumanPlayer;
 import org.monopoly.Model.Players.Player;
+import org.monopoly.Model.TurnManager;
 
 import java.util.ArrayList;
 
@@ -249,27 +253,56 @@ public class PropertySpace extends GameTile {
     /**
      * Executes the strategy for the PropertySpace.
      * @author crevelings
-     * Modified by: crevelings (4/8/25) Configured for CPU
+     * Modified by: crevelings (4/8/25), (4/9/25)
+     * 4/8/25: Configured for CPU
+     * 4/9/25: Added full implementation for strategy
      */
     @Override
     public void executeStrategy(Player player) {
+        System.out.println(player.getName() + " landed on " + getName());
+
         if (player.hasProperty(getName())) {
-            System.out.println("You already own the " + getName() + "!");
-        } else {
-            if (owner == null || owner.isEmpty()) { // Proper null check
-                System.out.println("You can buy the " + getName() + " for $" + price);
-                System.out.println("Or property can be auctioned");
-            } else {
-                System.out.println(getOwner() + " already owns the " + getName() + "!");
-                if (player.getClass() == ComputerPlayer.class){
-                    ((ComputerPlayer) player).handleLanding(this.rentPrices);
+            System.out.println("You already own " + getName() + "!");
+            return;
+        }
+
+        if (owner == null || owner.isEmpty()) {
+            System.out.println(getName() + " is unowned.");
+
+            if (player instanceof HumanPlayer) {
+                try {
+                    player.purchaseProperty(getName(), price);
+                    setOwner(player.getName());
+                    System.out.println("You bought " + getName() + "!");
+                } catch (InsufficientFundsException e) {
+                    System.out.println("Not enough money to purchase. Starting auction...");
+                    Banker banker = Banker.getInstance();
+                    TurnManager turnManager = TurnManager.getInstance();
+                    banker.auctionProperty(getName(), turnManager.getPlayers());
                 }
+            } else if (player instanceof ComputerPlayer) {
+                ((ComputerPlayer) player).handleLanding(rentPrices);
             }
+
+        } else {
+            if (isMortgaged) {
+                System.out.println("Property is mortgaged. No rent due.");
+                return;
+            }
+
+            int buildings = getNumHotels() > 0 ? 5 : getNumHouses(); // hotel is index 5
+            int rent = getRentPrice(buildings);
+            System.out.println("Owned by " + owner + ". Rent is $" + rent);
+
             try {
-                player.purchaseProperty(getName(), price);
-                System.out.println("You bought the " + getName());
-            } catch (InsufficientFundsException e) {
-                throw new RuntimeException(e);
+                if (!(player.getBalance() >= rent)) {
+                    System.out.println("Not enough funds. Attempting to raise money...");
+                    player.attemptToRaiseFunds(rent);
+                }
+
+                player.subtractFromBalance(rent);
+            } catch (BankruptcyException e) {
+                System.out.println(player.getName() + " is bankrupt!");
             }
         }
     }
