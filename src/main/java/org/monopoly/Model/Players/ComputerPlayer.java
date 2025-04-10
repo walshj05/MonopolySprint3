@@ -1,6 +1,5 @@
 package org.monopoly.Model.Players;
 
-
 import org.monopoly.Exceptions.BankruptcyException;
 import org.monopoly.Exceptions.InsufficientFundsException;
 import org.monopoly.Exceptions.NoSuchPropertyException;
@@ -635,17 +634,6 @@ public class ComputerPlayer extends Player {
         } else {
             System.out.println(name + " already owns " + space.getName());
         }
-    }
-
-    /**
-     * Checks to see if a player has a monopoly
-     * @return All properties are owned in the same color group as given property
-     * @author crevelings (4/8/25)
-     */
-    public boolean checkPropertyHasMonopoly(String property) {
-        TitleDeedCards cards = TitleDeedCards.getInstance();
-        ColorGroup color = cards.getProperty(property).getColorGroup();
-        return colorGroups.contains(color);
     }
 
     /**

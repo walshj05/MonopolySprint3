@@ -68,7 +68,6 @@ public class HumanPlayer extends Player {
         return balance;
     }
 
-
     public void setPosition(int position) {
         this.position = position;
     }
@@ -84,6 +83,16 @@ public class HumanPlayer extends Player {
     }
 
     /**
+     * Gets the properties that are mortgaged.
+     * @return Properties that are mortgaged.
+     *
+     * Developed by: shifmans
+     */
+    public ArrayList<String> getPropertiesMortgaged() {
+        return propertiesMortgaged;
+    }
+
+    /**
      * Gets the monopolies a player has.
      * @return Monopolies a player has.
      *
@@ -92,7 +101,6 @@ public class HumanPlayer extends Player {
     public ArrayList<Monopoly> getMonopolies() {
         return monopolies;
     }
-
 
     /**
      * Moves player a certain number of spaces
