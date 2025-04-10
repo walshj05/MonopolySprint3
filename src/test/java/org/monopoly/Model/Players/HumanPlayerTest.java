@@ -2,6 +2,7 @@ package org.monopoly.Model.Players;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.monopoly.Exceptions.BankruptcyException;
 import org.monopoly.Exceptions.InsufficientFundsException;
 import org.monopoly.Exceptions.NoSuchPropertyException;
 import org.monopoly.Model.Banker;
@@ -149,6 +150,32 @@ public class HumanPlayerTest {
         assertEquals(1325, humanPlayer.getBalance());
     }
 
+    /**
+     * Developed by: shifmans
+     */
+    @Test
+    public void testPlayerUnmortgageProperty() throws InsufficientFundsException, NoSuchPropertyException {
+        HumanPlayer humanPlayer = new HumanPlayer("John Doe", new Token( "John Doe","BattleShip.png"));
+        assertEquals(1500, humanPlayer.getBalance());
+        assertEquals(List.of(), humanPlayer.getPropertiesOwned());
+        assertEquals(List.of(), humanPlayer.getPropertiesMortgaged());
+
+        humanPlayer.purchaseProperty("Park Place", 100);
+        assertEquals(1400, humanPlayer.getBalance());
+        assertEquals(1, humanPlayer.getPropertiesOwned().size());
+        assertEquals(List.of("Park Place"), humanPlayer.getPropertiesOwned());
+
+        humanPlayer.mortgageProperty("Park Place", 50);
+        assertEquals(1450, humanPlayer.getBalance());
+        assertEquals(0, humanPlayer.getPropertiesOwned().size());
+        assertEquals(List.of("Park Place"), humanPlayer.getPropertiesMortgaged());
+
+        humanPlayer.unmortgageProperty("Park Place", 50);
+        assertEquals(1400, humanPlayer.getBalance());
+        assertEquals(List.of("Park Place"), humanPlayer.getPropertiesOwned());
+        assertEquals(0, humanPlayer.getPropertiesMortgaged().size());
+    }
+
     @Test
     void playerTakingTurnMovesPlayer() {
         Dice dice = new Dice();
@@ -261,9 +288,11 @@ public class HumanPlayerTest {
         assertEquals(Arrays.asList("Park Place", "Boardwalk"), humanPlayer.getPropertiesOwned());
         assertTrue(humanPlayer.hasMonopoly(ColorGroup.DARK_BLUE));
         assertEquals(1, humanPlayer.getMonopolies().size());
+        assertEquals(0, humanPlayer.getNumHouses());
 
         humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200);
         assertEquals(550, humanPlayer.getBalance());
+        assertEquals(1, humanPlayer.getNumHouses());
     }
 
     /**
@@ -445,9 +474,12 @@ public class HumanPlayerTest {
         humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200);
         humanPlayer.buyHouse("Boardwalk", ColorGroup.DARK_BLUE, 200);
         assertEquals(9150, humanPlayer.getBalance());
+        assertEquals(8, humanPlayer.getNumHouses());
+        assertEquals(0, humanPlayer.getNumHotels());
 
         humanPlayer.buyHotel("Park Place", ColorGroup.DARK_BLUE, 200);
         assertEquals(8950, humanPlayer.getBalance());
+        assertEquals(1, humanPlayer.getNumHotels());
     }
 
     /**
@@ -592,4 +624,24 @@ public class HumanPlayerTest {
         assertEquals(8, humanPlayer.getPosition());
     }
 
+    /**
+     * Developed by: shifmans
+     */
+    @Test
+    public void testMortgageAssetsToRaiseFunds() throws InsufficientFundsException, BankruptcyException {
+        HumanPlayer humanPlayer = new HumanPlayer("John Doe", new Token( "John Doe","BattleShip.png"));
+        assertEquals(1500, humanPlayer.getBalance());
+
+        humanPlayer.purchaseProperty("Park Place", 350);
+        assertEquals(1150, humanPlayer.getBalance());
+        assertEquals(List.of(), humanPlayer.getPropertiesMortgaged());
+        assertEquals(List.of("Park Place"), humanPlayer.getPropertiesOwned());
+
+
+        humanPlayer.mortgageAssetsToRaiseFunds(100);
+        // Mortgage value is 175
+        assertEquals(1325, humanPlayer.getBalance());
+        assertEquals(List.of("Park Place"), humanPlayer.getPropertiesMortgaged());
+        assertEquals(List.of(), humanPlayer.getPropertiesOwned());
+    }
 }
