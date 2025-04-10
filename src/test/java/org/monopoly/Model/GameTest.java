@@ -24,11 +24,11 @@ class GameTest {
     void playerCanTakeTurn() {
         Token[] tokens = {new Token("John Doe","BattleShip.png"), new Token("Jane Doe","Car.png")};
         Game game = new Game(2, tokens);
-        TurnManager tm = game.getTurnManager();
+        TurnManager tm = TurnManager.getInstance().getTurnManager();
         Player currentPlayer = tm.getCurrentPlayer();
         assertEquals(0, currentPlayer.getPosition());
         while (currentPlayer.getPosition() == 0) {
-            game.playerTakeTurn();
+            tm.playerTakeTurn();
         }
         assertNotEquals(0, currentPlayer.getPosition());
     }
@@ -37,16 +37,16 @@ class GameTest {
     void playerOneAndPlayerTwoCanTakeTurns() {
         Token[] tokens = {new Token("John Doe","BattleShip.png"), new Token("Jane Doe","Car.png")};
         Game game = new Game(2, tokens);
-        TurnManager tm = game.getTurnManager();
+        TurnManager tm = TurnManager.getInstance().getTurnManager();
         Player currentPlayer = tm.getCurrentPlayer();
         while (currentPlayer.getPosition() == 0) {
-            game.playerTakeTurn();
+            tm.playerTakeTurn();
         }
         assertNotEquals(0, currentPlayer.getPosition());
-        game.nextPlayersTurn();
+        tm.nextPlayersTurn();
         currentPlayer = tm.getCurrentPlayer();
         while (currentPlayer.getPosition() == 0) {
-            game.playerTakeTurn();
+            tm.playerTakeTurn();
         }
         assertNotEquals(0, currentPlayer.getPosition());
     }
@@ -55,18 +55,18 @@ class GameTest {
     void afterPlayer2TurnGoBackToPlayer1() {
         Token[] tokens = {new Token("John Doe","BattleShip.png"), new Token("Jane Doe","Car.png")};
         Game game = new Game(2, tokens);
-        TurnManager tm = game.getTurnManager();
-        game.nextPlayersTurn();
+        TurnManager tm = TurnManager.getInstance().getTurnManager();
+        tm.nextPlayersTurn();
         Player currentPlayer = tm.getCurrentPlayer();
         while (currentPlayer.getPosition() == 0) {
-            game.playerTakeTurn();
+            tm.playerTakeTurn();
         }
         assertNotEquals(0, currentPlayer.getPosition());
-        game.nextPlayersTurn();
+        tm.nextPlayersTurn();
         currentPlayer = tm.getCurrentPlayer();
         assertEquals(0, currentPlayer.getPosition());
         while (currentPlayer.getPosition() == 0) {
-            game.playerTakeTurn();
+            tm.playerTakeTurn();
         }
         assertNotEquals(0, currentPlayer.getPosition());
     }
@@ -75,12 +75,12 @@ class GameTest {
     void playerInJailGoesThroughInJailProcess(){
         Token[] tokens = {new Token("John Doe","BattleShip.png"), new Token("Jane Doe","Car.png")};
         Game game = new Game(2, tokens);
-        TurnManager tm = game.getTurnManager();
+        TurnManager tm = TurnManager.getInstance().getTurnManager();
         Player currentPlayer = tm.getCurrentPlayer();
         currentPlayer.goToJail();
-        game.jailTurnLogic(currentPlayer);
+        tm.jailTurnLogic(currentPlayer);
         currentPlayer.releaseFromJail();
-        game.playerTakeTurn();
+        tm.playerTakeTurn();
         assertNotEquals(10, currentPlayer.getPosition());
     }
 
@@ -88,14 +88,14 @@ class GameTest {
     void removingAPlayerFromGameChancesTurnManagerQueue(){
         Token[] tokens = {new Token("John Doe","BattleShip.png"), new Token("Jane Doe","Car.png"), new Token("Jack Doe","Dog.png")};
         Game game = new Game(3, tokens);
-        TurnManager tm = game.getTurnManager();
+        TurnManager tm = TurnManager.getInstance().getTurnManager();
         Player currentPlayer = tm.getCurrentPlayer();
-        game.nextPlayersTurn();
-        game.removePlayer(currentPlayer);
+        tm.nextPlayersTurn();
+        tm.removePlayer(currentPlayer);
         ArrayList<Player> players = new ArrayList<>();
         boolean newPlayerAdded = true;
         while (newPlayerAdded) {
-            game.nextPlayersTurn();
+            tm.nextPlayersTurn();
             if (players.contains(tm.getCurrentPlayer())) {
                 newPlayerAdded = false;
             } else {
