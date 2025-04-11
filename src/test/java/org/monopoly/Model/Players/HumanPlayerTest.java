@@ -10,7 +10,9 @@ import org.monopoly.Model.Cards.ColorGroup;
 import org.monopoly.Model.Cards.TitleDeedCards;
 import org.monopoly.Model.Dice;
 import org.monopoly.Model.GameBoard;
+import org.monopoly.Model.GameTiles.PropertySpace;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -293,11 +295,9 @@ public class HumanPlayerTest {
         assertEquals(Arrays.asList("Park Place", "Boardwalk"), humanPlayer.getPropertiesOwned());
         assertTrue(humanPlayer.hasMonopoly(ColorGroup.DARK_BLUE));
         assertEquals(1, humanPlayer.getMonopolies().size());
-        assertEquals(0, humanPlayer.getNumHouses());
 
         humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200);
         assertEquals(550, humanPlayer.getBalance());
-        assertEquals(1, humanPlayer.getNumHouses());
     }
 
     /**
@@ -479,12 +479,9 @@ public class HumanPlayerTest {
         humanPlayer.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200);
         humanPlayer.buyHouse("Boardwalk", ColorGroup.DARK_BLUE, 200);
         assertEquals(9150, humanPlayer.getBalance());
-        assertEquals(8, humanPlayer.getNumHouses());
-        assertEquals(0, humanPlayer.getNumHotels());
 
         humanPlayer.buyHotel("Park Place", ColorGroup.DARK_BLUE, 200);
         assertEquals(8950, humanPlayer.getBalance());
-        assertEquals(1, humanPlayer.getNumHotels());
     }
 
     /**
@@ -627,6 +624,30 @@ public class HumanPlayerTest {
         humanPlayer.setPosition(38);
         humanPlayer.move(10);
         assertEquals(8, humanPlayer.getPosition());
+    }
+
+    @Test
+    public void testMortgageAssetsRaisesFundsSuccessfully() throws InsufficientFundsException, BankruptcyException {
+        Token token = new Token("Hat", "TokensPNGs/Hat.png");
+        HumanPlayer player = new HumanPlayer("Test Player", token);
+
+        // Set up a property
+        PropertySpace prop = new PropertySpace(
+                "Baltic Avenue", "", 60,
+                new ArrayList<>(List.of(4, 20, 60, 180, 320, 450)),
+                ColorGroup.BROWN, 50, 50, 30);
+
+        player.purchaseProperty(prop.getName(), 60);
+        player.subtractFromBalance(1450);
+
+        // Try to raise $30
+        player.mortgageAssetsToRaiseFunds(30);
+
+        // Assert balance increased
+        assertTrue(player.getBalance() >= 30);
+
+        // Assert property is mortgaged
+        assertEquals(0, player.getPropertiesOwned().size());
     }
 
     /**

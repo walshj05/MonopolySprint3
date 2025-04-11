@@ -191,6 +191,7 @@ public class HumanPlayer extends Player {
      * @author walshj05
      */
     public void mortgageProperty(String property, int mortgageCost) throws NoSuchPropertyException {
+        PropertySpace space = (PropertySpace) TitleDeedCards.getInstance().getProperty(property);
         if (propertiesOwned.contains(property)) {
             propertiesOwned.remove(property);
             propertiesMortgaged.add(property);
