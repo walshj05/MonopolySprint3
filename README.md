@@ -18,10 +18,6 @@ To install the code, follow these steps:
 3. Build the project using the command: mvn clean package
 4. The project is now installed and ready to run.
 
-### Steps to run through Terminal
-1. If running project through terminal, run the following command "javac src/main/java/org/monopoly/View/Main.java" to compile main.
-2. Then run "java -cp src/main/java org.monopoly.View.Main" to run the Main.
-
 ### Steps to run through IDE
 1. Go through the project directory (src/main/java/org/monopoly/View/Main.java) and run the Main class.
 2. If project is not running, and gives SDK error, go to File > Project Structure > Project > SDK > then select an SDK 22 or higher.
@@ -32,11 +28,12 @@ The Monopoly Game Project is designed to provide a fun and interactive way to pl
 Monopoly. The game can be played by one user against the computer and has features like:
 
 Buying and selling properties
-Collecting rentgit co
+Collecting rent
 Drawing chance and community chest cards
 Building houses and hotels
 
 Note: This is a basic implementation of the game, and there may be some features that are not included. The project is intended to be a starting point for further development and customization.
+As of right now, there is a User Interface implemented, but not completed.
 
 ### UML
-![alt text](UML.png)
+![alt text](UML%203.png)
