@@ -36,4 +36,4 @@ Note: This is a basic implementation of the game, and there may be some features
 As of right now, there is a User Interface implemented, but not completed.
 
 ### UML
-![alt text](UML%203.png)
+![alt text](UML.png)
