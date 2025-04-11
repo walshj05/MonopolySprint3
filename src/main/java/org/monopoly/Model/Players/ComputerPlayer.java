@@ -641,6 +641,7 @@ public class ComputerPlayer extends Player {
      * @throws InsufficientFundsException No money
      * @throws NoSuchPropertyException Property isn't there anymore
      */
+    /*
     public void handleEndOfTurn() throws InsufficientFundsException, NoSuchPropertyException {
         Random random = new Random(System.nanoTime());
         int index = random.nextInt(propertiesOwned.size());
@@ -666,6 +667,7 @@ public class ComputerPlayer extends Player {
             mortgageProperty(spaceName, space.getMortgageValue());
         }
     }
+     */
 
     /**
      * Gives the number of hotels the player owns

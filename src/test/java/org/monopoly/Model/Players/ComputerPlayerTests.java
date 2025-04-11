@@ -1007,33 +1007,134 @@ public class ComputerPlayerTests {
      * Developed by: shifmans
      */
     @Test
-    public void testComputerPlayerHandleLandingPayRent() {
-        ComputerPlayer cpu = new ComputerPlayer("Player 1", new Token( "Player 1","BattleShip.png"));
+    public void testComputerPlayerHandleLandingPayRentProperty() {
+        HumanPlayer humanPlayer = new HumanPlayer("Player 1", new Token( "Player 1","BattleShip.png"));
+        assertEquals(1500, humanPlayer.getBalance());
+        assertFalse(humanPlayer.hasProperty("Mediterranean Avenue"));
+
+        humanPlayer.move(1);
+        GameBoard.getInstance().executeStrategyType(humanPlayer, "tile");
+
+        assertEquals(1440, humanPlayer.getBalance());
+        assertTrue(humanPlayer.hasProperty("Mediterranean Avenue"));
+
+        ComputerPlayer cpu = new ComputerPlayer("CPU", new Token( "CPU","TopHat.png"));
         assertEquals(1500, cpu.getBalance());
+        assertEquals(0, cpu.getPosition());
         assertFalse(cpu.hasProperty("Mediterranean Avenue"));
 
         cpu.move(1);
-        GameBoard.getInstance().executeStrategyType(cpu, "tile");
-
-        assertEquals(1440, cpu.getBalance());
-        assertTrue(cpu.hasProperty("Mediterranean Avenue"));
-
-        ComputerPlayer cpu2 = new ComputerPlayer("CPU", new Token( "CPU","TopHat.png"));
-        assertEquals(1500, cpu2.getBalance());
-        assertEquals(0, cpu2.getPosition());
-        assertFalse(cpu2.hasProperty("Mediterranean Avenue"));
-
-        cpu2.move(1);
-        assertEquals(1, cpu2.getPosition());
+        assertEquals(1, cpu.getPosition());
 
         TitleDeedCards tiles = TitleDeedCards.getInstance();
         System.out.println(tiles.getProperty("Mediterranean Avenue").getOwner());
 
         ArrayList<Integer> rentPrices = new ArrayList<>(List.of(2, 10, 30, 90, 160, 250));
-        cpu2.handleLanding(rentPrices);
+        cpu.handleLanding(rentPrices);
 
-        assertFalse(cpu2.hasProperty("Mediterranean Avenue"));
-        assertEquals(1498, cpu2.getBalance());
+        assertFalse(cpu.hasProperty("Mediterranean Avenue"));
+        assertEquals(1498, cpu.getBalance());
+        // Add rest of cases later
+    }
+
+    /**
+     * Developed by: shifmans
+     */
+    @Test
+    public void testComputerPlayerHandleLandingPayRentRailroad() {
+        HumanPlayer humanPlayer = new HumanPlayer("Player 1", new Token( "Player 1","BattleShip.png"));
+        assertEquals(1500, humanPlayer.getBalance());
+        assertFalse(humanPlayer.hasProperty("Reading Railroad"));
+
+        humanPlayer.move(5);
+        GameBoard.getInstance().executeStrategyType(humanPlayer, "tile");
+
+        assertEquals(1300, humanPlayer.getBalance());
+        assertTrue(humanPlayer.hasProperty("Reading Railroad"));
+
+        ComputerPlayer cpu = new ComputerPlayer("CPU", new Token( "CPU","TopHat.png"));
+        assertEquals(1500, cpu.getBalance());
+        assertEquals(0, cpu.getPosition());
+        assertFalse(cpu.hasProperty("Reading Railroad"));
+
+        cpu.move(5);
+        assertEquals(5, cpu.getPosition());
+
+        TitleDeedCards tiles = TitleDeedCards.getInstance();
+        System.out.println(tiles.getProperty("Reading Railroad").getOwner());
+
+        ArrayList<Integer> rentPrices = new ArrayList<>(List.of(25, 50, 100, 200));
+        cpu.handleLanding(rentPrices);
+
+        assertFalse(cpu.hasProperty("Reading Railroad"));
+        assertEquals(1475, cpu.getBalance());
+        // Add rest of cases later
+    }
+
+    /**
+     * Developed by: shifmans
+     */
+    @Test
+    public void testComputerPlayerHandleLandingPayRentElectricCompany() {
+        HumanPlayer humanPlayer = new HumanPlayer("Player 1", new Token( "Player 1","BattleShip.png"));
+        assertEquals(1500, humanPlayer.getBalance());
+        assertFalse(humanPlayer.hasProperty("Electric Company"));
+
+        humanPlayer.move(12);
+        GameBoard.getInstance().executeStrategyType(humanPlayer, "tile");
+
+        assertEquals(1350, humanPlayer.getBalance());
+        assertTrue(humanPlayer.hasProperty("Electric Company"));
+
+        ComputerPlayer cpu = new ComputerPlayer("CPU", new Token( "CPU","TopHat.png"));
+        assertEquals(1500, cpu.getBalance());
+        assertEquals(0, cpu.getPosition());
+        assertFalse(cpu.hasProperty("Electric Company"));
+
+        cpu.move(12);
+        assertEquals(12, cpu.getPosition());
+
+        TitleDeedCards tiles = TitleDeedCards.getInstance();
+        System.out.println(tiles.getProperty("Electric Company").getOwner());
+
+        ArrayList<Integer> rentPrices = new ArrayList<>(List.of(4, 10));
+        cpu.handleLanding(rentPrices);
+
+        assertFalse(cpu.hasProperty("Electric Company"));
+        // Add rest of cases later
+    }
+
+    /**
+     * Developed by: shifmans
+     */
+    @Test
+    public void testComputerPlayerHandleLandingPayRentWaterWorks() {
+        HumanPlayer humanPlayer = new HumanPlayer("Player 1", new Token( "Player 1","BattleShip.png"));
+        assertEquals(1500, humanPlayer.getBalance());
+        assertFalse(humanPlayer.hasProperty("Water Works"));
+
+        humanPlayer.move(28);
+        GameBoard.getInstance().executeStrategyType(humanPlayer, "tile");
+
+        assertEquals(1350, humanPlayer.getBalance());
+        assertTrue(humanPlayer.hasProperty("Water Works"));
+
+        ComputerPlayer cpu = new ComputerPlayer("CPU", new Token( "CPU","TopHat.png"));
+        assertEquals(1500, cpu.getBalance());
+        assertEquals(0, cpu.getPosition());
+        assertFalse(cpu.hasProperty("Water Works"));
+
+        cpu.move(28);
+        assertEquals(28, cpu.getPosition());
+
+        TitleDeedCards tiles = TitleDeedCards.getInstance();
+        System.out.println(tiles.getProperty("Water Works").getOwner());
+
+        ArrayList<Integer> rentPrices = new ArrayList<>(List.of(4, 10));
+        cpu.handleLanding(rentPrices);
+
+        assertFalse(cpu.hasProperty("Water Works"));
+        // Add rest of cases later
     }
 
     /**
@@ -1051,7 +1152,6 @@ public class ComputerPlayerTests {
         assertEquals(List.of(), cpu.getPropertiesMortgaged());
         assertEquals(List.of("Park Place"), cpu.getPropertiesOwned());
 
-
         while (cpu.hasProperty("Park Place")) {
             cpu.mortgageAssetsToRaiseFunds(100);
         }
@@ -1061,27 +1161,86 @@ public class ComputerPlayerTests {
         assertEquals(List.of(), cpu.getPropertiesOwned());
     }
 
+    /**
+     * Developed by: shifmans
+     */
     @Test
-    public void testMortgageAssetsRaisesFundsSuccessfully() throws InsufficientFundsException, BankruptcyException {
-        Token token = new Token("Hat", "TokensPNGs/Hat.png");
-        ComputerPlayer cpu = new ComputerPlayer("Test Player", token);
+    public void testSellBuildingsToRaiseFundsFail() throws InsufficientFundsException, BankruptcyException {
+        ComputerPlayer cpu = new ComputerPlayer("CPU", new Token("CPU", "BattleShip.png"));
+        assertEquals(1500, cpu.getBalance());
 
-        // Set up a property
-        PropertySpace prop = new PropertySpace(
-                "Baltic Avenue", "", 60,
-                new ArrayList<>(List.of(4, 20, 60, 180, 320, 450)),
-                ColorGroup.BROWN, 50, 50, 30);
+        while (!cpu.hasProperty("Park Place")) {
+            cpu.purchaseProperty("Park Place", 350);
+        }
+        while (!cpu.hasProperty("Boardwalk")) {
+            cpu.purchaseProperty("Boardwalk", 400);
+        }
+        cpu.hasMonopoly(ColorGroup.DARK_BLUE);
+        assertEquals(750, cpu.getBalance());
 
-        cpu.purchaseProperty(prop.getName(), 60);
-        cpu.subtractFromBalance(1450);
+        while (cpu.getNumHouses() != 1) {
+            cpu.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200);
+        }
+        while (cpu.getNumHouses() != 2) {
+            cpu.buyHouse("Boardwalk", ColorGroup.DARK_BLUE, 200);
+        }
+        assertEquals(350, cpu.getBalance());
+        assertEquals(2, cpu.getNumHouses());
 
-        // Try to raise $30
-        cpu.mortgageAssetsToRaiseFunds(30);
+        assertThrows(BankruptcyException.class, () -> {
+            while (cpu.getNumHouses() == 2) {
+                cpu.sellBuildingsToRaiseFunds(1000);
+            }});
+    }
 
-        // Assert balance increased
-        assertTrue(cpu.getBalance() >= 30);
+    /**
+     * Developed by: shifmans
+     */
+    @Test
+    public void testAttemptToRaiseFunds() throws InsufficientFundsException, BankruptcyException {
+        ComputerPlayer cpu = new ComputerPlayer("CPU", new Token("CPU", "BattleShip.png"));
+        assertEquals(1500, cpu.getBalance());
 
-        // Assert property is mortgaged
-        assertEquals(0, cpu.getPropertiesOwned().size());
+        while (!cpu.hasProperty("Park Place")) {
+            cpu.purchaseProperty("Park Place", 350);
+        }
+        assertEquals(1150, cpu.getBalance());
+        assertEquals(List.of(), cpu.getPropertiesMortgaged());
+        assertEquals(List.of("Park Place"), cpu.getPropertiesOwned());
+
+        while (cpu.getBalance() != 1325) {
+            cpu.attemptToRaiseFunds(100);
+        }
+        // Mortgage value is 175
+        assertEquals(1325, cpu.getBalance());
+        assertEquals(List.of("Park Place"), cpu.getPropertiesMortgaged());
+        assertEquals(List.of(), cpu.getPropertiesOwned());
+
+        cpu.addToBalance(175);
+        assertEquals(1500, cpu.getBalance());
+
+        while (!cpu.hasProperty("Park Place")) {
+            cpu.purchaseProperty("Park Place", 350);
+        }
+        while (!cpu.hasProperty("Boardwalk")) {
+            cpu.purchaseProperty("Boardwalk", 400);
+        }
+        cpu.hasMonopoly(ColorGroup.DARK_BLUE);
+        assertEquals(750, cpu.getBalance());
+
+        while (cpu.getNumHouses() != 1) {
+            cpu.buyHouse("Park Place", ColorGroup.DARK_BLUE, 200);
+        }
+        while (cpu.getNumHouses() != 2) {
+            cpu.buyHouse("Boardwalk", ColorGroup.DARK_BLUE, 200);
+        }
+        assertEquals(350, cpu.getBalance());
+        assertEquals(2, cpu.getNumHouses());
+
+        assertThrows(BankruptcyException.class, () -> {
+            while (cpu.getNumHouses() == 2) {
+                cpu.sellBuildingsToRaiseFunds(1000);
+            }
+        });
     }
 }
