@@ -637,39 +637,6 @@ public class ComputerPlayer extends Player {
     }
 
     /**
-     * Handles the chances of players at the end of their turn and the processes that they can do and the chances of CPU doing these processes
-     * @throws InsufficientFundsException No money
-     * @throws NoSuchPropertyException Property isn't there anymore
-     */
-    /*
-    public void handleEndOfTurn() throws InsufficientFundsException, NoSuchPropertyException {
-        Random random = new Random(System.nanoTime());
-        int index = random.nextInt(propertiesOwned.size());
-        PropertySpace space = (PropertySpace) TitleDeedCards.getInstance().getProperty(propertiesOwned.get(index));
-        String spaceName = space.getName();
-        ColorGroup spaceColor = space.getColorGroup();
-
-        if (runOdds(0.9)){
-            buyHouse(spaceName, spaceColor, space.getHousePrice());
-        } else {
-            sellHouse(spaceName, spaceColor);
-        }
-
-        if (runOdds(0.9)){
-            buyHotel(spaceName, spaceColor, space.getHotelPrice());
-        } else {
-            sellHotel(spaceName, spaceColor);
-        }
-
-        if (runOdds(0.5)){
-            sellProperty(spaceName, space.getPrice());
-        } else {
-            mortgageProperty(spaceName, space.getMortgageValue());
-        }
-    }
-     */
-
-    /**
      * Gives the number of hotels the player owns
      * @return numHotels
      * @author crevelings and walshj05
