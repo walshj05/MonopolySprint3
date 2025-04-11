@@ -59,9 +59,9 @@ public abstract class Player {
     public abstract int getJailTurns();
 
     public abstract void buyHouse(String propertyName, ColorGroup colorGroup, int price) throws InsufficientFundsException, RuntimeException;
-    public abstract void sellHouse(String propertyName, ColorGroup colorGroup) throws NoSuchPropertyException, HouseCannotBeBuiltException;
+    public abstract void sellHouse(String propertyName, ColorGroup colorGroup) throws NoSuchPropertyException;
     public abstract void buyHotel(String propertyName, ColorGroup colorGroup, int price) throws InsufficientFundsException, RuntimeException;
-    public abstract void sellHotel(String propertyName, ColorGroup colorGroup) throws NoSuchPropertyException, HotelCannotBeBuiltException;
+    public abstract void sellHotel(String propertyName, ColorGroup colorGroup) throws NoSuchPropertyException;
     public abstract void mortgageAssetsToRaiseFunds(int amount) throws BankruptcyException;
     public abstract void sellBuildingsToRaiseFunds(int amount) throws BankruptcyException;
     public abstract void attemptToRaiseFunds(int amount) throws BankruptcyException;
