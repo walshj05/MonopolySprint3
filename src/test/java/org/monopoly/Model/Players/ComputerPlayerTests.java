@@ -10,6 +10,7 @@ import org.monopoly.Model.Cards.ColorGroup;
 import org.monopoly.Model.Cards.TitleDeedCards;
 import org.monopoly.Model.Dice;
 import org.monopoly.Model.GameBoard;
+import org.monopoly.Model.GameTiles.PropertySpace;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -1007,32 +1008,32 @@ public class ComputerPlayerTests {
      */
     @Test
     public void testComputerPlayerHandleLandingPayRent() {
-        HumanPlayer humanPlayer = new HumanPlayer("Player 1", new Token( "Player 1","BattleShip.png"));
-        assertEquals(1500, humanPlayer.getBalance());
-        assertFalse(humanPlayer.hasProperty("Mediterranean Avenue"));
-
-        humanPlayer.move(1);
-        GameBoard.getInstance().executeStrategyType(humanPlayer, "tile");
-
-        assertEquals(1440, humanPlayer.getBalance());
-        assertTrue(humanPlayer.hasProperty("Mediterranean Avenue"));
-
-        ComputerPlayer cpu = new ComputerPlayer("CPU", new Token( "CPU","TopHat.png"));
+        ComputerPlayer cpu = new ComputerPlayer("Player 1", new Token( "Player 1","BattleShip.png"));
         assertEquals(1500, cpu.getBalance());
-        assertEquals(0, cpu.getPosition());
         assertFalse(cpu.hasProperty("Mediterranean Avenue"));
 
         cpu.move(1);
-        assertEquals(1, cpu.getPosition());
+        GameBoard.getInstance().executeStrategyType(cpu, "tile");
+
+        assertEquals(1440, cpu.getBalance());
+        assertTrue(cpu.hasProperty("Mediterranean Avenue"));
+
+        ComputerPlayer cpu2 = new ComputerPlayer("CPU", new Token( "CPU","TopHat.png"));
+        assertEquals(1500, cpu2.getBalance());
+        assertEquals(0, cpu2.getPosition());
+        assertFalse(cpu2.hasProperty("Mediterranean Avenue"));
+
+        cpu2.move(1);
+        assertEquals(1, cpu2.getPosition());
 
         TitleDeedCards tiles = TitleDeedCards.getInstance();
         System.out.println(tiles.getProperty("Mediterranean Avenue").getOwner());
 
         ArrayList<Integer> rentPrices = new ArrayList<>(List.of(2, 10, 30, 90, 160, 250));
-        cpu.handleLanding(rentPrices);
+        cpu2.handleLanding(rentPrices);
 
-        assertFalse(cpu.hasProperty("Mediterranean Avenue"));
-        assertEquals(1498, cpu.getBalance());
+        assertFalse(cpu2.hasProperty("Mediterranean Avenue"));
+        assertEquals(1498, cpu2.getBalance());
     }
 
     /**
@@ -1058,5 +1059,29 @@ public class ComputerPlayerTests {
         assertEquals(1325, cpu.getBalance());
         assertEquals(List.of("Park Place"), cpu.getPropertiesMortgaged());
         assertEquals(List.of(), cpu.getPropertiesOwned());
+    }
+
+    @Test
+    public void testMortgageAssetsRaisesFundsSuccessfully() throws InsufficientFundsException, BankruptcyException {
+        Token token = new Token("Hat", "TokensPNGs/Hat.png");
+        ComputerPlayer cpu = new ComputerPlayer("Test Player", token);
+
+        // Set up a property
+        PropertySpace prop = new PropertySpace(
+                "Baltic Avenue", "", 60,
+                new ArrayList<>(List.of(4, 20, 60, 180, 320, 450)),
+                ColorGroup.BROWN, 50, 50, 30);
+
+        cpu.purchaseProperty(prop.getName(), 60);
+        cpu.subtractFromBalance(1450);
+
+        // Try to raise $30
+        cpu.mortgageAssetsToRaiseFunds(30);
+
+        // Assert balance increased
+        assertTrue(cpu.getBalance() >= 30);
+
+        // Assert property is mortgaged
+        assertEquals(0, cpu.getPropertiesOwned().size());
     }
 }

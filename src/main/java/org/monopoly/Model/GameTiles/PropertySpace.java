@@ -176,6 +176,7 @@ public class PropertySpace extends GameTile {
      *
      * Developed by: shifmans
      */
+//    @Override
     public boolean isMortgaged() {
         return isMortgaged;
     }
@@ -186,6 +187,7 @@ public class PropertySpace extends GameTile {
      *
      * Developed by: shifmans
      */
+    @Override
     public void setMortgagedStatus(boolean isMortgaged) {
         this.isMortgaged = isMortgaged;
     }
